@@ -6,15 +6,12 @@ This project is designed to train junior developers on API integration using Rea
 
 ```
 training/
-├── backend/          # Node.js Express API server
-│   ├── data/        # Mock data generators
-│   ├── routes/      # API route handlers
-│   └── server.js    # Express server
-├── frontend/        # React + Vite application
-│   └── src/
-│       ├── pages/   # Page components
-│       ├── services/# API service (Axios)
-│       └── data/    # Task definitions
+├── level_one/        # Beginner progression (original 10 tasks)
+│   ├── backend/      # Node.js Express API server
+│   └── frontend/     # React + Vite application
+├── level_two/        # Intermediate progression (new 10 tasks)
+│   ├── backend/      # Node.js Express API server
+│   └── frontend/     # React + Vite application
 └── README.md
 ```
 
@@ -27,9 +24,13 @@ training/
 
 ### Backend Setup
 
-1. Navigate to the backend directory:
+1. Navigate to the backend directory for your selected level:
    ```bash
-   cd backend
+   cd level_one/backend
+   ```
+   or
+   ```bash
+   cd level_two/backend
    ```
 
 2. Install dependencies (if not already installed):
@@ -47,9 +48,13 @@ training/
 
 ### Frontend Setup
 
-1. Navigate to the frontend directory:
+1. Navigate to the frontend directory for your selected level:
    ```bash
-   cd frontend
+   cd level_one/frontend
+   ```
+   or
+   ```bash
+   cd level_two/frontend
    ```
 
 2. Install dependencies (if not already installed):
@@ -68,18 +73,8 @@ training/
 
 ## API Endpoints
 
-All endpoints return arrays of user objects with progressive complexity:
-
-1. **GET /api/users/simple** - Flat objects (id, name, email, profile, avatar)
-2. **GET /api/users/basic** - Single level nesting (address, contact objects)
-3. **GET /api/users/medium** - Multiple nested objects (address, contact, profile)
-4. **GET /api/users/hobbies** - Nested arrays of strings (hobbies)
-5. **GET /api/users/skills** - Arrays of objects (skills with name, level, years)
-6. **GET /api/users/company** - Deep nesting level 1 (company with nested address)
-7. **GET /api/users/education** - Deep nesting level 2 (education array with nested details)
-8. **GET /api/users/full** - Complex mixed structure (multiple nested objects and arrays)
-9. **GET /api/users/advanced** - Very deep nesting (workHistory with nested company and projects)
-10. **GET /api/users/complex** - Maximum complexity (all nesting levels combined)
+- `level_one` keeps the original beginner-to-advanced progression (`/api/users/simple` through `/api/users/complex`).
+- `level_two` provides a new intermediate progression (`/api/users/org` through `/api/users/strategy`).
 
 ## Training Tasks
 
