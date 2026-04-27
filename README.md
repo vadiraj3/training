@@ -12,6 +12,9 @@ training/
 ├── level_two/        # Intermediate progression (new 10 tasks)
 │   ├── backend/      # Node.js Express API server
 │   └── frontend/     # React + Vite application
+├── level_three/      # Advanced progression (complex and unusual response shapes)
+│   ├── backend/      # Node.js Express API server
+│   └── frontend/     # React + Vite application
 └── README.md
 ```
 
@@ -31,6 +34,10 @@ training/
    or
    ```bash
    cd level_two/backend
+   ```
+   or
+   ```bash
+   cd level_three/backend
    ```
 
 2. Install dependencies (if not already installed):
@@ -56,6 +63,10 @@ training/
    ```bash
    cd level_two/frontend
    ```
+   or
+   ```bash
+   cd level_three/frontend
+   ```
 
 2. Install dependencies (if not already installed):
    ```bash
@@ -75,10 +86,11 @@ training/
 
 - `level_one` keeps the original beginner-to-advanced progression (`/api/users/simple` through `/api/users/complex`).
 - `level_two` provides a new intermediate progression (`/api/users/org` through `/api/users/strategy`).
+- `level_three` introduces advanced payload shapes, including deep objects plus primitive, null, and matrix responses.
 
 ## Training Tasks
 
-Visit `/tasks` route in the frontend to see all 10 training tasks with:
+Visit the `/tasks` route in the frontend to see all 10 training tasks with:
 - Detailed descriptions
 - Data structure examples
 - Requirements
@@ -102,7 +114,7 @@ import { getSimpleUsers, getBasicUsers, ... } from './services/api';
 4. For each task:
    - Create a new page/component
    - Import the appropriate API function
-   - Fetch data using useEffect
+   - Fetch data using `useEffect`
    - Display data using MUI components
    - Handle loading and error states
 
@@ -113,8 +125,7 @@ import { getSimpleUsers, getBasicUsers, ... } from './services/api';
 
 ## Notes
 
-- All API endpoints return arrays
-- Each task increases in complexity
+- Level 1 and level 2 mostly return arrays of objects
+- Level 3 intentionally mixes response shapes so learners have to inspect the payload first
 - Swagger documentation shows the exact response structure for each endpoint
 - The API service is pre-configured - you just need to use the functions
-
