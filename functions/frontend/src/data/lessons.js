@@ -138,5 +138,137 @@ export const lessons = [
       ],
       expectedResult: "Buttons work without having separate function definitions in the component body."
     }
+  },
+  {
+    id: 7,
+    title: "Multiple Parameters & Logic",
+    topic: "Logic within Functions",
+    difficulty: "Intermediate",
+    explanation: "Functions can handle complex logic using if/else statements. This allows you to make decisions based on the input arguments. It's common to use parameters as inputs for these decisions.",
+    syntax: {
+      multiple: "function evaluate(a, b) {\n  if (a > b) return 'Greater';\n  else return 'Smaller';\n}"
+    },
+    teacherExample: {
+      description: "A function that checks if a number is within a range.",
+      code: "function isBetween(num, min, max) {\n  if (num >= min && num <= max) {\n    return true;\n  } else {\n    return false;\n  }\n}"
+    },
+    traineeTask: {
+      description: "Create a function 'evaluateScore' that takes two parameters: 'score' and 'passingGrade'. It should return 'Pass' if score is greater than or equal to passingGrade, and 'Fail' otherwise.",
+      requirements: [
+        { id: 'l7r1', text: "Define 'evaluateScore' with 2 parameters", check: (ex) => typeof ex?.lesson7?.evaluateScore === 'function' && ex.lesson7.evaluateScore.length === 2 },
+        { id: 'l7r2', text: "Should return 'Pass' for 80, 50", check: (ex) => ex?.lesson7?.evaluateScore?.(80, 50) === 'Pass' },
+        { id: 'l7r3', text: "Should return 'Fail' for 40, 50", check: (ex) => ex?.lesson7?.evaluateScore?.(40, 50) === 'Fail' }
+      ],
+      expectedResult: "'Pass' or 'Fail' string based on the comparison."
+    }
+  },
+  {
+    id: 8,
+    title: "Function Composition",
+    topic: "Calling Functions",
+    difficulty: "Intermediate",
+    explanation: "One of the most powerful features of functions is that they can call other functions. This helps in breaking down complex problems into smaller, manageable pieces (Composition).",
+    syntax: {
+      normal: "function first() { ... }\nfunction second() {\n  first(); // calling another function\n}"
+    },
+    teacherExample: {
+      description: "Combining string parts using a helper function.",
+      code: "function formatName(name) {\n  return name.trim();\n}\n\nfunction welcomeUser(name) {\n  const cleanName = formatName(name);\n  return 'Welcome, ' + cleanName + '!';\n}"
+    },
+    traineeTask: {
+      description: "Create two functions: 1. 'getFullName(first, last)' which returns 'first last'. 2. 'greetUser(first, last)' which calls 'getFullName' and returns 'Hello, [Full Name]!'.",
+      requirements: [
+        { id: 'l8r1', text: "Define 'getFullName' correctly", check: (ex) => ex?.lesson8?.getFullName?.('John', 'Doe') === 'John Doe' },
+        { id: 'l8r2', text: "Define 'greetUser' correctly", check: (ex) => ex?.lesson8?.greetUser?.('John', 'Doe') === 'Hello, John Doe!' }
+      ],
+      expectedResult: "'Hello, John Doe!' when calling greetUser('John', 'Doe')."
+    }
+  },
+  {
+    id: 9,
+    title: "Helper Functions",
+    topic: "Modularity",
+    difficulty: "Intermediate",
+    explanation: "Helper functions are small, focused functions that perform a specific task used by larger functions. This promotes DRY (Don't Repeat Yourself) principles and makes code easier to test.",
+    teacherExample: {
+      description: "A tax calculator used by an invoice generator.",
+      code: "const getTax = (amount) => amount * 0.15;\n\nfunction calculateTotal(price) {\n  return price + getTax(price);\n}"
+    },
+    traineeTask: {
+      description: "Create 'square(n)' which returns n*n. Then create 'sumOfSquares(a, b)' which calls 'square' for both a and b, and returns their sum.",
+      requirements: [
+        { id: 'l9r1', text: "Define 'square' function", check: (ex) => ex?.lesson9?.square?.(4) === 16 },
+        { id: 'l9r2', text: "Define 'sumOfSquares' using 'square'", check: (ex) => ex?.lesson9?.sumOfSquares?.(3, 4) === 25 }
+      ],
+      expectedResult: "sumOfSquares(3, 4) should return 25."
+    }
+  },
+  {
+    id: 10,
+    title: "Functions & Arrays",
+    topic: "Data Transformation",
+    difficulty: "Advanced",
+    explanation: "Functions are often used to process collections of data. You can pass an array as a single parameter to a function and loop through it or use array methods.",
+    syntax: {
+      arrayParam: "function processList(items) {\n  items.forEach(item => console.log(item));\n}"
+    },
+    teacherExample: {
+      description: "Finding the maximum number in an array.",
+      code: "function findMax(numbers) {\n  return Math.max(...numbers);\n}"
+    },
+    traineeTask: {
+      description: "Create a function 'sumArray(numbers)' that takes an array of numbers and returns their sum using a loop or reduce.",
+      requirements: [
+        { id: 'l10r1', text: "Define 'sumArray' that takes 1 parameter", check: (ex) => typeof ex?.lesson10?.sumArray === 'function' && ex.lesson10.sumArray.length === 1 },
+        { id: 'l10r2', text: "Correctly sums [1, 2, 3, 4]", check: (ex) => ex?.lesson10?.sumArray?.([1, 2, 3, 4]) === 10 },
+        { id: 'l10r3', text: "Returns 0 for empty array", check: (ex) => ex?.lesson10?.sumArray?.([]) === 0 }
+      ],
+      expectedResult: "The total sum of all numbers in the array."
+    }
+  },
+  {
+    id: 11,
+    title: "Object Parameters & Destructuring",
+    topic: "Clean Code",
+    difficulty: "Advanced",
+    explanation: "Instead of passing many individual arguments, you can pass a single object. Using destructuring in the function parameters makes the code much cleaner and avoids order-dependent bugs.",
+    syntax: {
+      destructure: "function printUser({ name, age }) {\n  console.log(name + ' is ' + age);\n}"
+    },
+    teacherExample: {
+      description: "Using destructuring to handle configuration objects.",
+      code: "function createButton({ text, color = 'blue', size = 'medium' }) {\n  return `Button: ${text}, Style: ${color}, Size: ${size}`;\n}"
+    },
+    traineeTask: {
+      description: "Create a function 'formatUserCard' that takes an object with 'username' and 'email' properties, and returns a string: 'User: username, Contact: email'.",
+      requirements: [
+        { id: 'l11r1', text: "Define 'formatUserCard'", check: (ex) => typeof ex?.lesson11?.formatUserCard === 'function' },
+        { id: 'l11r2', text: "Correctly formats the output string", check: (ex) => ex?.lesson11?.formatUserCard?.({ username: 'jsmith', email: 'j@s.com' }) === 'User: jsmith, Contact: j@s.com' }
+      ],
+      expectedResult: "'User: jsmith, Contact: j@s.com'"
+    }
+  },
+  {
+    id: 12,
+    title: "Callback Functions",
+    topic: "Functional Programming",
+    difficulty: "Advanced",
+    explanation: "A callback is a function passed as an argument to another function. This is a fundamental concept for handling asynchronous code and event-driven programming.",
+    syntax: {
+      callback: "function execute(task) {\n  console.log('Starting...');\n  task();\n}"
+    },
+    teacherExample: {
+      description: "A custom filter-like behavior using a callback.",
+      code: "function checkCondition(val, callback) {\n  return callback(val);\n}\n\ncheckCondition(5, (x) => x > 0); // returns true"
+    },
+    traineeTask: {
+      description: "Create a function 'applyOperation(a, b, operation)' where 'operation' is a function. It should return the result of calling 'operation' with a and b.",
+      requirements: [
+        { id: 'l12r1', text: "Define 'applyOperation' with 3 parameters", check: (ex) => typeof ex?.lesson12?.applyOperation === 'function' && ex.lesson12.applyOperation.length === 3 },
+        { id: 'l12r2', text: "Correctly applies addition callback", check: (ex) => ex?.lesson12?.applyOperation?.(10, 5, (x, y) => x + y) === 15 },
+        { id: 'l12r3', text: "Correctly applies multiplication callback", check: (ex) => ex?.lesson12?.applyOperation?.(10, 5, (x, y) => x * y) === 50 }
+      ],
+      expectedResult: "The result of the operation function."
+    }
   }
 ];

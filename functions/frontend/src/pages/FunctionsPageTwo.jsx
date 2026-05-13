@@ -26,15 +26,16 @@ import {
   Code as CodeIcon,
   PlayArrow as PlayArrowIcon,
   CheckCircle as CheckCircleIcon,
-  Cancel as CancelIcon
+  Cancel as CancelIcon,
+  ArrowBack as ArrowBackIcon
 } from '@mui/icons-material';
 
 import { lessons } from '../data/lessons';
 import CodeBlock from '../components/CodeBlock';
 import { traineeExercises } from '../exercises';
 
-const FunctionsPage = () => {
-  const [expanded, setExpanded] = useState('panel1');
+const FunctionsPageTwo = () => {
+  const [expanded, setExpanded] = useState('panel7');
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -60,30 +61,28 @@ const FunctionsPage = () => {
           gutterBottom 
           sx={{ 
             fontWeight: 800, 
-            background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
+            background: 'linear-gradient(45deg, #FF5722 30%, #FFC107 90%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             mb: 1
           }}
         >
-          Mastering JavaScript Functions
+          Functions Level 2: Logic & Composition
         </Typography>
         <Typography variant="h5" color="text.secondary" sx={{ maxWidth: '800px', mx: 'auto', mb: 4 }}>
-          From basic definitions to return statements. Start your journey with the fundamentals.
+          Taking it to the next level with multiple arguments, nested functions, and array processing.
         </Typography>
         
-        <Alert severity="info" icon={<SchoolIcon />} sx={{ borderRadius: 2, textAlign: 'left', mb: 4 }}>
-          <AlertTitle>Learning Path</AlertTitle>
-          Follow the progressive lessons below. Each lesson includes a <strong>Teacher's Explanation</strong>, 
-          <strong>Code Examples</strong>, and a <strong>Trainee Task</strong> for you to complete.
-          <br />
-          <strong>Status:</strong> Your code in <code>src/exercises/</code> is validated in real-time!
+        <Alert severity="warning" icon={<SchoolIcon />} sx={{ borderRadius: 2, textAlign: 'left', mb: 4 }}>
+          <AlertTitle>Intermediate Track</AlertTitle>
+          These lessons focus on real-world patterns like <strong>Composition</strong> and <strong>Callbacks</strong>. 
+          Each task requires more logic than the previous module.
         </Alert>
       </Box>
 
       {/* Lessons Accordion */}
       <Box sx={{ mb: 4 }}>
-        {lessons.filter(l => l.id <= 6).map((lesson) => {
+        {lessons.filter(l => l.id > 6).map((lesson) => {
           const progress = getLessonProgress(lesson);
           return (
             <Accordion 
@@ -97,7 +96,7 @@ const FunctionsPage = () => {
                 boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
                 overflow: 'hidden',
                 border: '1px solid',
-                borderColor: expanded === `panel${lesson.id}` ? 'primary.main' : 'divider'
+                borderColor: expanded === `panel${lesson.id}` ? 'warning.main' : 'divider'
               }}
             >
               <AccordionSummary
@@ -105,7 +104,7 @@ const FunctionsPage = () => {
                 sx={{ 
                   px: 3,
                   py: 1,
-                  bgcolor: expanded === `panel${lesson.id}` ? 'rgba(33, 150, 243, 0.04)' : 'transparent'
+                  bgcolor: expanded === `panel${lesson.id}` ? 'rgba(255, 193, 7, 0.04)' : 'transparent'
                 }}
               >
                 <Box sx={{ display: 'flex', alignItems: 'center', width: '100%', gap: 2 }}>
@@ -126,14 +125,14 @@ const FunctionsPage = () => {
                   <Chip 
                     label={lesson.topic} 
                     size="small" 
-                    color="primary" 
+                    color="warning" 
                     variant="outlined" 
                     sx={{ fontWeight: 600 }}
                   />
                   <Chip 
                     label={lesson.difficulty} 
                     size="small" 
-                    color={lesson.difficulty === 'Beginner' ? 'success' : 'warning'} 
+                    color={lesson.difficulty === 'Advanced' ? 'error' : 'warning'} 
                     sx={{ fontWeight: 600 }}
                   />
                 </Box>
@@ -143,10 +142,9 @@ const FunctionsPage = () => {
                 <Divider sx={{ mb: 3 }} />
                 
                 <Grid container spacing={4}>
-                  {/* Left Column: Teacher Explanation */}
                   <Grid item xs={12} md={6}>
                     <Box sx={{ mb: 4 }}>
-                      <Typography variant="subtitle1" color="primary" sx={{ display: 'flex', alignItems: 'center', gap: 1, fontWeight: 700, mb: 2 }}>
+                      <Typography variant="subtitle1" color="warning.main" sx={{ display: 'flex', alignItems: 'center', gap: 1, fontWeight: 700, mb: 2 }}>
                         <SchoolIcon fontSize="small" /> Teacher's Explanation
                       </Typography>
                       <Typography variant="body1" sx={{ mb: 3, lineHeight: 1.7, color: 'text.secondary' }}>
@@ -155,14 +153,10 @@ const FunctionsPage = () => {
                       
                       {lesson.syntax && (
                         <Box sx={{ mb: 3 }}>
-                          <Typography variant="subtitle2" gutterBottom sx={{ fontWeight: 700 }}>Basic Syntax:</Typography>
-                          {lesson.syntax.normal && <CodeBlock code={lesson.syntax.normal} label="Normal Function" />}
-                          {lesson.syntax.arrow && <CodeBlock code={lesson.syntax.arrow} label="Arrow Function" />}
-                          {lesson.syntax.direct && <CodeBlock code={lesson.syntax.direct} label="Direct Usage" />}
-                          {lesson.syntax.button && <CodeBlock code={lesson.syntax.button} label="Button Usage" />}
-                          {lesson.syntax.multiple && <CodeBlock code={lesson.syntax.multiple} label="Multiple Parameters" />}
-                          {lesson.syntax.default && <CodeBlock code={lesson.syntax.default} label="Default Values" />}
-                          {lesson.syntax.inline && <CodeBlock code={lesson.syntax.inline} label="Inline Function" />}
+                          <Typography variant="subtitle2" gutterBottom sx={{ fontWeight: 700 }}>Syntax Guide:</Typography>
+                          {Object.entries(lesson.syntax).map(([key, code]) => (
+                            <CodeBlock key={key} code={code} label={key.charAt(0).toUpperCase() + key.slice(1)} />
+                          ))}
                         </Box>
                       )}
 
@@ -170,15 +164,14 @@ const FunctionsPage = () => {
                         <Box>
                           <Typography variant="subtitle2" gutterBottom sx={{ fontWeight: 700 }}>Example Case:</Typography>
                           <Typography variant="body2" sx={{ mb: 1, fontStyle: 'italic' }}>{lesson.teacherExample.description}</Typography>
-                          {lesson.teacherExample.normal && <CodeBlock code={lesson.teacherExample.normal} label="Normal Implementation" />}
-                          {lesson.teacherExample.arrow && <CodeBlock code={lesson.teacherExample.arrow} label="Arrow Implementation" />}
                           {lesson.teacherExample.code && <CodeBlock code={lesson.teacherExample.code} label="Implementation" />}
+                          {lesson.teacherExample.normal && <CodeBlock code={lesson.teacherExample.normal} label="Normal" />}
+                          {lesson.teacherExample.arrow && <CodeBlock code={lesson.teacherExample.arrow} label="Arrow" />}
                         </Box>
                       )}
                     </Box>
                   </Grid>
 
-                  {/* Right Column: Trainee Task */}
                   <Grid item xs={12} md={6}>
                     <Paper 
                       variant="outlined" 
@@ -241,7 +234,7 @@ const FunctionsPage = () => {
                           icon={<PlayArrowIcon />} 
                           sx={{ mt: 2 }}
                         >
-                          {progress.isFullyCompleted ? "Task Completed! Well done." : `Expected Result: ${lesson.traineeTask.expectedResult}`}
+                          {progress.isFullyCompleted ? "Task Completed! Great work." : `Expected Result: ${lesson.traineeTask.expectedResult}`}
                         </Alert>
                       </Box>
                     </Paper>
@@ -254,35 +247,36 @@ const FunctionsPage = () => {
       </Box>
 
       {/* Footer Info */}
-      <Paper sx={{ p: 4, borderRadius: 4, bgcolor: 'primary.main', color: 'white', textAlign: 'center' }}>
+      <Paper sx={{ p: 4, borderRadius: 4, bgcolor: 'warning.main', color: 'white', textAlign: 'center' }}>
         <Typography variant="h5" gutterBottom sx={{ fontWeight: 700 }}>
-          Ready for more challenges?
+          Advanced Mastery
         </Typography>
         <Typography variant="body1" sx={{ mb: 3, opacity: 0.9 }}>
-          Once you've mastered these basics, head over to the advanced module to learn about logic, composition, and callbacks.
+          You are now handling complex JavaScript patterns. Keep practicing and building!
         </Typography>
         <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
+          <Button 
+            variant="contained" 
+            color="inherit" 
+            size="large" 
+            component={Link}
+            to="/"
+            startIcon={<ArrowBackIcon />}
+            sx={{ borderRadius: 10, px: 4, py: 1.5, fontWeight: 700, color: 'warning.main' }}
+          >
+            Back to Level 1
+          </Button>
           <Button 
             variant="contained" 
             color="secondary" 
             size="large" 
             sx={{ borderRadius: 10, px: 4, py: 1.5, fontWeight: 700, boxShadow: '0 4px 14px 0 rgba(0,0,0,0.39)' }}
             onClick={() => {
-              const nextLesson = lessons.filter(l => l.id <= 6).find(l => !getLessonProgress(l).isFullyCompleted);
+              const nextLesson = lessons.filter(l => l.id > 6).find(l => !getLessonProgress(l).isFullyCompleted);
               if (nextLesson) setExpanded(`panel${nextLesson.id}`);
             }}
           >
-            Go to Next Task
-          </Button>
-          <Button 
-            variant="outlined" 
-            color="inherit" 
-            size="large" 
-            component={Link}
-            to="/level-two"
-            sx={{ borderRadius: 10, px: 4, py: 1.5, fontWeight: 700, border: '2px solid white', '&:hover': { border: '2px solid white', bgcolor: 'rgba(255,255,255,0.1)' } }}
-          >
-            Level 2 Lessons →
+            Next Advanced Task
           </Button>
         </Box>
       </Paper>
@@ -290,4 +284,4 @@ const FunctionsPage = () => {
   );
 };
 
-export default FunctionsPage;
+export default FunctionsPageTwo;
