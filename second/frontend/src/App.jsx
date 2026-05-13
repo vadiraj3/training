@@ -13,18 +13,16 @@ import {
   Box,
   Container,
 } from "@mui/material";
-import TasksPage from "./pages/TasksPage";
 import "./App.css";
-import Task1 from "./pages/Task1";
-import Task2 from "./pages/Task2";
-import Task3 from "./pages/Task3";
-import Task4 from "./pages/Task4";
-import Task5 from "./pages/Task5";
-import Task6 from "./pages/Task6";
-import Task7 from "./pages/Task7";
-import Task8 from "./pages/Task8";
-import Task9 from "./pages/Task9";
-import Task10 from "./pages/Task10";
+
+import TaskPageOne from "./pages/TaskPageOne";
+import TaskPageTwo from "./pages/TaskPageTwo";
+import TaskPageThree from "./pages/TaskPageThree";
+import TaskPageFour from "./pages/TaskPageFour";
+import TaskPageFive from "./pages/TaskPageFive";
+import TaskPageSix from "./pages/TaskPageSix";
+import TaskPageSeven from "./pages/TaskPageSeven";
+import TaskPageEight from "./pages/TaskPageEight";
 
 function Navigation() {
   const location = useLocation();
@@ -55,7 +53,7 @@ function Navigation() {
 
 function HomePage() {
   return (
-    <Container maxWidth="lg" sx={{ py: 4, textAlign: "center" }}>
+    <Container maxWidth="xl" sx={{ py: 4, textAlign: "center" }}>
       <Typography variant="h3" component="h1" gutterBottom color="black">
         Welcome to API Integration Training
       </Typography>
@@ -78,17 +76,14 @@ function App() {
         <Navigation />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/tasks" element={<TasksPage />} />
-          <Route path="/task1" element={<Task1 />} />
-          <Route path="/task2" element={<Task2 />} />
-          <Route path="/task3" element={<Task3 />} />
-          <Route path="/task4" element={<Task4 />} />
-          <Route path="/task5" element={<Task5 />} />
-          <Route path="/task6" element={<Task6 />} />
-          <Route path="/task7" element={<Task7 />} />
-          <Route path="/task8" element={<Task8 />} />
-          <Route path="/task9" element={<Task9 />} />
-          <Route path="/task10" element={<Task10 />} />
+          <Route path="/taskpageone" element={<TaskPageOne />} />
+          <Route path="/taskpageTwo" element={<TaskPageTwo />} />
+          <Route path="/taskpageThree" element={<TaskPageThree />} />
+          <Route path="/taskpageFour" element={<TaskPageFour />} />
+          <Route path="/taskpageFive" element={<TaskPageFive />} />
+          <Route path="/taskpageSix" element={<TaskPageSix />} />
+          <Route path="/taskpageSeven" element={<TaskPageSeven />} />
+          <Route path="/taskpageEight" element={<TaskPageEight />} />
         </Routes>
       </Box>
     </Router>
