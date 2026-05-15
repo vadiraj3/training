@@ -67,22 +67,22 @@ const FunctionsPageTwo = () => {
             mb: 1
           }}
         >
-          Functions Level 2: Logic & Composition
+          Functions Level 2: Advanced Logic & Objects
         </Typography>
         <Typography variant="h5" color="text.secondary" sx={{ maxWidth: '800px', mx: 'auto', mb: 4 }}>
-          Taking it to the next level with multiple arguments, nested functions, and array processing.
+          Expanding your knowledge with complex parameters, function composition, and object handling.
         </Typography>
         
         <Alert severity="warning" icon={<SchoolIcon />} sx={{ borderRadius: 2, textAlign: 'left', mb: 4 }}>
-          <AlertTitle>Intermediate Track</AlertTitle>
-          These lessons focus on real-world patterns like <strong>Composition</strong> and <strong>Callbacks</strong>. 
-          Each task requires more logic than the previous module.
+          <AlertTitle>Logic & Objects Track</AlertTitle>
+          These lessons build on lessons 7 to 11, focusing on <strong>Logic</strong>, <strong>Composition</strong>, and <strong>Object Manipulation</strong>. 
+          Each task requires you to call the function in <code>src/exercises/index.js</code> to complete the lesson!
         </Alert>
       </Box>
 
       {/* Lessons Accordion */}
       <Box sx={{ mb: 4 }}>
-        {lessons.filter(l => l.id > 6).map((lesson) => {
+        {lessons.filter(l => l.id > 6 && l.id !== 10).map((lesson) => {
           const progress = getLessonProgress(lesson);
           return (
             <Accordion 
