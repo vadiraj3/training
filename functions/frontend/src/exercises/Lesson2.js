@@ -9,14 +9,12 @@
 
 // YOUR CODE HERE (Normal Function)
 function calculateSquare(number) {
-  const add = number * number;
-  console.log(add);
+  console.log(number * number);
 }
-// YOUR CODE HERE (Arrow Function)
-const calculateSquareArrow = (parameter) => {
-  const result = parameter * parameter;
-  console.log(result);
-};
+
+function calculateSquareArrow(number) {
+  console.log(number * number);
+}
 // Export them
 export const lesson2 = {
   calculateSquare:

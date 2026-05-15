@@ -11,10 +11,9 @@ export function handleButtonClick() {
   console.log("The trainee clicked the button!");
 }
 
-export const handleClick = () => {
+export function handleClick() {
   console.log("manual verification needed");
-};
-
+}
 // Export it
 export const lesson3 = {
   handleButtonClick:

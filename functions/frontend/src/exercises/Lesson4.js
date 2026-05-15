@@ -9,7 +9,7 @@
 
 // YOUR CODE HERE
 function introduceUser(name, title = "Student") {
-  console.log("name: " + name, "Title: " + title);
+  console.log("Name: " + name + "," + "Title: " + title);
 }
 
 // Export it

@@ -29,14 +29,31 @@ export const traineeExercises = {
 lesson1.welcomeTrainee();
 lesson1.welcomeTraineeArrow();
 
-lesson2.calculateSquare(7);
-lesson2.calculateSquareArrow(9);
+lesson2.calculateSquare(2);
+lesson2.calculateSquareArrow(4);
 
 lesson3.handleButtonClick();
+lesson4.introduceUser("Venu", "Student");
 
-lesson4.introduceUser("Veeru", "Student");
-
-const add = lesson5.getRectangleArea(4, 4);
+const add = lesson5.getRectangleArea(5, 3);
 console.log(add);
-const result = lesson5.getRectangleAreaArrow(7, 7);
+const result = lesson5.getRectangleArea(9, 7);
 console.log(result);
+
+const score = lesson7.evaluateScore(80, 50);
+console.log(score);
+
+const fullName = lesson8.greetUser("John", "Doe");
+console.log(fullName);
+
+const Totalresult = lesson9.sumOfSquares(15, 10);
+console.log(Totalresult);
+
+const sum = lesson10.sumArray([1, 3, 5, 7, 9]);
+console.log(sum);
+
+const UserCard = lesson11.formatUserCard({
+  username: "jsmith",
+  email: "j@s.com",
+});
+console.log(UserCard);

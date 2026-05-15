@@ -11,10 +11,9 @@ function welcomeTrainee() {
   console.log("Welcome to JavaScript Training!");
 }
 
-const welcomeTraineeArrow = () => {
-  console.log("Welcome to JavaScript Training batch!");
-};
-
+function welcomeTraineeArrow() {
+  console.log("Hello from Arrow Function!");
+}
 // Export them for testing in the UI
 export const lesson1 = {
   welcomeTrainee: typeof welcomeTrainee !== "undefined" ? welcomeTrainee : null,
