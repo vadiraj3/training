@@ -18,7 +18,8 @@ export const lessons = [
       description: "Create a function that logs a welcome message to the console.",
       requirements: [
         { id: 'l1r1', text: "Define a normal function named 'welcomeTrainee'", check: (ex) => typeof ex?.lesson1?.welcomeTrainee === 'function' },
-        { id: 'l1r2', text: "Define an arrow function named 'welcomeTraineeArrow'", check: (ex) => typeof ex?.lesson1?.welcomeTraineeArrow === 'function' }
+        { id: 'l1r2', text: "Define an arrow function named 'welcomeTraineeArrow'", check: (ex) => typeof ex?.lesson1?.welcomeTraineeArrow === 'function' },
+        { id: 'l1r3', text: "Call it in index.js", check: (ex) => ex?.lesson1?.__wasCalledByTrainee === true }
       ],
       expectedResult: "Two functions defined and ready to be called."
     }
@@ -42,7 +43,8 @@ export const lessons = [
       description: "Create a function that calculates and logs the square of a number.",
       requirements: [
         { id: 'l2r1', text: "Define a normal function named 'calculateSquare' with one parameter", check: (ex) => typeof ex?.lesson2?.calculateSquare === 'function' && ex.lesson2.calculateSquare.length === 1 },
-        { id: 'l2r2', text: "Define an arrow function named 'calculateSquareArrow' with one parameter", check: (ex) => typeof ex?.lesson2?.calculateSquareArrow === 'function' && ex.lesson2.calculateSquareArrow.length === 1 }
+        { id: 'l2r2', text: "Define an arrow function named 'calculateSquareArrow' with one parameter", check: (ex) => typeof ex?.lesson2?.calculateSquareArrow === 'function' && ex.lesson2.calculateSquareArrow.length === 1 },
+        { id: 'l2r3', text: "Call it in index.js", check: (ex) => ex?.lesson2?.__wasCalledByTrainee === true }
       ],
       expectedResult: "Functions that log the square of whatever number is passed to them."
     }
@@ -65,7 +67,7 @@ export const lessons = [
       description: "Implement a button that triggers a console log message when clicked.",
       requirements: [
         { id: 'l3r1', text: "Define a function named 'handleButtonClick'", check: (ex) => typeof ex?.lesson3?.handleButtonClick === 'function' },
-        { id: 'l3r2', text: "Function should log a message (manual verification needed)", check: (ex) => typeof ex?.lesson3?.handleButtonClick === 'function' }
+        { id: 'l3r2', text: "Call it in index.js", check: (ex) => ex?.lesson3?.__wasCalledByTrainee === true }
       ],
       expectedResult: "A message appears in the console whenever the button is clicked."
     }
@@ -89,7 +91,7 @@ export const lessons = [
       description: "Create a function that introduces a user with an optional title.",
       requirements: [
         { id: 'l4r1', text: "Define 'introduceUser' with 2 parameters", check: (ex) => typeof ex?.lesson4?.introduceUser === 'function' && ex.lesson4.introduceUser.length >= 1 },
-        { id: 'l4r2', text: "Set default value for 'title' (detected by length property)", check: (ex) => typeof ex?.lesson4?.introduceUser === 'function' && ex.lesson4.introduceUser.length === 1 }
+        { id: 'l4r2', text: "Call it in index.js", check: (ex) => ex?.lesson4?.__wasCalledByTrainee === true }
       ],
       expectedResult: "Correct introduction logged even if the title is missing."
     }
@@ -112,7 +114,7 @@ export const lessons = [
       description: "Create a function that calculates the area of a rectangle and returns it.",
       requirements: [
         { id: 'l5r1', text: "Define 'getRectangleArea' that returns a value", check: (ex) => typeof ex?.lesson5?.getRectangleArea === 'function' && ex.lesson5.getRectangleArea(5, 4) === 20 },
-        { id: 'l5r2', text: "Define 'getRectangleAreaArrow' that returns a value", check: (ex) => typeof ex?.lesson5?.getRectangleAreaArrow === 'function' && ex.lesson5.getRectangleAreaArrow(5, 4) === 20 }
+        { id: 'l5r2', text: "Call it in index.js", check: (ex) => ex?.lesson5?.__wasCalledByTrainee === true }
       ],
       expectedResult: "The area is calculated, returned, and then logged outside the function."
     }
@@ -133,8 +135,8 @@ export const lessons = [
     traineeTask: {
       description: "Use an inline arrow function to log a message.",
       requirements: [
-        { id: 'l6r1', text: "Create an MUI Button with inline onClick", check: () => true }, // Hard to validate statically
-        { id: 'l6r2', text: "The inline function should log: 'Inline function executed!'", check: () => true }
+        { id: 'l6r1', text: "Create an MUI Button with inline onClick", check: () => true },
+        { id: 'l6r2', text: "Call it in index.js", check: (ex) => ex?.lesson6?.__wasCalledByTrainee === true }
       ],
       expectedResult: "Buttons work without having separate function definitions in the component body."
     }
@@ -156,8 +158,7 @@ export const lessons = [
       description: "Create a function 'evaluateScore' that takes two parameters: 'score' and 'passingGrade'. It should return 'Pass' if score is greater than or equal to passingGrade, and 'Fail' otherwise.",
       requirements: [
         { id: 'l7r1', text: "Define 'evaluateScore' with 2 parameters", check: (ex) => typeof ex?.lesson7?.evaluateScore === 'function' && ex.lesson7.evaluateScore.length === 2 },
-        { id: 'l7r2', text: "Should return 'Pass' for 80, 50", check: (ex) => ex?.lesson7?.evaluateScore?.(80, 50) === 'Pass' },
-        { id: 'l7r3', text: "Should return 'Fail' for 40, 50", check: (ex) => ex?.lesson7?.evaluateScore?.(40, 50) === 'Fail' }
+        { id: 'l7r2', text: "Call it in index.js", check: (ex) => ex?.lesson7?.__wasCalledByTrainee === true }
       ],
       expectedResult: "'Pass' or 'Fail' string based on the comparison."
     }
@@ -179,7 +180,7 @@ export const lessons = [
       description: "Create two functions: 1. 'getFullName(first, last)' which returns 'first last'. 2. 'greetUser(first, last)' which calls 'getFullName' and returns 'Hello, [Full Name]!'.",
       requirements: [
         { id: 'l8r1', text: "Define 'getFullName' correctly", check: (ex) => ex?.lesson8?.getFullName?.('John', 'Doe') === 'John Doe' },
-        { id: 'l8r2', text: "Define 'greetUser' correctly", check: (ex) => ex?.lesson8?.greetUser?.('John', 'Doe') === 'Hello, John Doe!' }
+        { id: 'l8r2', text: "Call it in index.js", check: (ex) => ex?.lesson8?.__wasCalledByTrainee === true }
       ],
       expectedResult: "'Hello, John Doe!' when calling greetUser('John', 'Doe')."
     }
@@ -198,7 +199,7 @@ export const lessons = [
       description: "Create 'square(n)' which returns n*n. Then create 'sumOfSquares(a, b)' which calls 'square' for both a and b, and returns their sum.",
       requirements: [
         { id: 'l9r1', text: "Define 'square' function", check: (ex) => ex?.lesson9?.square?.(4) === 16 },
-        { id: 'l9r2', text: "Define 'sumOfSquares' using 'square'", check: (ex) => ex?.lesson9?.sumOfSquares?.(3, 4) === 25 }
+        { id: 'l9r2', text: "Call it in index.js", check: (ex) => ex?.lesson9?.__wasCalledByTrainee === true }
       ],
       expectedResult: "sumOfSquares(3, 4) should return 25."
     }
@@ -220,8 +221,7 @@ export const lessons = [
       description: "Create a function 'sumArray(numbers)' that takes an array of numbers and returns their sum using a loop or reduce.",
       requirements: [
         { id: 'l10r1', text: "Define 'sumArray' that takes 1 parameter", check: (ex) => typeof ex?.lesson10?.sumArray === 'function' && ex.lesson10.sumArray.length === 1 },
-        { id: 'l10r2', text: "Correctly sums [1, 2, 3, 4]", check: (ex) => ex?.lesson10?.sumArray?.([1, 2, 3, 4]) === 10 },
-        { id: 'l10r3', text: "Returns 0 for empty array", check: (ex) => ex?.lesson10?.sumArray?.([]) === 0 }
+        { id: 'l10r2', text: "Call it in index.js", check: (ex) => ex?.lesson10?.__wasCalledByTrainee === true }
       ],
       expectedResult: "The total sum of all numbers in the array."
     }
@@ -243,7 +243,8 @@ export const lessons = [
       description: "Create a function 'formatUserCard' that takes an object with 'username' and 'email' properties, and returns a string: 'User: username, Contact: email'.",
       requirements: [
         { id: 'l11r1', text: "Define 'formatUserCard'", check: (ex) => typeof ex?.lesson11?.formatUserCard === 'function' },
-        { id: 'l11r2', text: "Correctly formats the output string", check: (ex) => ex?.lesson11?.formatUserCard?.({ username: 'jsmith', email: 'j@s.com' }) === 'User: jsmith, Contact: j@s.com' }
+        { id: 'l11r2', text: "Correctly formats the output string", check: (ex) => ex?.lesson11?.formatUserCard?.({ username: 'jsmith', email: 'j@s.com' }) === 'User: jsmith, Contact: j@s.com' },
+        { id: 'l11r3', text: "Call it in index.js", check: (ex) => ex?.lesson11?.__wasCalledByTrainee === true }
       ],
       expectedResult: "'User: jsmith, Contact: j@s.com'"
     }
@@ -266,9 +267,216 @@ export const lessons = [
       requirements: [
         { id: 'l12r1', text: "Define 'applyOperation' with 3 parameters", check: (ex) => typeof ex?.lesson12?.applyOperation === 'function' && ex.lesson12.applyOperation.length === 3 },
         { id: 'l12r2', text: "Correctly applies addition callback", check: (ex) => ex?.lesson12?.applyOperation?.(10, 5, (x, y) => x + y) === 15 },
-        { id: 'l12r3', text: "Correctly applies multiplication callback", check: (ex) => ex?.lesson12?.applyOperation?.(10, 5, (x, y) => x * y) === 50 }
+        { id: 'l12r3', text: "Call it in index.js", check: (ex) => ex?.lesson12?.__wasCalledByTrainee === true }
       ],
       expectedResult: "The result of the operation function."
+    }
+  },
+  {
+    id: 13,
+    title: "The Discount Applicator",
+    topic: "Multiple Parameters & Logic",
+    difficulty: "Intermediate",
+    explanation: "Functions can handle complex pricing logic. By passing multiple parameters like price, discount, and membership status, we can calculate the final cost.",
+    teacherExample: {
+      description: "Calculating shipping cost based on weight and distance.",
+      code: "function getShipping(weight, distance) {\n  if (distance < 50) return 5;\n  return weight * 0.5;\n}"
+    },
+    traineeTask: {
+      description: "Create a function 'calculatePrice' that takes 'basePrice', 'discountAmount', and 'isMember'. If isMember is true, subtract the discount from the basePrice. Otherwise, return the basePrice.",
+      requirements: [
+        { id: 'l13r1', text: "Define 'calculatePrice' function", check: (ex) => typeof ex?.lesson13?.calculatePrice === 'function' },
+        { id: 'l13r2', text: "Subtracts discount for members (100, 20, true) -> 80", check: (ex) => ex?.lesson13?.calculatePrice?.(100, 20, true) === 80 },
+        { id: 'l13r3', text: "No discount for non-members (100, 20, false) -> 100", check: (ex) => ex?.lesson13?.calculatePrice?.(100, 20, false) === 100 },
+        { id: 'l13r4', text: "Call it in index.js", check: (ex) => ex?.lesson13?.__wasCalledByTrainee === true }
+      ],
+      expectedResult: "The final price after membership check."
+    }
+  },
+  {
+    id: 14,
+    title: "The Age Categorizer",
+    topic: "Nested Logic",
+    difficulty: "Intermediate",
+    explanation: "You can use multiple if/else statements (or else if) to categorize data based on ranges. This is very common for user profiling.",
+    teacherExample: {
+      description: "Categorizing a score into 'Low', 'Mid', or 'High'.",
+      code: "function categorize(val) {\n  if (val < 30) return 'Low';\n  if (val < 70) return 'Mid';\n  return 'High';\n}"
+    },
+    traineeTask: {
+      description: "Create a function 'getAgeGroup' that takes an 'age'. If age < 13 return 'Child', if age < 20 return 'Teen', otherwise return 'Adult'.",
+      requirements: [
+        { id: 'l14r1', text: "Define 'getAgeGroup'", check: (ex) => typeof ex?.lesson14?.getAgeGroup === 'function' },
+        { id: 'l14r2', text: "Returns 'Teen' for 15", check: (ex) => ex?.lesson14?.getAgeGroup?.(15) === 'Teen' },
+        { id: 'l14r3', text: "Call it in index.js", check: (ex) => ex?.lesson14?.__wasCalledByTrainee === true }
+      ],
+      expectedResult: "The correct age group string."
+    }
+  },
+  {
+    id: 15,
+    title: "User Profile Creator",
+    topic: "Returning Objects",
+    difficulty: "Intermediate",
+    explanation: "Functions don't just return strings or numbers; they can return whole objects! This is useful for packaging data together.",
+    teacherExample: {
+      description: "Creating a simple point object.",
+      code: "function createPoint(x, y) {\n  return { x: x, y: y };\n}"
+    },
+    traineeTask: {
+      description: "Create a function 'createUser' that takes 'name' and 'role'. It should return an object like { userName: name, userRole: role }.",
+      requirements: [
+        { id: 'l15r1', text: "Define 'createUser'", check: (ex) => typeof ex?.lesson15?.createUser === 'function' },
+        { id: 'l15r2', text: "Returns correct object { userName: 'Ali', userRole: 'Admin' }", check: (ex) => {
+          const u = ex?.lesson15?.createUser?.('Ali', 'Admin');
+          return u?.userName === 'Ali' && u?.userRole === 'Admin';
+        }},
+        { id: 'l15r3', text: "Call it in index.js", check: (ex) => ex?.lesson15?.__wasCalledByTrainee === true }
+      ],
+      expectedResult: "A user object with the provided properties."
+    }
+  },
+  {
+    id: 16,
+    title: "Address Formatter",
+    topic: "Destructuring in Parameters",
+    difficulty: "Intermediate",
+    explanation: "Mirroring Lesson 11, you can take an object and pull out the properties you need right in the parameter list. This makes the function body cleaner.",
+    teacherExample: {
+      description: "Formatting a person's height from an object.",
+      code: "function formatHeight({ feet, inches }) {\n  return feet + 'ft ' + inches + 'in';\n}"
+    },
+    traineeTask: {
+      description: "Create a function 'formatAddress' that takes an object with 'city' and 'zip'. Return a string like 'City: [city], Zip: [zip]'.",
+      requirements: [
+        { id: 'l16r1', text: "Define 'formatAddress'", check: (ex) => typeof ex?.lesson16?.formatAddress === 'function' },
+        { id: 'l16r2', text: "Formats correctly", check: (ex) => ex?.lesson16?.formatAddress?.({ city: 'Mumbai', zip: '400001' }) === 'City: Mumbai, Zip: 400001' },
+        { id: 'l16r3', text: "Call it in index.js", check: (ex) => ex?.lesson16?.__wasCalledByTrainee === true }
+      ],
+      expectedResult: "A formatted address string."
+    }
+  },
+  {
+    id: 17,
+    title: "Multi-Step Calculation",
+    topic: "Logic & Math",
+    difficulty: "Intermediate",
+    explanation: "Sometimes a function needs to perform a few steps in order. First calculate one part, then another, then combine them.",
+    teacherExample: {
+      description: "Calculating volume of a box.",
+      code: "function getVolume(w, h, l) {\n  const area = w * h;\n  return area * l;\n}"
+    },
+    traineeTask: {
+      description: "Create a function 'getTotalWithTax' that takes 'price' and 'taxRate'. 1. Calculate tax amount (price * taxRate). 2. Add tax to price. 3. Return the total.",
+      requirements: [
+        { id: 'l17r1', text: "Define 'getTotalWithTax'", check: (ex) => typeof ex?.lesson17?.getTotalWithTax === 'function' },
+        { id: 'l17r2', text: "Correctly calculates (100, 0.1) -> 110", check: (ex) => ex?.lesson17?.getTotalWithTax?.(100, 0.1) === 110 },
+        { id: 'l17r3', text: "Call it in index.js", check: (ex) => ex?.lesson17?.__wasCalledByTrainee === true }
+      ],
+      expectedResult: "The final price including tax."
+    }
+  },
+  {
+    id: 18,
+    title: "Composition: The Full Name Greet",
+    topic: "Function Composition",
+    difficulty: "Intermediate",
+    explanation: "Composition (calling one function inside another) keeps your code modular. You can reuse the 'formatter' in many different greetings.",
+    teacherExample: {
+      description: "Combining title and name.",
+      code: "const getTitle = (gender) => gender === 'm' ? 'Mr.' : 'Ms.';\nfunction greet(name, gender) {\n  return 'Hello ' + getTitle(gender) + ' ' + name;\n}"
+    },
+    traineeTask: {
+      description: "Create 'joinNames(first, last)' that returns 'first last'. Then create 'welcomeMessage(first, last)' that calls 'joinNames' and returns 'Welcome, [Full Name]!'.",
+      requirements: [
+        { id: 'l18r1', text: "Define 'joinNames'", check: (ex) => ex?.lesson18?.joinNames?.('A', 'B') === 'A B' },
+        { id: 'l18r2', text: "Define 'welcomeMessage' using joinNames", check: (ex) => ex?.lesson18?.welcomeMessage?.('A', 'B') === 'Welcome, A B!' },
+        { id: 'l18r3', text: "Call it in index.js", check: (ex) => ex?.lesson18?.__wasCalledByTrainee === true }
+      ],
+      expectedResult: "'Welcome, [Full Name]!'"
+    }
+  },
+  {
+    id: 19,
+    title: "Helper: The Circle Stats",
+    topic: "Helper Functions",
+    difficulty: "Intermediate",
+    explanation: "Helper functions can perform sub-calculations like finding the diameter or area, which are then used by a main function to return a report.",
+    teacherExample: {
+      description: "Using a square helper to find hypotenuse.",
+      code: "const sq = (n) => n * n;\nfunction hypotenuse(a, b) {\n  return Math.sqrt(sq(a) + sq(b));\n}"
+    },
+    traineeTask: {
+      description: "Create 'getDiameter(r)' which returns r * 2. Then create 'getCircleInfo(r)' which calls 'getDiameter' and returns 'Radius: [r], Diameter: [diameter]'.",
+      requirements: [
+        { id: 'l19r1', text: "Define 'getDiameter'", check: (ex) => ex?.lesson19?.getDiameter?.(5) === 10 },
+        { id: 'l19r2', text: "Define 'getCircleInfo' using getDiameter", check: (ex) => ex?.lesson19?.getCircleInfo?.(5) === 'Radius: 5, Diameter: 10' },
+        { id: 'l19r3', text: "Call it in index.js", check: (ex) => ex?.lesson19?.__wasCalledByTrainee === true }
+      ],
+      expectedResult: "A string with radius and diameter."
+    }
+  },
+  {
+    id: 20,
+    title: "Object Property Addition",
+    topic: "Objects & Logic",
+    difficulty: "Intermediate",
+    explanation: "Functions can modify or extend objects. You can take an existing object, add a new piece of information based on some logic, and return it.",
+    teacherExample: {
+      description: "Adding a status to a task object.",
+      code: "function setStatus(task) {\n  task.isDone = true;\n  return task;\n}"
+    },
+    traineeTask: {
+      description: "Create 'addScore' that takes a 'user' object (like { name: '...' }) and a 'score'. Return the same object but with a 'score' property added.",
+      requirements: [
+        { id: 'l20r1', text: "Define 'addScore'", check: (ex) => typeof ex?.lesson20?.addScore === 'function' },
+        { id: 'l20r2', text: "Correctly adds score { name: 'A' }, 50 -> { name: 'A', score: 50 }", check: (ex) => {
+          const u = ex?.lesson20?.addScore?.({ name: 'A' }, 50);
+          return u?.name === 'A' && u?.score === 50;
+        }},
+        { id: 'l20r3', text: "Call it in index.js", check: (ex) => ex?.lesson20?.__wasCalledByTrainee === true }
+      ],
+      expectedResult: "The user object with an added score."
+    }
+  },
+  {
+    id: 21,
+    title: "The Settings Merger",
+    topic: "Objects & Default Values",
+    difficulty: "Intermediate",
+    explanation: "Often we have default settings and we want to allow users to override them. Functions can merge these options together.",
+    teacherExample: {
+      description: "Merging color settings.",
+      code: "function getStyle(userColor) {\n  return { theme: 'dark', color: userColor || 'blue' };\n}"
+    },
+    traineeTask: {
+      description: "Create 'getSettings' that takes a 'userName' and 'preferredTheme'. Return an object: { user: userName, theme: preferredTheme, language: 'English' }.",
+      requirements: [
+        { id: 'l21r1', text: "Define 'getSettings'", check: (ex) => typeof ex?.lesson21?.getSettings === 'function' },
+        { id: 'l21r2', text: "Includes default language 'English'", check: (ex) => ex?.lesson21?.getSettings?.('A', 'Dark')?.language === 'English' },
+        { id: 'l21r3', text: "Call it in index.js", check: (ex) => ex?.lesson21?.__wasCalledByTrainee === true }
+      ],
+      expectedResult: "A settings object with user, theme, and language."
+    }
+  },
+  {
+    id: 22,
+    title: "Practical Composition: Tax & Total",
+    topic: "Intermediate Composition",
+    difficulty: "Intermediate",
+    explanation: "This is a final review of composition. We use small, focused math helpers to build a final invoice calculator.",
+    teacherExample: {
+      description: "Helper to convert and then format.",
+      code: "const toUpper = (s) => s.toUpperCase();\nfunction formatMsg(msg) {\n  return 'MSG: ' + toUpper(msg);\n}"
+    },
+    traineeTask: {
+      description: "Create 'calculateTax(price)' which returns price * 0.18. Then create 'finalInvoice(price)' which calls 'calculateTax' and returns the sum of price + tax. Call it with 1000.",
+      requirements: [
+        { id: 'l22r1', text: "Define 'calculateTax' (18%)", check: (ex) => ex?.lesson22?.calculateTax?.(100) === 18 },
+        { id: 'l22r2', text: "Define 'finalInvoice' using calculateTax", check: (ex) => ex?.lesson22?.finalInvoice?.(100) === 118 },
+        { id: 'l22r3', text: "Call it in index.js", check: (ex) => ex?.lesson22?.__wasCalledByTrainee === true }
+      ],
+      expectedResult: "The total price including 18% tax."
     }
   }
 ];
