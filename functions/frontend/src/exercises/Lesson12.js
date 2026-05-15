@@ -1,17 +1,16 @@
 /**
- * LESSON 12: Callback Functions (Functions as Arguments)
+ * LESSON 12: Tip Calculator
  * 
- * In JavaScript, a function is just another piece of data. You can pass a function into ANOTHER function!
- * The function that gets passed in is called a "Callback".
+ * Functions can handle multiple pieces of information (parameters).
  * 
  * WHAT TO DO:
- * 1. Create a function 'applyOperation'.
- * 2. It takes 3 arguments: 'a' (number), 'b' (number), and 'operation' (a function).
- * 3. Inside, call 'operation(a, b)' and return whatever it gives back.
+ * 1. Create a function named 'calculateTip'.
+ * 2. It should take two inputs: the bill amount and the tip percentage.
+ * 3. Calculate the tip (bill * percent / 100).
+ * 4. Return the calculated tip.
  * 
- * EXAMPLE:
- * applyOperation(5, 2, (x, y) => x + y) -> returns 7
- * applyOperation(5, 2, (x, y) => x * y) -> returns 10
+ * IMPORTANT: Call your function with 100 and 15, and store the result 
+ * in a variable named 'tipAmount'.
  */
 
 // YOUR CODE HERE
@@ -20,5 +19,6 @@
 
 // Export for validation
 export const lesson12 = {
-  applyOperation: typeof applyOperation !== 'undefined' ? applyOperation : null,
+  calculateTip: typeof calculateTip !== 'undefined' ? calculateTip : null,
+  tipAmount: typeof tipAmount !== 'undefined' ? tipAmount : undefined,
 };

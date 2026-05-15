@@ -82,7 +82,7 @@ const FunctionsPageTwo = () => {
 
       {/* Lessons Accordion */}
       <Box sx={{ mb: 4 }}>
-        {lessons.filter(l => l.id > 6).map((lesson) => {
+        {lessons.filter(l => l.id > 6 && l.id !== 10).map((lesson) => {
           const progress = getLessonProgress(lesson);
           return (
             <Accordion 

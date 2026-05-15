@@ -10,6 +10,14 @@ import { lesson9 } from './Lesson9';
 import { lesson10 } from './Lesson10';
 import { lesson11 } from './Lesson11';
 import { lesson12 } from './Lesson12';
+import { lesson13 } from './Lesson13';
+import { lesson14 } from './Lesson14';
+import { lesson15 } from './Lesson15';
+import { lesson16 } from './Lesson16';
+import { lesson17 } from './Lesson17';
+import { lesson18 } from './Lesson18';
+import { lesson19 } from './Lesson19';
+import { lesson20 } from './Lesson20';
 
 export const traineeExercises = {
   lesson1,
@@ -24,4 +32,12 @@ export const traineeExercises = {
   lesson10,
   lesson11,
   lesson12,
+  lesson13,
+  lesson14,
+  lesson15,
+  lesson16,
+  lesson17,
+  lesson18,
+  lesson19,
+  lesson20,
 };
