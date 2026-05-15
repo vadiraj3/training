@@ -228,208 +228,47 @@ export const lessons = [
   },
   {
     id: 11,
-    title: "Temperature Converter",
-    topic: "Math & Return Values",
-    difficulty: "Intermediate",
-    explanation: "Functions are perfect for mathematical conversions. You take an input, apply a formula, and return the result. This keeps your conversion logic in one place.",
+    title: "Object Parameters & Destructuring",
+    topic: "Clean Code",
+    difficulty: "Advanced",
+    explanation: "Instead of passing many individual arguments, you can pass a single object. Using destructuring in the function parameters makes the code much cleaner and avoids order-dependent bugs.",
+    syntax: {
+      destructure: "function printUser({ name, age }) {\n  console.log(name + ' is ' + age);\n}"
+    },
     teacherExample: {
-      description: "Converting Kilometers to Miles.",
-      code: "function toMiles(km) {\n  return km * 0.621371;\n}\n\nconst miles = toMiles(10);\nconsole.log(miles);"
+      description: "Using destructuring to handle configuration objects.",
+      code: "function createButton({ text, color = 'blue', size = 'medium' }) {\n  return `Button: ${text}, Style: ${color}, Size: ${size}`;\n}"
     },
     traineeTask: {
-      description: "Create a function 'toFahrenheit' that converts Celsius to Fahrenheit. The formula is (Celsius * 9/5) + 32. After defining it, call it with a value and export the result.",
+      description: "Create a function 'formatUserCard' that takes an object with 'username' and 'email' properties, and returns a string: 'User: username, Contact: email'.",
       requirements: [
-        { id: 'l11r1', text: "Define 'toFahrenheit' function", check: (ex) => typeof ex?.lesson11?.toFahrenheit === 'function' },
-        { id: 'l11r2', text: "Correctly converts 0°C to 32°F", check: (ex) => ex?.lesson11?.toFahrenheit?.(0) === 32 },
-        { id: 'l11r3', text: "Call the function and export 'currentTemp'", check: (ex) => ex?.lesson11?.currentTemp !== undefined }
+        { id: 'l11r1', text: "Define 'formatUserCard'", check: (ex) => typeof ex?.lesson11?.formatUserCard === 'function' },
+        { id: 'l11r2', text: "Correctly formats the output string", check: (ex) => ex?.lesson11?.formatUserCard?.({ username: 'jsmith', email: 'j@s.com' }) === 'User: jsmith, Contact: j@s.com' }
       ],
-      expectedResult: "The Fahrenheit equivalent of your input temperature."
+      expectedResult: "'User: jsmith, Contact: j@s.com'"
     }
   },
   {
     id: 12,
-    title: "Tip Calculator",
-    topic: "Multiple Arguments",
-    difficulty: "Intermediate",
-    explanation: "When a function needs multiple pieces of data, like a bill amount and a tip percentage, we pass them as separate parameters. Order matters when calling the function!",
+    title: "Callback Functions",
+    topic: "Functional Programming",
+    difficulty: "Advanced",
+    explanation: "A callback is a function passed as an argument to another function. This is a fundamental concept for handling asynchronous code and event-driven programming.",
+    syntax: {
+      callback: "function execute(task) {\n  console.log('Starting...');\n  task();\n}"
+    },
     teacherExample: {
-      description: "Calculating a simple discount.",
-      code: "function getDiscount(price, percent) {\n  return price * (percent / 100);\n}"
+      description: "A custom filter-like behavior using a callback.",
+      code: "function checkCondition(val, callback) {\n  return callback(val);\n}\n\ncheckCondition(5, (x) => x > 0); // returns true"
     },
     traineeTask: {
-      description: "Create 'calculateTip' which takes a bill amount and a tip percentage. It should return the tip amount. Then, call it with 100 and 15, and export the result as 'tipAmount'.",
+      description: "Create a function 'applyOperation(a, b, operation)' where 'operation' is a function. It should return the result of calling 'operation' with a and b.",
       requirements: [
-        { id: 'l12r1', text: "Define 'calculateTip' with 2 parameters", check: (ex) => typeof ex?.lesson12?.calculateTip === 'function' && ex.lesson12.calculateTip.length === 2 },
-        { id: 'l12r2', text: "Correctly calculates 15% of 200", check: (ex) => ex?.lesson12?.calculateTip?.(200, 15) === 30 },
-        { id: 'l12r3', text: "Call the function and export 'tipAmount'", check: (ex) => ex?.lesson12?.tipAmount !== undefined }
+        { id: 'l12r1', text: "Define 'applyOperation' with 3 parameters", check: (ex) => typeof ex?.lesson12?.applyOperation === 'function' && ex.lesson12.applyOperation.length === 3 },
+        { id: 'l12r2', text: "Correctly applies addition callback", check: (ex) => ex?.lesson12?.applyOperation?.(10, 5, (x, y) => x + y) === 15 },
+        { id: 'l12r3', text: "Correctly applies multiplication callback", check: (ex) => ex?.lesson12?.applyOperation?.(10, 5, (x, y) => x * y) === 50 }
       ],
-      expectedResult: "The calculated tip amount based on your inputs."
-    }
-  },
-  {
-    id: 13,
-    title: "Greeting Logic",
-    topic: "Conditions (If/Else)",
-    difficulty: "Intermediate",
-    explanation: "Functions often need to behave differently based on the input. We use if/else statements inside the function to return different values.",
-    teacherExample: {
-      description: "Checking if a number is positive or negative.",
-      code: "function checkSign(num) {\n  if (num >= 0) return 'Positive';\n  else return 'Negative';\n}"
-    },
-    traineeTask: {
-      description: "Create 'getGreeting' that takes an 'hour' (0-23). If hour is less than 12, return 'Good Morning'. Otherwise, return 'Good Day'. Call it with any hour and export as 'myGreeting'.",
-      requirements: [
-        { id: 'l13r1', text: "Define 'getGreeting' function", check: (ex) => typeof ex?.lesson13?.getGreeting === 'function' },
-        { id: 'l13r2', text: "Returns 'Good Morning' for 10", check: (ex) => ex?.lesson13?.getGreeting?.(10) === 'Good Morning' },
-        { id: 'l13r3', text: "Returns 'Good Day' for 14", check: (ex) => ex?.lesson13?.getGreeting?.(14) === 'Good Day' },
-        { id: 'l13r4', text: "Call it and export 'myGreeting'", check: (ex) => ex?.lesson13?.myGreeting !== undefined }
-      ],
-      expectedResult: "'Good Morning' or 'Good Day' depending on the time."
-    }
-  },
-  {
-    id: 14,
-    title: "Password Validator",
-    topic: "Boolean Returns",
-    difficulty: "Intermediate",
-    explanation: "Many functions are used to 'validate' something. These functions usually return true or false (Booleans).",
-    teacherExample: {
-      description: "Checking if a string is empty.",
-      code: "function isEmpty(text) {\n  return text.length === 0;\n}"
-    },
-    traineeTask: {
-      description: "Create 'isPasswordValid' that takes a password string. It should return true if the password is 8 characters or longer, and false otherwise. Call it and export 'isValid'.",
-      requirements: [
-        { id: 'l14r1', text: "Define 'isPasswordValid'", check: (ex) => typeof ex?.lesson14?.isPasswordValid === 'function' },
-        { id: 'l14r2', text: "Returns true for 'password123'", check: (ex) => ex?.lesson14?.isPasswordValid?.('password123') === true },
-        { id: 'l14r3', text: "Returns false for '123'", check: (ex) => ex?.lesson14?.isPasswordValid?.('123') === false },
-        { id: 'l14r4', text: "Call it and export 'isValid'", check: (ex) => ex?.lesson14?.isValid !== undefined }
-      ],
-      expectedResult: "A boolean value (true or false)."
-    }
-  },
-  {
-    id: 15,
-    title: "Circle Area Calculator",
-    topic: "Math Constants",
-    difficulty: "Intermediate",
-    explanation: "JavaScript has a built-in Math object. You can use Math.PI for the value of Pi (3.14159...).",
-    teacherExample: {
-      description: "Calculating the perimeter of a square.",
-      code: "function getPerimeter(side) {\n  return side * 4;\n}"
-    },
-    traineeTask: {
-      description: "Create 'getCircleArea' that takes a radius. Use Math.PI * r * r to calculate the area. Call it with radius 10 and export as 'area'.",
-      requirements: [
-        { id: 'l15r1', text: "Define 'getCircleArea'", check: (ex) => typeof ex?.lesson15?.getCircleArea === 'function' },
-        { id: 'l15r2', text: "Calculates area correctly (approx 314.159)", check: (ex) => Math.round(ex?.lesson15?.getCircleArea?.(10)) === 314 },
-        { id: 'l15r3', text: "Call it and export 'area'", check: (ex) => ex?.lesson15?.area !== undefined }
-      ],
-      expectedResult: "The area of a circle with radius 10."
-    }
-  },
-  {
-    id: 16,
-    title: "Seconds Converter",
-    topic: "Unit Conversion",
-    difficulty: "Intermediate",
-    explanation: "Simple multiplication functions are the building blocks of larger applications. They are easy to read and reuse.",
-    teacherExample: {
-      description: "Hours to Minutes.",
-      code: "const toMinutes = (hours) => hours * 60;"
-    },
-    traineeTask: {
-      description: "Create 'toSeconds' that takes minutes and returns the total seconds. Call it with 5 and export as 'seconds'.",
-      requirements: [
-        { id: 'l16r1', text: "Define 'toSeconds' function", check: (ex) => typeof ex?.lesson16?.toSeconds === 'function' },
-        { id: 'l16r2', text: "Returns 300 for 5 minutes", check: (ex) => ex?.lesson16?.toSeconds?.(5) === 300 },
-        { id: 'l16r3', text: "Call it and export 'seconds'", check: (ex) => ex?.lesson16?.seconds !== undefined }
-      ],
-      expectedResult: "300 (or whatever value matches your input)."
-    }
-  },
-  {
-    id: 17,
-    title: "Even or Odd",
-    topic: "The Modulo Operator",
-    difficulty: "Intermediate",
-    explanation: "The % (modulo) operator returns the remainder of a division. For example, 10 % 2 is 0, while 11 % 2 is 1. This is perfect for checking if a number is even.",
-    teacherExample: {
-      description: "Checking if a number is divisible by 5.",
-      code: "function isDivBy5(n) {\n  return n % 5 === 0;\n}"
-    },
-    traineeTask: {
-      description: "Create 'checkEvenOdd' that takes a number. Return the string 'Even' if it is even, and 'Odd' if it is odd. Call it with any number and export as 'evenOddResult'.",
-      requirements: [
-        { id: 'l17r1', text: "Define 'checkEvenOdd'", check: (ex) => typeof ex?.lesson17?.checkEvenOdd === 'function' },
-        { id: 'l17r2', text: "Returns 'Even' for 8", check: (ex) => ex?.lesson17?.checkEvenOdd?.(8) === 'Even' },
-        { id: 'l17r3', text: "Returns 'Odd' for 7", check: (ex) => ex?.lesson17?.checkEvenOdd?.(7) === 'Odd' },
-        { id: 'l17r4', text: "Call it and export 'evenOddResult'", check: (ex) => ex?.lesson17?.evenOddResult !== undefined }
-      ],
-      expectedResult: "'Even' or 'Odd'."
-    }
-  },
-  {
-    id: 18,
-    title: "Composition: Math Chain",
-    topic: "Function Composition",
-    difficulty: "Intermediate",
-    explanation: "Composition is when you use the output of one function as the input for another. It allows you to build complex logic from simple parts.",
-    teacherExample: {
-      description: "Doubling and then adding ten.",
-      code: "const double = (n) => n * 2;\nfunction doubleAndAddTen(n) {\n  return double(n) + 10;\n}"
-    },
-    traineeTask: {
-      description: "Create two functions: 1. 'square(n)' which returns n*n. 2. 'squareAndDouble(n)' which calls 'square' first and then doubles that result. Call it with 3 and export as 'mathResult'.",
-      requirements: [
-        { id: 'l18r1', text: "Define 'square' function", check: (ex) => ex?.lesson18?.square?.(4) === 16 },
-        { id: 'l18r2', text: "Define 'squareAndDouble' correctly", check: (ex) => ex?.lesson18?.squareAndDouble?.(3) === 18 },
-        { id: 'l18r3', text: "Call it and export 'mathResult'", check: (ex) => ex?.lesson18?.mathResult !== undefined }
-      ],
-      expectedResult: "18 (if you used 3 as input)."
-    }
-  },
-  {
-    id: 19,
-    title: "Range Checker",
-    topic: "Logical Operators",
-    difficulty: "Intermediate",
-    explanation: "You can use && (AND) and || (OR) to check multiple conditions at once inside a function.",
-    teacherExample: {
-      description: "Checking if a number is between 1 and 10.",
-      code: "function isSmall(n) {\n  return n >= 1 && n <= 10;\n}"
-    },
-    traineeTask: {
-      description: "Create 'isInRange' that takes three numbers: 'num', 'min', and 'max'. Return true if num is between min and max (inclusive), otherwise false. Call it and export 'rangeCheck'.",
-      requirements: [
-        { id: 'l19r1', text: "Define 'isInRange' with 3 parameters", check: (ex) => typeof ex?.lesson19?.isInRange === 'function' && ex.lesson19.isInRange.length === 3 },
-        { id: 'l19r2', text: "Returns true for (5, 1, 10)", check: (ex) => ex?.lesson19?.isInRange?.(5, 1, 10) === true },
-        { id: 'l19r3', text: "Returns false for (15, 1, 10)", check: (ex) => ex?.lesson19?.isInRange?.(15, 1, 10) === false },
-        { id: 'l19r4', text: "Call it and export 'rangeCheck'", check: (ex) => ex?.lesson19?.rangeCheck !== undefined }
-      ],
-      expectedResult: "A boolean result."
-    }
-  },
-  {
-    id: 20,
-    title: "Simple Calculator",
-    topic: "Switch/Case or Multi-If",
-    difficulty: "Intermediate",
-    explanation: "A calculator function is a classic example of logic-heavy functions. It chooses which math operation to perform based on a string input.",
-    teacherExample: {
-      description: "A simple color picker logic.",
-      code: "function getColor(name) {\n  if (name === 'red') return '#FF0000';\n  if (name === 'blue') return '#0000FF';\n  return '#000000';\n}"
-    },
-    traineeTask: {
-      description: "Create 'simpleCalc' that takes 'a', 'b', and 'op' (operation). If op is 'add' return a+b. If op is 'sub' return a-b. If op is 'mult' return a*b. Call it with (10, 5, 'add') and export as 'calcResult'.",
-      requirements: [
-        { id: 'l20r1', text: "Define 'simpleCalc' with 3 parameters", check: (ex) => typeof ex?.lesson20?.simpleCalc === 'function' },
-        { id: 'l20r2', text: "Adds correctly", check: (ex) => ex?.lesson20?.simpleCalc?.(10, 5, 'add') === 15 },
-        { id: 'l20r3', text: "Subtracts correctly", check: (ex) => ex?.lesson20?.simpleCalc?.(10, 5, 'sub') === 5 },
-        { id: 'l20r4', text: "Multiplies correctly", check: (ex) => ex?.lesson20?.simpleCalc?.(10, 5, 'mult') === 50 },
-        { id: 'l20r5', text: "Call it and export 'calcResult'", check: (ex) => ex?.lesson20?.calcResult !== undefined }
-      ],
-      expectedResult: "The result of the specified operation."
+      expectedResult: "The result of the operation function."
     }
   }
 ];

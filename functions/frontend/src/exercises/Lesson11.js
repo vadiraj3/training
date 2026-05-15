@@ -1,19 +1,16 @@
 /**
- * LESSON 11: Temperature Converter
+ * LESSON 11: Object Parameters & Destructuring
  * 
- * In this lesson, we practice math operations and returning values.
+ * Sometimes we have too many arguments to pass. Instead of passing 10 things, we pass 1 Object.
+ * "Destructuring" is a shortcut to grab exactly what we need from that object immediately.
  * 
  * WHAT TO DO:
- * 1. Create a function named 'toFahrenheit'.
- * 2. It should take one input (Celsius).
- * 3. Use the formula: (Celsius * 9/5) + 32.
- * 4. Return the result.
+ * 1. Create a function 'formatUserCard'.
+ * 2. It takes ONE argument: an object that looks like { username: "...", email: "..." }.
+ * 3. Use destructuring in the parameter line: ({ username, email }) => { ... }
+ * 4. Return the string: "User: " + username + ", Contact: " + email
  * 
- * IMPORTANT: To complete the lesson, you must also CALL your function 
- * and store the result in a variable named 'currentTemp'.
- * 
- * Example:
- * toFahrenheit(0) should return 32
+ * WHY? It makes your code much easier to read and you don't have to worry about the order of arguments!
  */
 
 // YOUR CODE HERE
@@ -22,6 +19,5 @@
 
 // Export for validation
 export const lesson11 = {
-  toFahrenheit: typeof toFahrenheit !== 'undefined' ? toFahrenheit : null,
-  currentTemp: typeof currentTemp !== 'undefined' ? currentTemp : undefined,
+  formatUserCard: typeof formatUserCard !== 'undefined' ? formatUserCard : null,
 };
