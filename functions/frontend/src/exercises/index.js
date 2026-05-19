@@ -159,37 +159,3 @@ console.log(setting);
 
 const sum = lesson22.finalInvoice(1000);
 console.log(sum);
-
-// Level 3 (Lessons 23-32) calls for tracking:
-const profile = lesson23.formatProfile({ username: "TraineeGoogle", role: "Developer" });
-console.log(profile);
-
-const updatedCart = lesson24.updateCartQuantity([5, 10, 15], 1, 10);
-console.log(updatedCart);
-
-const street = lesson25.getStreetName({ address: { street: "1600 Amphitheatre Pkwy" } });
-console.log(street);
-
-const cleanMail = lesson26.cleanEmail("   Developer@google.com   ");
-console.log(cleanMail);
-
-const activeProducts = lesson27.filterActiveProducts([
-  { name: "Pixel 8 Pro", isActive: true },
-  { name: "Nexus 5", isActive: false }
-]);
-console.log(activeProducts);
-
-const discountPrice = lesson28.applyBoundedDiscount(200, 60); // caps at 50%
-console.log(discountPrice);
-
-const newConfig = lesson29.updateConfig({ debug: false }, "debug", true);
-console.log(newConfig);
-
-const avgRating = lesson30.calculateAverage([5, 4, 4, 5]);
-console.log(avgRating);
-
-const topScores = lesson31.getTopThree([22, 98, 45, 100, 76]);
-console.log(topScores);
-
-const nestedTotal = lesson32.calculateOrderTotal({ order: { price: 150, taxRate: 0.18 } });
-console.log(nestedTotal);

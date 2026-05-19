@@ -13,10 +13,7 @@
  */
 
 // YOUR CODE HERE
-function applyBoundedDiscount(price, discountPercent) {
-  const cappedDiscount = Math.min(discountPercent, 50);
-  return price - (price * cappedDiscount / 100);
-}
+
 
 // Export for validation
 export const lesson28 = {

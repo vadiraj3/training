@@ -13,12 +13,7 @@
  */
 
 // YOUR CODE HERE
-function updateConfig(config, key, value) {
-  if (config && typeof config === "object" && typeof key === "string") {
-    config[key] = value;
-  }
-  return config;
-}
+
 
 // Export for validation
 export const lesson29 = {

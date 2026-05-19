@@ -12,12 +12,7 @@
  */
 
 // YOUR CODE HERE
-function updateCartQuantity(cart, index, incrementBy) {
-  if (Array.isArray(cart) && index >= 0 && index < cart.length) {
-    cart[index] += incrementBy;
-  }
-  return cart;
-}
+
 
 // Export for validation
 export const lesson24 = {

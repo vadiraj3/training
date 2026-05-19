@@ -12,9 +12,7 @@
  */
 
 // YOUR CODE HERE
-function calculateOrderTotal({ order: { price, taxRate } } = { order: { price: 0, taxRate: 0 } }) {
-  return price + (price * taxRate);
-}
+
 
 // Export for validation
 export const lesson32 = {

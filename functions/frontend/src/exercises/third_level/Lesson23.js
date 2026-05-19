@@ -11,9 +11,7 @@
  */
 
 // YOUR CODE HERE
-function formatProfile({ username, role = "Guest" } = {}) {
-  return `User: ${username}, Role: ${role}`;
-}
+
 
 // Export for validation
 export const lesson23 = {

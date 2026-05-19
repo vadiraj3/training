@@ -12,11 +12,7 @@
  */
 
 // YOUR CODE HERE
-function calculateAverage(ratings) {
-  if (!Array.isArray(ratings) || ratings.length === 0) return 0;
-  const total = ratings.reduce((sum, current) => sum + current, 0);
-  return total / ratings.length;
-}
+
 
 // Export for validation
 export const lesson30 = {

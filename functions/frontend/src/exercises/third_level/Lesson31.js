@@ -12,10 +12,7 @@
  */
 
 // YOUR CODE HERE
-function getTopThree(scores) {
-  if (!Array.isArray(scores)) return [];
-  return scores.slice().sort((a, b) => b - a).slice(0, 3);
-}
+
 
 // Export for validation
 export const lesson31 = {

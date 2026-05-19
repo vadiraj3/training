@@ -12,10 +12,7 @@
  */
 
 // YOUR CODE HERE
-function filterActiveProducts(products) {
-  if (!Array.isArray(products)) return [];
-  return products.filter(product => product?.isActive === true);
-}
+
 
 // Export for validation
 export const lesson27 = {
