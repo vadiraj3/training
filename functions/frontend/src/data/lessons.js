@@ -478,5 +478,262 @@ export const lessons = [
       ],
       expectedResult: "The total price including 18% tax."
     }
+  },
+  {
+    id: 23,
+    title: "User Profile Destructuring & Defaulting",
+    topic: "Destructuring & Defaults",
+    difficulty: "Advanced",
+    explanation: "Parameter destructuring allows you to unpack properties from objects directly in a function's signature. By providing default values, your functions become robust against missing data.",
+    syntax: {
+      destructuring: "function showProfile({ username, role = 'Member' } = {}) {\n  return `${username} is a ${role}`;\n}"
+    },
+    teacherExample: {
+      description: "Destructuring a nested profile config.",
+      code: "function setupUser({ name, active = true } = {}) {\n  return `User ${name} active status is ${active}`;\n}"
+    },
+    traineeTask: {
+      description: "Create a function 'formatProfile' that destructures '{ username, role = \"Guest\" }' from its parameter, and returns a formatted string: 'User: [username], Role: [role]'.",
+      requirements: [
+        { id: 'l23r1', text: "Define 'formatProfile' with 1 destructured parameter", check: (ex) => typeof ex?.lesson23?.formatProfile === 'function' },
+        { id: 'l23r2', text: "Correctly formats with role provided: { username: 'Ram', role: 'Admin' } -> 'User: Ram, Role: Admin'", check: (ex) => ex?.lesson23?.formatProfile?.({ username: 'Ram', role: 'Admin' }) === 'User: Ram, Role: Admin' },
+        { id: 'l23r3', text: "Correctly defaults role when missing: { username: 'Sham' } -> 'User: Sham, Role: Guest'", check: (ex) => ex?.lesson23?.formatProfile?.({ username: 'Sham' }) === 'User: Sham, Role: Guest' },
+        { id: 'l23r4', text: "Call it in index.js", check: (ex) => ex?.lesson23?.__wasCalledByTrainee === true }
+      ],
+      expectedResult: "'User: Ram, Role: Admin'"
+    }
+  },
+  {
+    id: 24,
+    title: "Array Element Modification",
+    topic: "Arrays & Indexing",
+    difficulty: "Advanced",
+    explanation: "Array elements can be accessed and modified directly using their index. In Javascript, array indices are 0-based.",
+    syntax: {
+      indexAccess: "array[index] = newValue;"
+    },
+    teacherExample: {
+      description: "Updating the status of a specific item in a primitive array.",
+      code: "function markPassed(grades, index) {\n  grades[index] = 100;\n  return grades;\n}"
+    },
+    traineeTask: {
+      description: "Create a function 'updateCartQuantity' that takes three parameters: 'cart' (array of numbers), 'index' (number), and 'incrementBy' (number). It should add 'incrementBy' to the value at 'index' in the 'cart' array and return the updated 'cart' array.",
+      requirements: [
+        { id: 'l24r1', text: "Define 'updateCartQuantity' with 3 parameters", check: (ex) => typeof ex?.lesson24?.updateCartQuantity === 'function' && ex.lesson24.updateCartQuantity.length === 3 },
+        { id: 'l24r2', text: "Correctly updates element: [1, 5, 2], 1, 3 -> [1, 8, 2]", check: (ex) => {
+          const arr = [1, 5, 2];
+          const result = ex?.lesson24?.updateCartQuantity?.(arr, 1, 3);
+          return result && result[1] === 8 && result[0] === 1 && result[2] === 2;
+        }},
+        { id: 'l24r3', text: "Call it in index.js", check: (ex) => ex?.lesson24?.__wasCalledByTrainee === true }
+      ],
+      expectedResult: "The cart array with the quantity modified at the specified index."
+    }
+  },
+  {
+    id: 25,
+    title: "Safe Nested Property Access",
+    topic: "Optional Chaining",
+    difficulty: "Advanced",
+    explanation: "Optional chaining (?.) permits reading the value of a property located deep within a chain of connected objects without having to check that each reference in the chain is valid. Combined with the nullish coalescing operator (??), you can provide graceful fallback values.",
+    syntax: {
+      optionalChaining: "const city = user?.address?.city ?? 'Unknown';"
+    },
+    teacherExample: {
+      description: "Safely getting the postal code from a user profile.",
+      code: "function getZipCode(user) {\n  return user?.location?.zipCode ?? 'N/A';\n}"
+    },
+    traineeTask: {
+      description: "Create a function 'getStreetName' that takes a 'user' object parameter. It should safely retrieve 'user.address.street' using optional chaining. If 'street' is not found (null or undefined), it should return the string 'Street Not Found'.",
+      requirements: [
+        { id: 'l25r1', text: "Define 'getStreetName'", check: (ex) => typeof ex?.lesson25?.getStreetName === 'function' },
+        { id: 'l25r2', text: "Returns street name if exists: { address: { street: 'Main St' } } -> 'Main St'", check: (ex) => ex?.lesson25?.getStreetName?.({ address: { street: 'Main St' } }) === 'Main St' },
+        { id: 'l25r3', text: "Returns 'Street Not Found' if nested street property is missing", check: (ex) => ex?.lesson25?.getStreetName?.({ address: {} }) === 'Street Not Found' && ex?.lesson25?.getStreetName?.(null) === 'Street Not Found' },
+        { id: 'l25r4', text: "Call it in index.js", check: (ex) => ex?.lesson25?.__wasCalledByTrainee === true }
+      ],
+      expectedResult: "'Main St' or 'Street Not Found'"
+    }
+  },
+  {
+    id: 26,
+    title: "String Transformation & Cleaning",
+    topic: "String Methods",
+    difficulty: "Advanced",
+    explanation: "Validating and sanitizing input values is a crucial first step in any real-world app. String methods like .trim() and .toLowerCase() allow you to format inputs uniformly.",
+    syntax: {
+      trimAndLower: "const clean = str.trim().toLowerCase();"
+    },
+    teacherExample: {
+      description: "Cleaning a user-submitted username prefix.",
+      code: "function cleanUsername(rawName) {\n  return typeof rawName === 'string' ? rawName.trim().toUpperCase() : '';\n}"
+    },
+    traineeTask: {
+      description: "Create a function 'cleanEmail' that takes a string 'email'. It should trim any leading/trailing whitespace, convert it to lowercase, and return the cleaned email. If the input is not a string, return an empty string ''.",
+      requirements: [
+        { id: 'l26r1', text: "Define 'cleanEmail'", check: (ex) => typeof ex?.lesson26?.cleanEmail === 'function' },
+        { id: 'l26r2', text: "Correctly trims and lowercases: '  Trainee@Google.Com ' -> 'trainee@google.com'", check: (ex) => ex?.lesson26?.cleanEmail?.('  Trainee@Google.Com ') === 'trainee@google.com' },
+        { id: 'l26r3', text: "Safely returns '' for non-string input: null -> ''", check: (ex) => ex?.lesson26?.cleanEmail?.(null) === '' },
+        { id: 'l26r4', text: "Call it in index.js", check: (ex) => ex?.lesson26?.__wasCalledByTrainee === true }
+      ],
+      expectedResult: "A sanitized email string."
+    }
+  },
+  {
+    id: 27,
+    title: "List Filtering by Property",
+    topic: "Array Filtering",
+    difficulty: "Advanced",
+    explanation: "Array.prototype.filter() creates a shallow copy of a portion of a given array, filtered down to just the elements from the given array that pass the test implemented by the provided callback function.",
+    syntax: {
+      filter: "const active = list.filter(item => item.isActive);"
+    },
+    teacherExample: {
+      description: "Filtering complete tasks from a todo list.",
+      code: "function getDoneTodos(todos) {\n  return todos.filter(todo => todo.isDone === true);\n}"
+    },
+    traineeTask: {
+      description: "Create a function 'filterActiveProducts' that takes an array 'products' containing object elements. Each object has an 'isActive' boolean property. The function should return a new array containing only the product objects where 'isActive' is true.",
+      requirements: [
+        { id: 'l27r1', text: "Define 'filterActiveProducts'", check: (ex) => typeof ex?.lesson27?.filterActiveProducts === 'function' },
+        { id: 'l27r2', text: "Correctly filters active: [{name:'A', isActive:true}, {name:'B', isActive:false}] -> [{name:'A', isActive:true}]", check: (ex) => {
+          const list = [{ name: 'A', isActive: true }, { name: 'B', isActive: false }];
+          const res = ex?.lesson27?.filterActiveProducts?.(list);
+          return Array.isArray(res) && res.length === 1 && res[0].name === 'A';
+        }},
+        { id: 'l27r3', text: "Call it in index.js", check: (ex) => ex?.lesson27?.__wasCalledByTrainee === true }
+      ],
+      expectedResult: "An array of product objects that are currently active."
+    }
+  },
+  {
+    id: 28,
+    title: "Bounded Discount Calculator",
+    topic: "Math Capping & Limiting",
+    difficulty: "Advanced",
+    explanation: "Capping values is extremely common when dealing with prices, ratings, or percentages. The Math.min() function returns the lowest-valued number passed into it.",
+    syntax: {
+      capValue: "const cappedValue = Math.min(value, maxLimit);"
+    },
+    teacherExample: {
+      description: "Limiting rating score to 5.",
+      code: "function capRating(score) {\n  return Math.min(score, 5);\n}"
+    },
+    traineeTask: {
+      description: "Create a function 'applyBoundedDiscount' that takes two parameters: 'price' (number) and 'discountPercent' (number). First, cap the 'discountPercent' so it does not exceed 50 (i.e. maximum 50% discount). Then, calculate and return the discounted price. Hint: Use Math.min(discountPercent, 50).",
+      requirements: [
+        { id: 'l28r1', text: "Define 'applyBoundedDiscount' with 2 parameters", check: (ex) => typeof ex?.lesson28?.applyBoundedDiscount === 'function' && ex.lesson28.applyBoundedDiscount.length === 2 },
+        { id: 'l28r2', text: "Caps discount at 50%: (100, 75) -> 50", check: (ex) => ex?.lesson28?.applyBoundedDiscount?.(100, 75) === 50 },
+        { id: 'l28r3', text: "Applies standard discount under cap: (200, 10) -> 180", check: (ex) => ex?.lesson28?.applyBoundedDiscount?.(200, 10) === 180 },
+        { id: 'l28r4', text: "Call it in index.js", check: (ex) => ex?.lesson28?.__wasCalledByTrainee === true }
+      ],
+      expectedResult: "The final price calculated after capping the discount at 50%."
+    }
+  },
+  {
+    id: 29,
+    title: "Dynamic Key Update",
+    topic: "Dynamic Objects",
+    difficulty: "Advanced",
+    explanation: "In JavaScript, you can access and modify properties of an object using either dot notation (object.property) or bracket notation (object['property']). Bracket notation is especially powerful because it allows you to use a dynamic key (e.g. stored in a variable) to modify the object.",
+    syntax: {
+      dynamicKey: "object[variableKey] = value;"
+    },
+    teacherExample: {
+      description: "Setting user preferences dynamically.",
+      code: "function setPreference(preferences, key, value) {\n  preferences[key] = value;\n  return preferences;\n}"
+    },
+    traineeTask: {
+      description: "Create a function 'updateConfig' that takes three parameters: 'config' (an object), 'key' (a string representing the property name), and 'value' (any type representing the property value). The function should set the property 'key' of 'config' to 'value' and return the updated 'config' object. Hint: Use square bracket notation.",
+      requirements: [
+        { id: 'l29r1', text: "Define 'updateConfig' with 3 parameters", check: (ex) => typeof ex?.lesson29?.updateConfig === 'function' && ex.lesson29.updateConfig.length === 3 },
+        { id: 'l29r2', text: "Updates correct key: {}, 'port', 8080 -> { port: 8080 }", check: (ex) => {
+          const cfg = {};
+          const res = ex?.lesson29?.updateConfig?.(cfg, 'port', 8080);
+          return res && res.port === 8080;
+        }},
+        { id: 'l29r3', text: "Call it in index.js", check: (ex) => ex?.lesson29?.__wasCalledByTrainee === true }
+      ],
+      expectedResult: "The config object updated with the dynamic key and value."
+    }
+  },
+  {
+    id: 30,
+    title: "Array Average Calculator",
+    topic: "Statistical Reducers",
+    difficulty: "Advanced",
+    explanation: "Calculating averages is a common task in processing data logs, user feedback, or e-commerce reviews. You can reduce an array of numbers to a sum and divide it by the array length.",
+    syntax: {
+      average: "const avg = array.reduce((a,b) => a+b, 0) / array.length;"
+    },
+    teacherExample: {
+      description: "Calculating average score of a student.",
+      code: "function getGradeAverage(grades) {\n  if (grades.length === 0) return 0;\n  return grades.reduce((s, g) => s + g, 0) / grades.length;\n}"
+    },
+    traineeTask: {
+      description: "Create a function 'calculateAverage' that takes an array of numbers 'ratings'. It should calculate and return the average value of all numbers in the array. If the array is empty or not an array, return 0.",
+      requirements: [
+        { id: 'l30r1', text: "Define 'calculateAverage'", check: (ex) => typeof ex?.lesson30?.calculateAverage === 'function' },
+        { id: 'l30r2', text: "Calculates correct average: [4, 5, 3] -> 4", check: (ex) => ex?.lesson30?.calculateAverage?.([4, 5, 3]) === 4 },
+        { id: 'l30r3', text: "Handles empty array gracefully: [] -> 0", check: (ex) => ex?.lesson30?.calculateAverage?.([]) === 0 },
+        { id: 'l30r4', text: "Call it in index.js", check: (ex) => ex?.lesson30?.__wasCalledByTrainee === true }
+      ],
+      expectedResult: "The average rating calculated or 0 if empty."
+    }
+  },
+  {
+    id: 31,
+    title: "Sorting & Slicing Lists",
+    topic: "Immutability & Slices",
+    difficulty: "Advanced",
+    explanation: "The .sort() method in JavaScript mutates the original array in place! To avoid unintended side-effects in real applications, we must first make a shallow copy using .slice() before sorting.",
+    syntax: {
+      safeSort: "const sorted = array.slice().sort((a,b) => a - b);"
+    },
+    teacherExample: {
+      description: "Finding top 2 runners' speed without mutating original list.",
+      code: "function getTopTwoSpeeds(speeds) {\n  return speeds.slice().sort((a,b) => b-a).slice(0, 2);\n}"
+    },
+    traineeTask: {
+      description: "Create a function 'getTopThree' that takes an array of numbers 'scores'. The function should sort these scores in descending order and return a new array containing the top 3 highest scores. Make sure NOT to mutate the original 'scores' array (use .slice() before sorting).",
+      requirements: [
+        { id: 'l31r1', text: "Define 'getTopThree'", check: (ex) => typeof ex?.lesson31?.getTopThree === 'function' },
+        { id: 'l31r2', text: "Does not mutate the original array", check: (ex) => {
+          const arr = [10, 40, 20, 30];
+          const copy = [...arr];
+          ex?.lesson31?.getTopThree?.(arr);
+          return arr.every((val, index) => val === copy[index]);
+        }},
+        { id: 'l31r3', text: "Correctly returns top 3 in descending order: [10, 50, 20, 80, 40] -> [80, 50, 40]", check: (ex) => {
+          const res = ex?.lesson31?.getTopThree?.([10, 50, 20, 80, 40]);
+          return res && res[0] === 80 && res[1] === 50 && res[2] === 40 && res.length === 3;
+        }},
+        { id: 'l31r4', text: "Call it in index.js", check: (ex) => ex?.lesson31?.__wasCalledByTrainee === true }
+      ],
+      expectedResult: "Top 3 numbers in descending order as a new array."
+    }
+  },
+  {
+    id: 32,
+    title: "Nested Destructuring & Total Calculation",
+    topic: "Nested Destructuring",
+    difficulty: "Advanced",
+    explanation: "Parameter destructuring can go multiple levels deep! This allows you to pull properties out of nested objects inside parameters in a single, neat expression.",
+    syntax: {
+      nestedDestructure: "function checkTax({ item: { details: { tax } } }) {\n  return tax;\n}"
+    },
+    teacherExample: {
+      description: "Extracting lat/long from a coordinate payload.",
+      code: "function getCoords({ location: { gps: { lat, lng } } }) {\n  return `${lat}, ${lng}`;\n}"
+    },
+    traineeTask: {
+      description: "Create a function 'calculateOrderTotal' that takes a single object parameter and deeply destructures it to extract '{ order: { price, taxRate } }'. It should return the total price including tax (price + (price * taxRate)).",
+      requirements: [
+        { id: 'l32r1', text: "Define 'calculateOrderTotal'", check: (ex) => typeof ex?.lesson32?.calculateOrderTotal === 'function' },
+        { id: 'l32r2', text: "Calculates correct order total: { order: { price: 100, taxRate: 0.18 } } -> 118", check: (ex) => ex?.lesson32?.calculateOrderTotal?.({ order: { price: 100, taxRate: 0.18 } }) === 118 },
+        { id: 'l32r3', text: "Call it in index.js", check: (ex) => ex?.lesson32?.__wasCalledByTrainee === true }
+      ],
+      expectedResult: "The final total cost including tax."
+    }
   }
 ];
+

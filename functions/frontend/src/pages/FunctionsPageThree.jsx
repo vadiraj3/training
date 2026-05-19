@@ -27,15 +27,16 @@ import {
   PlayArrow as PlayArrowIcon,
   CheckCircle as CheckCircleIcon,
   Cancel as CancelIcon,
-  ArrowBack as ArrowBackIcon
+  ArrowBack as ArrowBackIcon,
+  Stars as StarsIcon
 } from '@mui/icons-material';
 
 import { lessons } from '../data/lessons';
 import CodeBlock from '../components/CodeBlock';
 import { traineeExercises } from '../exercises';
 
-const FunctionsPageTwo = () => {
-  const [expanded, setExpanded] = useState('panel7');
+const FunctionsPageThree = () => {
+  const [expanded, setExpanded] = useState('panel23');
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -61,28 +62,29 @@ const FunctionsPageTwo = () => {
           gutterBottom 
           sx={{ 
             fontWeight: 800, 
-            background: 'linear-gradient(45deg, #FF5722 30%, #FFC107 90%)',
+            background: 'linear-gradient(45deg, #7C4DFF 30%, #00B0FF 90%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             mb: 1
           }}
         >
-          Functions Level 2: Advanced Logic & Objects
+          Functions Level 3: Real-World Engineering
         </Typography>
         <Typography variant="h5" color="text.secondary" sx={{ maxWidth: '800px', mx: 'auto', mb: 4 }}>
-          Expanding your knowledge with complex parameters, function composition, and object handling.
+          Mastering production-grade Javascript techniques: nesting, destructuring, optional chaining, and advanced array manipulation.
         </Typography>
         
-        <Alert severity="warning" icon={<SchoolIcon />} sx={{ borderRadius: 2, textAlign: 'left', mb: 4 }}>
-          <AlertTitle>Logic & Objects Track</AlertTitle>
-          These lessons build on lessons 7 to 11, focusing on <strong>Logic</strong>, <strong>Composition</strong>, and <strong>Object Manipulation</strong>. 
+        <Alert severity="info" icon={<StarsIcon />} sx={{ borderRadius: 2, textAlign: 'left', mb: 4, bgcolor: 'rgba(124, 77, 255, 0.08)', border: '1px solid rgba(124, 77, 255, 0.2)' }}>
+          <AlertTitle sx={{ color: '#7C4DFF', fontWeight: 700 }}>Production-Ready Engineering Track</AlertTitle>
+          These 10 exercises focus on real-world engineering paradigms. You will learn to clean inputs, safely traverse nested objects, dynamic properties, and run array calculations.
+          <br />
           Each task requires you to call the function in <code>src/exercises/index.js</code> to complete the lesson!
         </Alert>
       </Box>
 
       {/* Lessons Accordion */}
       <Box sx={{ mb: 4 }}>
-        {lessons.filter(l => l.id > 6 && l.id !== 10).map((lesson) => {
+        {lessons.filter(l => l.id >= 23 && l.id <= 32).map((lesson) => {
           const progress = getLessonProgress(lesson);
           return (
             <Accordion 
@@ -96,7 +98,7 @@ const FunctionsPageTwo = () => {
                 boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
                 overflow: 'hidden',
                 border: '1px solid',
-                borderColor: expanded === `panel${lesson.id}` ? 'warning.main' : 'divider'
+                borderColor: expanded === `panel${lesson.id}` ? '#7C4DFF' : 'divider'
               }}
             >
               <AccordionSummary
@@ -104,7 +106,7 @@ const FunctionsPageTwo = () => {
                 sx={{ 
                   px: 3,
                   py: 1,
-                  bgcolor: expanded === `panel${lesson.id}` ? 'rgba(255, 193, 7, 0.04)' : 'transparent'
+                  bgcolor: expanded === `panel${lesson.id}` ? 'rgba(124, 77, 255, 0.04)' : 'transparent'
                 }}
               >
                 <Box sx={{ display: 'flex', alignItems: 'center', width: '100%', gap: 2 }}>
@@ -125,14 +127,13 @@ const FunctionsPageTwo = () => {
                   <Chip 
                     label={lesson.topic} 
                     size="small" 
-                    color="warning" 
+                    sx={{ fontWeight: 600, color: '#7C4DFF', borderColor: '#7C4DFF' }} 
                     variant="outlined" 
-                    sx={{ fontWeight: 600 }}
                   />
                   <Chip 
                     label={lesson.difficulty} 
                     size="small" 
-                    color={lesson.difficulty === 'Advanced' ? 'error' : 'warning'} 
+                    color="error"
                     sx={{ fontWeight: 600 }}
                   />
                 </Box>
@@ -144,7 +145,7 @@ const FunctionsPageTwo = () => {
                 <Grid container spacing={4}>
                   <Grid item xs={12} md={6}>
                     <Box sx={{ mb: 4 }}>
-                      <Typography variant="subtitle1" color="warning.main" sx={{ display: 'flex', alignItems: 'center', gap: 1, fontWeight: 700, mb: 2 }}>
+                      <Typography variant="subtitle1" sx={{ display: 'flex', alignItems: 'center', gap: 1, fontWeight: 700, mb: 2, color: '#7C4DFF' }}>
                         <SchoolIcon fontSize="small" /> Teacher's Explanation
                       </Typography>
                       <Typography variant="body1" sx={{ mb: 3, lineHeight: 1.7, color: 'text.secondary' }}>
@@ -226,7 +227,7 @@ const FunctionsPageTwo = () => {
                           <TerminalIcon fontSize="small" /> Exercise File:
                         </Typography>
                         <Paper sx={{ p: 1, bgcolor: 'grey.100', mb: 2, fontFamily: 'monospace', fontSize: '0.8rem' }}>
-                          src/exercises/Lesson{lesson.id}.js
+                          src/exercises/third_level/Lesson{lesson.id}.js
                         </Paper>
                         
                         <Alert 
@@ -247,24 +248,24 @@ const FunctionsPageTwo = () => {
       </Box>
 
       {/* Footer Info */}
-      <Paper sx={{ p: 4, borderRadius: 4, bgcolor: 'warning.main', color: 'white', textAlign: 'center' }}>
+      <Paper sx={{ p: 4, borderRadius: 4, bgcolor: '#7C4DFF', color: 'white', textAlign: 'center' }}>
         <Typography variant="h5" gutterBottom sx={{ fontWeight: 700 }}>
-          Advanced Mastery
+          You've Arrived at Level 3!
         </Typography>
         <Typography variant="body1" sx={{ mb: 3, opacity: 0.9 }}>
-          You are now handling complex JavaScript patterns. Keep practicing and building!
+          Congratulations on tackling real-world code structures and deep manipulation.
         </Typography>
-        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, flexWrap: 'wrap' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
           <Button 
             variant="contained" 
             color="inherit" 
             size="large" 
             component={Link}
-            to="/"
+            to="/level-two"
             startIcon={<ArrowBackIcon />}
-            sx={{ borderRadius: 10, px: 4, py: 1.5, fontWeight: 700, color: 'warning.main' }}
+            sx={{ borderRadius: 10, px: 4, py: 1.5, fontWeight: 700, color: '#7C4DFF' }}
           >
-            Back to Level 1
+            Back to Level 2
           </Button>
           <Button 
             variant="contained" 
@@ -272,31 +273,11 @@ const FunctionsPageTwo = () => {
             size="large" 
             sx={{ borderRadius: 10, px: 4, py: 1.5, fontWeight: 700, boxShadow: '0 4px 14px 0 rgba(0,0,0,0.39)' }}
             onClick={() => {
-              const nextLesson = lessons.filter(l => l.id > 6 && l.id < 23 && l.id !== 10).find(l => !getLessonProgress(l).isFullyCompleted);
+              const nextLesson = lessons.filter(l => l.id >= 23 && l.id <= 32).find(l => !getLessonProgress(l).isFullyCompleted);
               if (nextLesson) setExpanded(`panel${nextLesson.id}`);
             }}
           >
-            Next Level 2 Task
-          </Button>
-          <Button 
-            variant="outlined" 
-            color="inherit" 
-            size="large" 
-            component={Link}
-            to="/level-three"
-            sx={{ 
-              borderRadius: 10, 
-              px: 4, 
-              py: 1.5, 
-              fontWeight: 700, 
-              border: '2px solid white',
-              '&:hover': {
-                border: '2px solid white',
-                bgcolor: 'rgba(255,255,255,0.1)'
-              }
-            }}
-          >
-            Level 3 Lessons →
+            Next Challenge
           </Button>
         </Box>
       </Paper>
@@ -304,4 +285,4 @@ const FunctionsPageTwo = () => {
   );
 };
 
-export default FunctionsPageTwo;
+export default FunctionsPageThree;

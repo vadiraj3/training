@@ -21,6 +21,17 @@ import { lesson19 } from "./Lesson19";
 import { lesson20 } from "./Lesson20";
 import { lesson21 } from "./Lesson21";
 import { lesson22 } from "./Lesson22";
+// Lessons 23-32 are in third_level folder
+import { lesson23 } from "./third_level/Lesson23";
+import { lesson24 } from "./third_level/Lesson24";
+import { lesson25 } from "./third_level/Lesson25";
+import { lesson26 } from "./third_level/Lesson26";
+import { lesson27 } from "./third_level/Lesson27";
+import { lesson28 } from "./third_level/Lesson28";
+import { lesson29 } from "./third_level/Lesson29";
+import { lesson30 } from "./third_level/Lesson30";
+import { lesson31 } from "./third_level/Lesson31";
+import { lesson32 } from "./third_level/Lesson32";
 
 /**
  * CALL TRACKER
@@ -71,6 +82,16 @@ export const traineeExercises = {
   lesson20: wrapWithTracker(lesson20, 20),
   lesson21: wrapWithTracker(lesson21, 21),
   lesson22: wrapWithTracker(lesson22, 22),
+  lesson23: wrapWithTracker(lesson23, 23),
+  lesson24: wrapWithTracker(lesson24, 24),
+  lesson25: wrapWithTracker(lesson25, 25),
+  lesson26: wrapWithTracker(lesson26, 26),
+  lesson27: wrapWithTracker(lesson27, 27),
+  lesson28: wrapWithTracker(lesson28, 28),
+  lesson29: wrapWithTracker(lesson29, 29),
+  lesson30: wrapWithTracker(lesson30, 30),
+  lesson31: wrapWithTracker(lesson31, 31),
+  lesson32: wrapWithTracker(lesson32, 32),
 };
 
 // Disable tracking after initial execution
@@ -138,3 +159,37 @@ console.log(setting);
 
 const sum = lesson22.finalInvoice(1000);
 console.log(sum);
+
+// Level 3 (Lessons 23-32) calls for tracking:
+const profile = lesson23.formatProfile({ username: "TraineeGoogle", role: "Developer" });
+console.log(profile);
+
+const updatedCart = lesson24.updateCartQuantity([5, 10, 15], 1, 10);
+console.log(updatedCart);
+
+const street = lesson25.getStreetName({ address: { street: "1600 Amphitheatre Pkwy" } });
+console.log(street);
+
+const cleanMail = lesson26.cleanEmail("   Developer@google.com   ");
+console.log(cleanMail);
+
+const activeProducts = lesson27.filterActiveProducts([
+  { name: "Pixel 8 Pro", isActive: true },
+  { name: "Nexus 5", isActive: false }
+]);
+console.log(activeProducts);
+
+const discountPrice = lesson28.applyBoundedDiscount(200, 60); // caps at 50%
+console.log(discountPrice);
+
+const newConfig = lesson29.updateConfig({ debug: false }, "debug", true);
+console.log(newConfig);
+
+const avgRating = lesson30.calculateAverage([5, 4, 4, 5]);
+console.log(avgRating);
+
+const topScores = lesson31.getTopThree([22, 98, 45, 100, 76]);
+console.log(topScores);
+
+const nestedTotal = lesson32.calculateOrderTotal({ order: { price: 150, taxRate: 0.18 } });
+console.log(nestedTotal);

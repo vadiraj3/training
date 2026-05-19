@@ -2,6 +2,7 @@ import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import FunctionsPage from './pages/FunctionsPage';
 import FunctionsPageTwo from './pages/FunctionsPageTwo';
+import FunctionsPageThree from './pages/FunctionsPageThree';
 
 const theme = createTheme({
   palette: {
@@ -53,6 +54,7 @@ function App() {
         <Routes>
           <Route path="/" element={<FunctionsPage />} />
           <Route path="/level-two" element={<FunctionsPageTwo />} />
+          <Route path="/level-three" element={<FunctionsPageThree />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
