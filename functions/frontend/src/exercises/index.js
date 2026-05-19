@@ -93,3 +93,48 @@ lesson4.introduceUser("Veeru", "Student");
 
 lesson5.getRectangleArea(4, 4);
 lesson5.getRectangleAreaArrow(7, 7);
+
+const evaluateResult = lesson7.evaluateScore(32, 35);
+console.log(evaluateResult);
+
+const fullname = lesson8.getFullName("basava", "gopal");
+console.log(fullname);
+
+const isMember = lesson13.calculatePrice(100, 20, true);
+console.log(isMember);
+const NonMember = lesson13.calculatePrice(100, 20, false);
+console.log(NonMember);
+
+const ChildGroup = lesson14.getAgeGroup(12);
+console.log(ChildGroup);
+const Teengroup = lesson14.getAgeGroup(15);
+console.log(Teengroup);
+const AdultGroup = lesson14.getAgeGroup(22);
+console.log(AdultGroup);
+
+const role = lesson15.createUser("Krishna", "Admin");
+console.log(role);
+
+const Address = lesson16.formatAddress({ city: "Mangalore", zip: 123456 });
+console.log(Address);
+
+const TotalAmount = lesson17.getTotalWithTax(100, 0.1);
+console.log(TotalAmount);
+
+const FullName = lesson18.welcomeMessage("Venu", "Vadi");
+console.log(FullName);
+
+const diameter = lesson19.getCircleInfo(10);
+console.log(diameter);
+
+const ExpertPlayer = { name: "Kumar", score: 50 };
+console.log(ExpertPlayer);
+
+const obj = lesson20.addScore(ExpertPlayer, 50);
+console.log(obj);
+
+const setting = lesson21.getSettings("Suresh", "Black");
+console.log(setting);
+
+const sum = lesson22.finalInvoice(1000);
+console.log(sum);

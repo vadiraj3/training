@@ -16,8 +16,8 @@
  */
 
 // YOUR CODE HERE
-function evaluateScore(score, passingGrage) {
-  if (score >= passingGrage) {
+function evaluateScore(score, passingGrade) {
+  if (score >= passingGrade) {
     return "Pass";
   } else {
     return "Fail";
