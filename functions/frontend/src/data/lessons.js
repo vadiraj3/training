@@ -1266,37 +1266,43 @@ export const lessons = [
   },
   {
     id: 33,
-    title: "Function Currying & Partial Application",
-    topic: "Currying",
-    difficulty: "Advanced",
+    title: "Product Detail Formatter",
+    topic: "Object Interpolation",
+    difficulty: "Medium",
     explanation:
-      "Currying is the technique of translating a function that takes multiple arguments into a sequence of functions that each take a single argument. This is highly useful for creating specialized configuration functions or pre-binding parameters.",
+      "Combining nested object parameters into dynamic template strings is a fundamental task in JavaScript. Safe defaults must be provided for optional or missing keys to prevent reference errors.",
     syntax: {
-      curry:
-        "const multiply = x => y => x * y;\nconst double = multiply(2);\ndouble(5); // 10",
+      template:
+        "const msg = `${obj.brand} ${obj.name} ($${obj.price})`;",
     },
     teacherExample: {
-      description: "Pre-configuring a discount application.",
-      code: "const applyDiscount = pct => price => price - (price * pct);\nconst memberDiscount = applyDiscount(0.10);\nmemberDiscount(100); // 90",
+      description: "Formatting book information with fallback defaults.",
+      code: "function printBook(book) {\n  const author = book.author || 'Anonymous';\n  const title = book.title || 'Untitled';\n  return `${title} by ${author}`;\n}",
     },
     traineeTask: {
       description:
-        "Create a function 'multiplyBy' that takes a single parameter 'factor' (number). It should return a function that takes a single parameter 'number' and returns 'number * factor'.",
+        "Create a function 'formatProductDetail(product)' that takes a product object: { brand, details: { name, price, releaseYear } } and returns: 'brand name ($price) - Released in releaseYear'. Use fallbacks if properties/objects are missing: brand: 'Generic', name: 'Product', price: 0, releaseYear: 'Unknown'.",
       requirements: [
         {
           id: "l33r1",
-          text: "Define 'multiplyBy' function",
-          check: (ex) => typeof ex?.lesson33?.multiplyBy === "function",
+          text: "Define 'formatProductDetail' function",
+          check: (ex) => typeof ex?.lesson33?.formatProductDetail === "function",
         },
         {
           id: "l33r2",
-          text: "Returns an inner function when called with a factor",
-          check: (ex) => typeof ex?.lesson33?.multiplyBy?.(3) === "function",
+          text: "Correctly formats: { brand: 'Adidas', details: { name: 'Gazelle', price: 100, releaseYear: 2023 } }",
+          check: (ex) =>
+            ex?.lesson33?.formatProductDetail?.({
+              brand: "Adidas",
+              details: { name: "Gazelle", price: 100, releaseYear: 2023 },
+            }) === "Adidas Gazelle ($100) - Released in 2023",
         },
         {
           id: "l33r3",
-          text: "Correctly multiplies: multiplyBy(3)(5) -> 15",
-          check: (ex) => ex?.lesson33?.multiplyBy?.(3)?.(5) === 15,
+          text: "Uses correct safe fallbacks for empty product objects",
+          check: (ex) =>
+            ex?.lesson33?.formatProductDetail?.({}) ===
+            "Generic Product ($0) - Released in Unknown",
         },
         {
           id: "l33r4",
@@ -1304,50 +1310,51 @@ export const lessons = [
           check: (ex) => ex?.lesson33?.__wasCalledByTrainee === true,
         },
       ],
-      expectedResult: "A curried multiplication function.",
+      expectedResult: "A product description string with safe defaults.",
     },
   },
   {
     id: 34,
-    title: "Method Chaining (Fluent Interface)",
-    topic: "Fluent Interfaces",
-    difficulty: "Advanced",
+    title: "Inventory Filter & Map",
+    topic: "Filter & Map combo",
+    difficulty: "Medium",
     explanation:
-      "Method chaining allows executing multiple operations on the same object sequentially in a single line. In JavaScript, this is achieved by returning 'this' (the object reference) from every modifying method.",
+      "Combining array filtering and transformation using multiple parameters lets you quickly query collection items that match specific properties and extract details from them.",
     syntax: {
-      chaining:
-        "const user = {\n  setName(name) { this.name = name; return this; },\n  greet() { console.log(this.name); return this; }\n};\nuser.setName('Antigravity').greet();",
+      chain: "arr.filter(x => x.active).map(x => x.name);",
     },
     teacherExample: {
-      description: "A chainable builder for a text box styling.",
-      code: "const elementBuilder = {\n  color: 'black',\n  setColor(c) { this.color = c; return this; },\n  build() { return `<div style='color:${this.color}'></div>`; }\n};\nelementBuilder.setColor('red').build();",
+      description: "Extracting names of users belonging to a target department.",
+      code: "function getStaff(users, dept) {\n  return users.filter(u => u.dept === dept && u.active).map(u => u.name);\n}",
     },
     traineeTask: {
       description:
-        "Create a function 'createChainableCalc' that takes an 'initialValue' (number) and returns an object with methods: 'add(val)', 'subtract(val)', and 'getResult()'. Modifying methods should return 'this' to allow chaining.",
+        "Create a function 'filterAndMapBooks(books, targetGenre)' that filters a books array: { title, genre, stock } to books of 'targetGenre' with 'stock > 0' and returns an array of just their titles.",
       requirements: [
         {
           id: "l34r1",
-          text: "Define 'createChainableCalc' function",
-          check: (ex) => typeof ex?.lesson34?.createChainableCalc === "function",
+          text: "Define 'filterAndMapBooks' function",
+          check: (ex) => typeof ex?.lesson34?.filterAndMapBooks === "function",
         },
         {
           id: "l34r2",
-          text: "Supports chaining calculations: calc.add(5).subtract(3).getResult() -> 12",
-          check: (ex) =>
-            ex?.lesson34?.createChainableCalc?.(10)
-              ?.add?.(5)
-              ?.subtract?.(3)
-              ?.getResult?.() === 12,
+          text: "Correctly filters and extracts titles of books in stock",
+          check: (ex) => {
+            const list = [
+              { title: "A", genre: "Sci-Fi", stock: 5 },
+              { title: "B", genre: "Sci-Fi", stock: 0 },
+              { title: "C", genre: "Drama", stock: 2 },
+            ];
+            const res = ex?.lesson34?.filterAndMapBooks?.(list, "Sci-Fi");
+            return res && res.includes("A") && !res.includes("B") && !res.includes("C");
+          },
         },
         {
           id: "l34r3",
-          text: "Avoids shared state between instances",
+          text: "Returns empty array if no match is found",
           check: (ex) => {
-            const c1 = ex?.lesson34?.createChainableCalc?.(0);
-            c1?.add?.(10);
-            const c2 = ex?.lesson34?.createChainableCalc?.(0);
-            return c2?.getResult?.() === 0;
+            const res = ex?.lesson34?.filterAndMapBooks?.([], "Sci-Fi");
+            return Array.isArray(res) && res.length === 0;
           },
         },
         {
@@ -1356,54 +1363,45 @@ export const lessons = [
           check: (ex) => ex?.lesson34?.__wasCalledByTrainee === true,
         },
       ],
-      expectedResult: "A chainable math calculator object.",
+      expectedResult: "An array of matching book title strings.",
     },
   },
   {
     id: 35,
-    title: "Closures & Private State",
-    topic: "Closures",
-    difficulty: "Advanced",
+    title: "Safe Connection URL Lookup",
+    topic: "Nested Safe Access",
+    difficulty: "Medium",
     explanation:
-      "Closures let you maintain state in a local scope that persists after the outer function finishes executing. This allows us to construct truly private variables that cannot be viewed or changed directly from outside.",
+      "Deep nested objects run the risk of breaking at runtime if a parent object is missing. You can safeguard these using optional chaining or logical OR assertions.",
     syntax: {
-      closure:
-        "function createCounter() {\n  let count = 0; // Private state\n  return { inc() { count++; }, get() { return count; } };\n}",
+      safe: "const val = obj?.a?.b || 'fallback';",
     },
     teacherExample: {
-      description: "A private toggle manager.",
-      code: "function makeToggle() {\n  let active = false;\n  return {\n    toggle() { active = !active; },\n    isActive() { return active; }\n  };\n}",
+      description: "Extracting optional coordinates with zero fallback.",
+      code: "function getCoords(loc) {\n  return `${loc?.geo?.lat || 0},${loc?.geo?.lng || 0}`;\n}",
     },
     traineeTask: {
       description:
-        "Create a function 'createBankAccount(initialBalance)' that keeps a private variable 'balance'. Return an object with methods: 'deposit(amount)', 'withdraw(amount)' (if balance is sufficient), and 'getBalance()'. Ensure 'balance' is not accessible as an object property.",
+        "Create a function 'getServerUrl(config)' that takes a config: { server: { connection: { host, port } } }. Return 'http://host:port' (e.g. 'http://127.0.0.1:8080'). If host or port is undefined/missing, return 'http://localhost:3000'.",
       requirements: [
         {
           id: "l35r1",
-          text: "Define 'createBankAccount' function",
-          check: (ex) => typeof ex?.lesson35?.createBankAccount === "function",
+          text: "Define 'getServerUrl' function",
+          check: (ex) => typeof ex?.lesson35?.getServerUrl === "function",
         },
         {
           id: "l35r2",
-          text: "Allows depositing and withdrawing correctly",
-          check: (ex) => {
-            const acc = ex?.lesson35?.createBankAccount?.(100);
-            acc?.deposit?.(50);
-            acc?.withdraw?.(30);
-            return acc?.getBalance?.() === 120;
-          },
+          text: "Successfully formats full URLs when host and port exist",
+          check: (ex) =>
+            ex?.lesson35?.getServerUrl?.({
+              server: { connection: { host: "10.0.0.1", port: 5000 } },
+            }) === "http://10.0.0.1:5000",
         },
         {
           id: "l35r3",
-          text: "Maintains private balance (no public property)",
-          check: (ex) => {
-            const acc = ex?.lesson35?.createBankAccount?.(100);
-            return (
-              acc !== undefined &&
-              !("balance" in acc) &&
-              !("_balance" in acc)
-            );
-          },
+          text: "Safely defaults to localhost URL when properties are omitted",
+          check: (ex) =>
+            ex?.lesson35?.getServerUrl?.({}) === "http://localhost:3000",
         },
         {
           id: "l35r4",
@@ -1411,41 +1409,45 @@ export const lessons = [
           check: (ex) => ex?.lesson35?.__wasCalledByTrainee === true,
         },
       ],
-      expectedResult: "A secure bank account closure object.",
+      expectedResult: "A validated URL string with robust fallbacks.",
     },
   },
   {
     id: 36,
-    title: "Rest Parameters (...args)",
-    topic: "Rest Operator",
-    difficulty: "Advanced",
+    title: "Tag Cleanup & Array Mapping",
+    topic: "String Cleanup",
+    difficulty: "Medium",
     explanation:
-      "The rest parameter syntax (...) allows a function to accept an indefinite number of arguments as a normal array. This solves the limitation of listing each parameter individually.",
+      "String scrubbing often involves splitting multi-value texts into lists and cleaning up each individual item using standard string actions like trimming and replacements.",
     syntax: {
-      rest: "function logAll(...messages) {\n  messages.forEach(m => console.log(m));\n}",
+      trimMap: "const clean = list.map(item => item.trim().toLowerCase());",
     },
     teacherExample: {
-      description: "A generic reporter that aggregates arguments.",
-      code: "function concatStrings(separator, ...words) {\n  return words.join(separator);\n}\nconcatStrings('-', 'one', 'two', 'three'); // 'one-two-three'",
+      description: "Sanitizing raw comma names.",
+      code: "function cleanNames(namesStr) {\n  return namesStr.split(',').map(n => n.trim().toUpperCase());\n}",
     },
     traineeTask: {
       description:
-        "Create a function 'sumAll(...numbers)' that takes any number of number arguments using rest parameters, and returns their sum. Return 0 if no numbers are provided.",
+        "Create a function 'sanitizeTags(tagStr)' that takes a string of comma-separated hashtag tags (e.g. '   #React, #javascript,  #HTML5   '). Trim outer whitespace, split by comma, and clean each tag by trimming, removing the '#' symbol, and converting it to lowercase.",
       requirements: [
         {
           id: "l36r1",
-          text: "Define 'sumAll' function",
-          check: (ex) => typeof ex?.lesson36?.sumAll === "function",
+          text: "Define 'sanitizeTags' function",
+          check: (ex) => typeof ex?.lesson36?.sanitizeTags === "function",
         },
         {
           id: "l36r2",
-          text: "Sums 4 numbers: sumAll(1, 2, 3, 4) -> 10",
-          check: (ex) => ex?.lesson36?.sumAll?.(1, 2, 3, 4) === 10,
+          text: "Cleans tags by stripping hashes and trimming whitespace",
+          check: (ex) =>
+            ex?.lesson36?.sanitizeTags?.("  #react, #JAVASCRIPT,  #html5  ")?.join(
+              ","
+            ) === "react,javascript,html5",
         },
         {
           id: "l36r3",
-          text: "Defaults to 0 when no numbers are supplied: sumAll() -> 0",
-          check: (ex) => ex?.lesson36?.sumAll?.() === 0,
+          text: "Gracefully processes tag strings without hash symbols",
+          check: (ex) =>
+            ex?.lesson36?.sanitizeTags?.("css")?.join(",") === "css",
         },
         {
           id: "l36r4",
@@ -1453,96 +1455,100 @@ export const lessons = [
           check: (ex) => ex?.lesson36?.__wasCalledByTrainee === true,
         },
       ],
-      expectedResult: "The sum of all arguments.",
+      expectedResult: "A clean array of lowercase tag strings.",
     },
   },
   {
     id: 37,
-    title: "Function Borrowing (call, apply, bind)",
-    topic: "Function Binding",
-    difficulty: "Advanced",
+    title: "Student Grade Classifier",
+    topic: "Conditional Mapping",
+    difficulty: "Medium",
     explanation:
-      "Every function in JavaScript has '.call()', '.apply()', and '.bind()' methods, which let you explicitly set the value of 'this' inside the function. This allows an object to 'borrow' a method from another object.",
+      "Updating arrays of objects based on score boundaries is a powerful data processing pattern. We can combine logical check thresholds to construct pass/fail metrics and letter grades.",
     syntax: {
-      borrow:
-        "const objA = { name: 'A', greet() { return 'Hi ' + this.name; } };\nconst objB = { name: 'B' };\nobjA.greet.call(objB); // 'Hi B'",
+      classify: "const status = score >= 50 ? 'Pass' : 'Fail';",
     },
     teacherExample: {
-      description: "Using Array slice on arguments or generic properties.",
-      code: "const person = { name: 'Bob' };\nfunction saySomething(msg) { return this.name + ' says ' + msg; }\nsaySomething.call(person, 'Hello!'); // 'Bob says Hello!'",
+      description: "Categorizing items based on price ranges.",
+      code: "function labelItems(items) {\n  return items.map(i => ({ ...i, tier: i.price > 100 ? 'premium' : 'budget' }));\n}",
     },
     traineeTask: {
       description:
-        "Create a function 'borrowFormatter(userObj, prefix)' that invokes the 'printDetails(prefix)' method from the exported 'formatter' object with the context of 'userObj'. Return the resulting string.",
+        "Create a function 'classifyStudents(students)' taking an array: { name, score }. Return a new array of objects containing: { name, pass: score >= 60, grade: 'A' (>=90), 'B' (>=80), 'C' (>=70), 'D' (>=60), else 'F' }.",
       requirements: [
         {
           id: "l37r1",
-          text: "Define 'borrowFormatter' function",
-          check: (ex) => typeof ex?.lesson37?.borrowFormatter === "function",
+          text: "Define 'classifyStudents' function",
+          check: (ex) => typeof ex?.lesson37?.classifyStudents === "function",
         },
         {
           id: "l37r2",
-          text: "Correctly sets 'this' and argument using .call or .apply",
-          check: (ex) =>
-            ex?.lesson37?.borrowFormatter?.(
-              { name: "Alice", role: "Dev" },
-              "INFO"
-            ) === "INFO: Alice (Dev)",
+          text: "Correctly adds passing criteria and letter grades",
+          check: (ex) => {
+            const res = ex?.lesson37?.classifyStudents?.([
+              { name: "Alice", score: 95 },
+              { name: "Bob", score: 50 },
+            ]);
+            return (
+              res &&
+              res[0]?.pass === true &&
+              res[0]?.grade === "A" &&
+              res[1]?.pass === false &&
+              res[1]?.grade === "F"
+            );
+          },
         },
         {
           id: "l37r3",
+          text: "Correctly classifies exact border scores",
+          check: (ex) =>
+            ex?.lesson37?.classifyStudents?.([{ name: "A", score: 80 }])?.[0]
+              ?.grade === "B",
+        },
+        {
+          id: "l37r4",
           text: "Call it in index.js",
           check: (ex) => ex?.lesson37?.__wasCalledByTrainee === true,
         },
       ],
-      expectedResult: "A formatted details string borrowing the method.",
+      expectedResult: "A transformed student list containing grades.",
     },
   },
   {
     id: 38,
-    title: "List Mapping & Object Transformation",
-    topic: "Array Map",
-    difficulty: "Advanced",
+    title: "Apply Tax & Bounded Budget Limit",
+    topic: "Math Bound Containment",
+    difficulty: "Medium",
     explanation:
-      "Array.prototype.map() applies a transformation callback to every element in an array and returns a brand new array of the same length containing the transformed values. It's a staple for handling UI state items.",
+      "We often need to calculate totals while ensuring they fit inside a hard upper limit (budget cap). You can solve this by performing basic arithmetic followed by a comparison threshold.",
     syntax: {
-      map: "const doubleArray = arr.map(x => x * 2);",
+      clamp: "const total = Math.min(price + tax, maxBudget);",
     },
     teacherExample: {
-      description: "Converting basic item IDs into active item configs.",
-      code: "function setupItems(ids) {\n  return ids.map(id => ({ itemId: id, active: true }));\n}",
+      description: "Capping delivery weight with flat max.",
+      code: "function capWeight(base, additions, maxWeight) {\n  const sum = base + additions;\n  return sum > maxWeight ? maxWeight : sum;\n}",
     },
     traineeTask: {
       description:
-        "Create a function 'formatTraineeList(trainees)' that takes an array of raw trainee objects: { firstName, lastName, age } and maps them into new objects containing '{ fullName: \"firstName lastName\", isAdult: age >= 18 }'.",
+        "Create a function 'calculateBoundedTotal(price, taxRate, maxBudget)' that calculates total cost: price + (price * taxRate). If this total exceeds 'maxBudget', return 'maxBudget'. Otherwise, return the calculated total cost.",
       requirements: [
         {
           id: "l38r1",
-          text: "Define 'formatTraineeList' function",
-          check: (ex) => typeof ex?.lesson38?.formatTraineeList === "function",
+          text: "Define 'calculateBoundedTotal' function",
+          check: (ex) =>
+            typeof ex?.lesson38?.calculateBoundedTotal === "function",
         },
         {
           id: "l38r2",
-          text: "Combines names into 'fullName' correctly",
-          check: (ex) => {
-            const res = ex?.lesson38?.formatTraineeList?.([
-              { firstName: "John", lastName: "Doe", age: 25 },
-            ]);
-            return res && res[0]?.fullName === "John Doe";
-          },
+          text: "Correctly adds tax rate: calculateBoundedTotal(100, 0.15, 200) -> 115",
+          check: (ex) =>
+            ex?.lesson38?.calculateBoundedTotal?.(100, 0.15, 200) === 115,
         },
         {
           id: "l38r3",
-          text: "Categorizes 'isAdult' based on age",
-          check: (ex) => {
-            const res = ex?.lesson38?.formatTraineeList?.([
-              { firstName: "A", lastName: "B", age: 15 },
-              { firstName: "C", lastName: "D", age: 18 },
-            ]);
-            return (
-              res && res[0]?.isAdult === false && res[1]?.isAdult === true
-            );
-          },
+          text: "Clamps the total value when it exceeds maxBudget",
+          check: (ex) =>
+            ex?.lesson38?.calculateBoundedTotal?.(100, 0.15, 110) === 110,
         },
         {
           id: "l38r4",
@@ -1550,103 +1556,93 @@ export const lessons = [
           check: (ex) => ex?.lesson38?.__wasCalledByTrainee === true,
         },
       ],
-      expectedResult: "A mapped array of formatted trainee objects.",
+      expectedResult: "The final budget-capped transaction price.",
     },
   },
   {
     id: 39,
-    title: "Immutable Object Updates",
-    topic: "Immutability",
-    difficulty: "Advanced",
+    title: "Dynamic Object Property Merging",
+    topic: "Dynamic Keys",
+    difficulty: "Medium",
     explanation:
-      "To update nested objects immutably, we copy each layer of objects using the spread operator (...). This prevents reference leaks and unwanted side-effects in state-driven UI engines.",
+      "When integrating partial configuration settings into a target object, you can dynamically copy only specified property keys to ensure other properties remain unmodified.",
     syntax: {
-      immutable:
-        "const newUser = { ...user, preferences: { ...user.preferences, theme: 'dark' } };",
+      dynamic: "target[key] = settings[key];",
     },
     teacherExample: {
-      description: "Safely modifying a deeply nested status code.",
-      code: "function markSent(message) {\n  return { ...message, delivery: { ...message.delivery, status: 'sent' } };\n}",
+      description: "Merging selected fields into active user state.",
+      code: "function updateFields(user, inputs, fields) {\n  fields.forEach(f => { if (inputs[f] !== undefined) user[f] = inputs[f]; });\n  return user;\n}",
     },
     traineeTask: {
       description:
-        "Create a function 'updateUserCity(user, newCity)' where 'user' is an object: { name, address: { city, country } }. Return a new object with 'address.city' set to 'newCity'. Do not mutate the original user object or the original address object.",
+        "Create a function 'mergeConfigKeys(target, settings, keysArray)'. For each key in 'keysArray', if that key is present in 'settings', update 'target' with the setting's value. Return the updated 'target' object.",
       requirements: [
         {
           id: "l39r1",
-          text: "Define 'updateUserCity' function",
-          check: (ex) => typeof ex?.lesson39?.updateUserCity === "function",
+          text: "Define 'mergeConfigKeys' function",
+          check: (ex) => typeof ex?.lesson39?.mergeConfigKeys === "function",
         },
         {
           id: "l39r2",
-          text: "Returns a new object instance (immutability)",
+          text: "Correctly updates target only with specified allowed keys",
           check: (ex) => {
-            const u = { name: "Bob", address: { city: "NY", country: "US" } };
-            const r = ex?.lesson39?.updateUserCity?.(u, "LA");
-            return r !== u && r?.address !== u.address && u.address.city === "NY";
+            const targetObj = { x: 1, y: 2 };
+            const res = ex?.lesson39?.mergeConfigKeys?.(
+              targetObj,
+              { y: 20, z: 30 },
+              ["y"]
+            );
+            return (
+              res?.x === 1 && res?.y === 20 && res?.z === undefined
+            );
           },
         },
         {
           id: "l39r3",
-          text: "Updates nested city while preserving other values",
-          check: (ex) => {
-            const u = { name: "Bob", address: { city: "NY", country: "US" } };
-            const r = ex?.lesson39?.updateUserCity?.(u, "LA");
-            return r?.address?.city === "LA" && r?.address?.country === "US";
-          },
-        },
-        {
-          id: "l39r4",
           text: "Call it in index.js",
           check: (ex) => ex?.lesson39?.__wasCalledByTrainee === true,
         },
       ],
-      expectedResult: "A safely copied and updated user configuration.",
+      expectedResult: "An updated target object containing the merged values.",
     },
   },
   {
     id: 40,
-    title: "Higher-Order Functions & Delayed Callbacks",
-    topic: "Callbacks & Timers",
-    difficulty: "Advanced",
+    title: "Calculate Weighted Average",
+    topic: "Array Calculation",
+    difficulty: "Medium",
     explanation:
-      "Functions that take other functions as arguments are Higher-Order Functions. One practical use case is scheduling function calls, such as delaying execution by combining a closure and 'setTimeout'.",
+      "Calculating a weighted average involves multiplying each item score by its respective weight contribution and summing the values. You can solve this by iterating through the list and keeping a running sum.",
     syntax: {
-      delay: "setTimeout(() => console.log('Hi'), 1000);",
+      weighted: "const weightedVal = score * weight;",
     },
     teacherExample: {
-      description: "Executing a callback after a user stops typing.",
-      code: "function makeScheduler(callback, delay) {\n  return () => setTimeout(callback, delay);\n}",
+      description: "Computing total asset value based on share counts.",
+      code: "function getValuation(assets) {\n  return assets.reduce((sum, a) => sum + (a.price * a.count), 0);\n}",
     },
     traineeTask: {
       description:
-        "Create a function 'delayExecution(callback, delayMs)' that returns a function. When the returned function is called, it schedules the 'callback' to run after 'delayMs' milliseconds using 'setTimeout'.",
+        "Create a function 'calculateWeightedAverage(grades)' that takes an array: { score, weight } (weight is decimal e.g. 0.3). Return the sum of (score * weight) for all grades. Return 0 if the array is empty.",
       requirements: [
         {
           id: "l40r1",
-          text: "Define 'delayExecution' function",
-          check: (ex) => typeof ex?.lesson40?.delayExecution === "function",
+          text: "Define 'calculateWeightedAverage' function",
+          check: (ex) =>
+            typeof ex?.lesson40?.calculateWeightedAverage === "function",
         },
         {
           id: "l40r2",
-          text: "Returns a scheduler function",
+          text: "Correctly computes: [{ score: 80, weight: 0.3 }, { score: 90, weight: 0.7 }] -> 87",
           check: (ex) =>
-            typeof ex?.lesson40?.delayExecution?.(() => {}, 100) === "function",
+            ex?.lesson40?.calculateWeightedAverage?.([
+              { score: 80, weight: 0.3 },
+              { score: 90, weight: 0.7 },
+            ]) === 87,
         },
         {
           id: "l40r3",
-          text: "Callback is runnable by the returned scheduler",
-          check: (ex) => {
-            let called = false;
-            const fn = ex?.lesson40?.delayExecution?.(() => {
-              called = true;
-            }, 10);
-            if (typeof fn === "function") {
-              fn();
-              return true;
-            }
-            return false;
-          },
+          text: "Correctly returns 0 for empty arrays",
+          check: (ex) => ex?.lesson40?.calculateWeightedAverage?.([]) === 0,
         },
         {
           id: "l40r4",
@@ -1654,51 +1650,47 @@ export const lessons = [
           check: (ex) => ex?.lesson40?.__wasCalledByTrainee === true,
         },
       ],
-      expectedResult: "A dynamic timer scheduling higher-order wrapper.",
+      expectedResult: "The final computed weighted score number.",
     },
   },
   {
     id: 41,
-    title: "Object Getters and Setters",
-    topic: "Accessors",
-    difficulty: "Advanced",
+    title: "Get Bottom Three Prices",
+    topic: "Array Sort & Slice",
+    difficulty: "Medium",
     explanation:
-      "Getter and setter properties (accessors) let you bind a property to a function. Accessing the property calls the getter; modifying it calls the setter. This lets you build clean computed values on objects.",
+      "Extracting lowest elements from a numerical list is best done by sorting the array in ascending order and slicing the first three elements. Remember to copy the array first so you don't mutate the input.",
     syntax: {
-      accessor:
-        "const rect = {\n  width: 5, height: 10,\n  get area() { return this.width * this.height; }\n};",
+      sortAsc: "const sorted = [...arr].sort((a, b) => a - b);",
     },
     teacherExample: {
-      description: "Managing a task toggle as an active property.",
-      code: "const lightBulb = {\n  state: 'off',\n  get isOn() { return this.state === 'on'; },\n  set isOn(value) { this.state = value ? 'on' : 'off'; }\n};",
+      description: "Getting the top two lowest scores.",
+      code: "function bottomTwo(scores) {\n  return [...scores].sort((a,b) => a-b).slice(0, 2);\n}",
     },
     traineeTask: {
       description:
-        "Create a function 'createInteractiveUser(firstName, lastName)' that returns an object with 'firstName' and 'lastName' properties. Add a getter 'fullName' returning `${firstName} ${lastName}` and a setter 'fullName' that takes a string (like 'First Last'), splits it, and updates 'firstName' and 'lastName'.",
+        "Create a function 'getBottomThree(prices)' that sorts a price list in ascending order (lowest to highest) and returns the first three elements. If there are fewer than three prices, return all sorted ascending. Do not mutate original prices.",
       requirements: [
         {
           id: "l41r1",
-          text: "Define 'createInteractiveUser' function",
-          check: (ex) => typeof ex?.lesson41?.createInteractiveUser === "function",
+          text: "Define 'getBottomThree' function",
+          check: (ex) => typeof ex?.lesson41?.getBottomThree === "function",
         },
         {
           id: "l41r2",
-          text: "Getter 'fullName' computes the correct full name",
-          check: (ex) => {
-            const u = ex?.lesson41?.createInteractiveUser?.("John", "Doe");
-            return u?.fullName === "John Doe";
-          },
+          text: "Returns the bottom 3 elements sorted ascending",
+          check: (ex) =>
+            ex?.lesson41?.getBottomThree?.([100, 50, 200, 20, 80])?.join(
+              ","
+            ) === "20,50,80",
         },
         {
           id: "l41r3",
-          text: "Setter 'fullName' updates first and last name properties",
+          text: "Immutably copies the price list before sorting",
           check: (ex) => {
-            const u = ex?.lesson41?.createInteractiveUser?.("John", "Doe");
-            if (u) {
-              u.fullName = "Jane Smith";
-              return u.firstName === "Jane" && u.lastName === "Smith";
-            }
-            return false;
+            const arr = [5, 1];
+            ex?.lesson41?.getBottomThree?.(arr);
+            return arr[0] === 5;
           },
         },
         {
@@ -1707,60 +1699,63 @@ export const lessons = [
           check: (ex) => ex?.lesson41?.__wasCalledByTrainee === true,
         },
       ],
-      expectedResult: "An object with interactive accessor properties.",
+      expectedResult: "The lowest 3 ascending sorted price numbers.",
     },
   },
   {
     id: 42,
-    title: "Grouping Data with Array.prototype.reduce()",
-    topic: "Array Reduce",
-    difficulty: "Advanced",
+    title: "Invoice Total with Custom Discount",
+    topic: "Math & Loops",
+    difficulty: "Medium",
     explanation:
-      "Array.prototype.reduce() accumulates elements into any resulting data shape. A major real-world case is grouping flat items into an index object classified by a category key.",
+      "Determining invoice sums requires iterating over items to sum their quantities and rates, and applying custom discount rules (either flat rate deductions or percentage discounts).",
     syntax: {
-      reduce:
-        "const grouped = list.reduce((acc, item) => {\n  acc[item.group] = acc[item.group] || [];\n  acc[item.group].push(item);\n  return acc;\n}, {});",
+      flat: "const cost = subtotal - flatValue;",
+      percent: "const cost = subtotal * (1 - percentValue);",
     },
     teacherExample: {
-      description: "Grouping student scores by grades.",
-      code: "const grades = [{ name: 'A', g: 'A' }, { name: 'B', g: 'B' }, { name: 'C', g: 'A' }];\ngrades.reduce((acc, x) => {\n  acc[x.g] = acc[x.g] || [];\n  acc[x.g].push(x.name);\n  return acc;\n}, {}); // { A: ['A', 'C'], B: ['B'] }",
+      description: "Summing simple cart totals with optional coupon values.",
+      code: "function checkout(cart, discount) {\n  const sub = cart.reduce((sum, i) => sum + i.price, 0);\n  return sub - (discount || 0);\n}",
     },
     traineeTask: {
       description:
-        "Create a function 'groupProductsByCategory(products)' that takes a products array: { name, category, price }. It should accumulate them into a single object where keys are categories, and values are arrays containing only the names of products in that category.",
+        "Create a function 'calculateInvoice(invoice)' that sums (price * qty) for all items in an items array. If a coupon exists: for type 'percent', discount is subtotal * coupon.value; for type 'flat', discount is coupon.value. Deduct and return total. Return 0 if items is empty.",
       requirements: [
         {
           id: "l42r1",
-          text: "Define 'groupProductsByCategory' function",
+          text: "Define 'calculateInvoice' function",
           check: (ex) =>
-            typeof ex?.lesson42?.groupProductsByCategory === "function",
+            typeof ex?.lesson42?.calculateInvoice === "function",
         },
         {
           id: "l42r2",
-          text: "Accurately groups product names into categorized list arrays",
-          check: (ex) => {
-            const list = [
-              { name: "Laptop", category: "Tech" },
-              { name: "Shirt", category: "Apparel" },
-              { name: "Phone", category: "Tech" },
-            ];
-            const res = ex?.lesson42?.groupProductsByCategory?.(list);
-            return (
-              res?.Tech?.includes("Laptop") &&
-              res?.Tech?.includes("Phone") &&
-              res?.Apparel?.includes("Shirt") &&
-              res?.Tech?.length === 2
-            );
-          },
+          text: "Applies percentage discount: subtotal 40 - 10% coupon -> 36",
+          check: (ex) =>
+            ex?.lesson42?.calculateInvoice?.({
+              items: [
+                { price: 10, qty: 2 },
+                { price: 20, qty: 1 },
+              ],
+              coupon: { type: "percent", value: 0.1 },
+            }) === 36,
         },
         {
           id: "l42r3",
+          text: "Applies flat discount: subtotal 20 - $5 coupon -> 15",
+          check: (ex) =>
+            ex?.lesson42?.calculateInvoice?.({
+              items: [{ price: 10, qty: 2 }],
+              coupon: { type: "flat", value: 5 },
+            }) === 15,
+        },
+        {
+          id: "l42r4",
           text: "Call it in index.js",
           check: (ex) => ex?.lesson42?.__wasCalledByTrainee === true,
         },
       ],
-      expectedResult: "A product name index grouped by category.",
+      expectedResult: "The final invoice cost after applying coupon values.",
     },
   },
-];
+];;
 

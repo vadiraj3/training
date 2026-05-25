@@ -1,31 +1,42 @@
 /**
- * LESSON 33: Function Currying
+ * LESSON 33: Product Detail Formatter
  *
- * Currying is the technique of translating a function that takes multiple arguments
- * into a sequence of functions that each take a single argument.
+ * This exercise works with nested object extraction and string construction.
  *
  * WHAT TO DO:
- * Create a function 'multiplyBy' that takes a single parameter 'factor' (number).
- * It should return an inner function.
- * The inner function should take a single parameter 'number' (number) and return 'number * factor'.
- *
- * HINT:
- * function multiplyBy(factor) {
- *   return function(number) {
- *     return ...
+ * Create a function 'formatProductDetail' that takes a single product object:
+ * {
+ *   brand: "Nike",
+ *   details: {
+ *     name: "Air Max",
+ *     price: 120,
+ *     releaseYear: 2024
  *   }
  * }
- * Or use arrow syntax: const multiplyBy = factor => number => ...
  *
- * IMPORTANT: Call 'multiplyBy' in index.js to see it marked as completed!
+ * The function should return a formatted string:
+ * "Nike Air Max ($120) - Released in 2024"
+ *
+ * If any nested detail is missing (e.g. details, name, price, releaseYear, or brand),
+ * it should use the following defaults:
+ * - brand: "Generic"
+ * - name: "Product"
+ * - price: 0
+ * - releaseYear: "Unknown"
+ *
+ * HINT:
+ * Check if product.brand exists, else use "Generic".
+ * Check if product.details exists before accessing product.details.price, etc.
+ *
+ * IMPORTANT: Call 'formatProductDetail' in index.js to see it marked as completed!
  */
 
 // YOUR CODE HERE
-function multiplyBy(factor) {
+function formatProductDetail(product) {
   // TODO: Implement this function
 }
 
 // Export for validation
 export const lesson33 = {
-  multiplyBy: typeof multiplyBy !== "undefined" ? multiplyBy : null,
+  formatProductDetail: typeof formatProductDetail !== "undefined" ? formatProductDetail : null,
 };

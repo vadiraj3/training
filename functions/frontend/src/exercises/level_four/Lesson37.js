@@ -1,38 +1,31 @@
 /**
- * LESSON 37: Function Borrowing (call, apply, bind)
+ * LESSON 37: Student Grade Classifier
  *
- * In JavaScript, you can invoke a function and explicitly set its 'this' context using
- * '.call()', '.apply()', or '.bind()'. This is called function borrowing.
- *
- * We have defined a generic formatter object below containing a function:
- * function printDetails(prefix) {
- *   return `${prefix}: ${this.name} (${this.role})`;
- * }
+ * This exercise covers mapping array elements and computing conditional object properties.
  *
  * WHAT TO DO:
- * Create a function 'borrowFormatter' that takes two parameters:
- * 1. 'userObj' - an object with { name: '...', role: '...' }
- * 2. 'prefix' - a string representing the details prefix
+ * Create a function 'classifyStudents' that takes an array of student objects:
+ * [{ name: "Alice", score: 85 }, { name: "Bob", score: 55 }]
  *
- * The function should call 'printDetails' from the 'formatter' object below,
- * using '.call()' or '.apply()' to execute it with 'userObj' as the 'this' context,
- * passing 'prefix' as the argument. Return the formatted string result.
+ * The function should return a NEW array where each student object is transformed into:
+ * {
+ *   name: string,
+ *   pass: boolean (true if score >= 60, false otherwise),
+ *   grade: string ('A' if score >= 90, 'B' if score >= 80, 'C' if score >= 70, 'D' if score >= 60, else 'F')
+ * }
  *
- * IMPORTANT: Call 'borrowFormatter' in index.js to see it marked as completed!
+ * HINT:
+ * Use Array.prototype.map() to iterate over and transform each student object.
+ *
+ * IMPORTANT: Call 'classifyStudents' in index.js to see it marked as completed!
  */
 
-export const formatter = {
-  printDetails(prefix) {
-    return `${prefix}: ${this.name} (${this.role})`;
-  }
-};
-
 // YOUR CODE HERE
-function borrowFormatter(userObj, prefix) {
+function classifyStudents(students) {
   // TODO: Implement this function
 }
 
 // Export for validation
 export const lesson37 = {
-  borrowFormatter: typeof borrowFormatter !== "undefined" ? borrowFormatter : null,
+  classifyStudents: typeof classifyStudents !== "undefined" ? classifyStudents : null,
 };

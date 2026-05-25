@@ -1,29 +1,37 @@
 /**
- * LESSON 35: Closures & Private State
+ * LESSON 35: Safe Connection URL Lookup
  *
- * A closure gives you access to an outer function's scope from an inner function.
- * We can use closures to hide variables (private state) from direct external access.
+ * This exercise focuses on safe nested property access and fallback handling.
  *
  * WHAT TO DO:
- * Create a function 'createBankAccount' that takes 'initialBalance' (number).
- * It should declare a variable 'balance' in the outer scope, which starts at 'initialBalance'.
- * It should return an object containing three methods:
- * 1. 'deposit(amount)' - adds amount to the balance.
- * 2. 'withdraw(amount)' - subtracts amount from the balance only if balance >= amount.
- * 3. 'getBalance()' - returns the current balance.
+ * Create a function 'getServerUrl' that takes a single 'config' object:
+ * {
+ *   server: {
+ *     connection: {
+ *       host: "127.0.0.1",
+ *       port: 8080
+ *     }
+ *   }
+ * }
  *
- * Note: The 'balance' variable must not be a property of the returned object (i.e. do not use 'this.balance').
- * It should only be accessible through the three methods via closure!
+ * The function should extract the host and port and return a string in the format:
+ * "http://host:port" (e.g. "http://127.0.0.1:8080")
  *
- * IMPORTANT: Call 'createBankAccount' in index.js to see it marked as completed!
+ * If either 'host' or 'port' (or connection/server objects) is missing or undefined,
+ * it should fallback to returning "http://localhost:3000".
+ *
+ * HINT:
+ * You can use nested checks, optional chaining (?.), or short-circuit evaluations.
+ *
+ * IMPORTANT: Call 'getServerUrl' in index.js to see it marked as completed!
  */
 
 // YOUR CODE HERE
-function createBankAccount(initialBalance) {
+function getServerUrl(config) {
   // TODO: Implement this function
 }
 
 // Export for validation
 export const lesson35 = {
-  createBankAccount: typeof createBankAccount !== "undefined" ? createBankAccount : null,
+  getServerUrl: typeof getServerUrl !== "undefined" ? getServerUrl : null,
 };

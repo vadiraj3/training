@@ -234,93 +234,98 @@ console.log(TotalPrice);
 
 // Level Four Calls
 try {
-  const doubleFn = typeof lesson33.multiplyBy === "function" ? lesson33.multiplyBy(2) : null;
-  if (typeof doubleFn === "function") {
-    console.log(doubleFn(10));
+  if (typeof lesson33.formatProductDetail === "function") {
+    const product = { brand: "Nike", details: { name: "Air Max", price: 120, releaseYear: 2024 } };
+    console.log(lesson33.formatProductDetail(product));
   }
 } catch (e) {
   console.warn("Lesson 33 is not fully implemented yet.", e.message);
 }
 
 try {
-  const calcInstance = typeof lesson34.createChainableCalc === "function" ? lesson34.createChainableCalc(10) : null;
-  if (calcInstance && typeof calcInstance.add === "function") {
-    console.log(calcInstance.add(5).subtract(3).getResult());
+  if (typeof lesson34.filterAndMapBooks === "function") {
+    const books = [
+      { title: "Book A", genre: "Sci-Fi", stock: 5 },
+      { title: "Book B", genre: "Sci-Fi", stock: 0 }
+    ];
+    console.log(lesson34.filterAndMapBooks(books, "Sci-Fi"));
   }
 } catch (e) {
   console.warn("Lesson 34 is not fully implemented yet.", e.message);
 }
 
 try {
-  const bankAcc = typeof lesson35.createBankAccount === "function" ? lesson35.createBankAccount(500) : null;
-  if (bankAcc && typeof bankAcc.deposit === "function") {
-    bankAcc.deposit(100);
-    bankAcc.withdraw(50);
-    console.log(bankAcc.getBalance());
+  if (typeof lesson35.getServerUrl === "function") {
+    const config = { server: { connection: { host: "127.0.0.1", port: 8080 } } };
+    console.log(lesson35.getServerUrl(config));
   }
 } catch (e) {
   console.warn("Lesson 35 is not fully implemented yet.", e.message);
 }
 
 try {
-  if (typeof lesson36.sumAll === "function") {
-    console.log(lesson36.sumAll(1, 2, 3, 4, 5));
+  if (typeof lesson36.sanitizeTags === "function") {
+    console.log(lesson36.sanitizeTags("  #react, #javascript  "));
   }
 } catch (e) {
   console.warn("Lesson 36 is not fully implemented yet.", e.message);
 }
 
 try {
-  if (typeof lesson37.borrowFormatter === "function") {
-    console.log(lesson37.borrowFormatter({ name: "Alice", role: "Developer" }, "LOGGER"));
+  if (typeof lesson37.classifyStudents === "function") {
+    const students = [{ name: "Alice", score: 85 }, { name: "Bob", score: 55 }];
+    console.log(lesson37.classifyStudents(students));
   }
 } catch (e) {
   console.warn("Lesson 37 is not fully implemented yet.", e.message);
 }
 
 try {
-  if (typeof lesson38.formatTraineeList === "function") {
-    console.log(lesson38.formatTraineeList([{ firstName: "John", lastName: "Doe", age: 20 }]));
+  if (typeof lesson38.calculateBoundedTotal === "function") {
+    console.log(lesson38.calculateBoundedTotal(100, 0.15, 200));
   }
 } catch (e) {
   console.warn("Lesson 38 is not fully implemented yet.", e.message);
 }
 
 try {
-  if (typeof lesson39.updateUserCity === "function") {
-    console.log(lesson39.updateUserCity({ name: "Bob", address: { city: "NY", country: "US" } }, "LA"));
+  if (typeof lesson39.mergeConfigKeys === "function") {
+    console.log(lesson39.mergeConfigKeys({ a: 1, b: 2 }, { b: 10, c: 20 }, ["b"]));
   }
 } catch (e) {
   console.warn("Lesson 39 is not fully implemented yet.", e.message);
 }
 
 try {
-  if (typeof lesson40.delayExecution === "function") {
-    const runLater = lesson40.delayExecution(() => console.log("Delayed execution worked!"), 100);
-    if (typeof runLater === "function") runLater();
+  if (typeof lesson40.calculateWeightedAverage === "function") {
+    const grades = [{ score: 80, weight: 0.3 }, { score: 90, weight: 0.7 }];
+    console.log(lesson40.calculateWeightedAverage(grades));
   }
 } catch (e) {
   console.warn("Lesson 40 is not fully implemented yet.", e.message);
 }
 
 try {
-  if (typeof lesson41.createInteractiveUser === "function") {
-    const interUser = lesson41.createInteractiveUser("Jane", "Doe");
-    if (interUser && typeof interUser.fullName !== "undefined") {
-      console.log(interUser.fullName);
-      interUser.fullName = "John Smith";
-      console.log(interUser.firstName, interUser.lastName);
-    }
+  if (typeof lesson41.getBottomThree === "function") {
+    console.log(lesson41.getBottomThree([100, 50, 200, 20, 80]));
   }
 } catch (e) {
   console.warn("Lesson 41 is not fully implemented yet.", e.message);
 }
 
 try {
-  if (typeof lesson42.groupProductsByCategory === "function") {
-    console.log(lesson42.groupProductsByCategory([{ name: "Macbook", category: "Tech" }, { name: "Hoodie", category: "Apparel" }]));
+  if (typeof lesson42.calculateInvoice === "function") {
+    const invoice = {
+      items: [
+        { name: "A", price: 10, qty: 2 },
+        { name: "B", price: 20, qty: 1 }
+      ],
+      coupon: { type: "percent", value: 0.1 }
+    };
+    console.log(lesson42.calculateInvoice(invoice));
   }
 } catch (e) {
   console.warn("Lesson 42 is not fully implemented yet.", e.message);
 }
+
 

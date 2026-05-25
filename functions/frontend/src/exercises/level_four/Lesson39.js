@@ -1,36 +1,31 @@
 /**
- * LESSON 39: Immutable Object Updates
+ * LESSON 39: Dynamic Object Property Merging
  *
- * Immutability is a core concept in functional programming and state management frameworks (like React/Redux).
- * Instead of modifying an object's nested properties directly (which mutates the original reference),
- * we create new objects using the spread operator ('...').
+ * This exercise works with object mutations and dynamic property keys using arrays.
  *
  * WHAT TO DO:
- * Create a function 'updateUserCity' that takes two parameters:
- * 1. 'user' - an object of shape { name: '...', address: { city: '...', country: '...' } }
- * 2. 'newCity' - a string representing the new city name
+ * Create a function 'mergeConfigKeys' that takes three parameters:
+ * 1. 'target' (object) - the original configuration object to be updated.
+ * 2. 'settings' (object) - the new configuration settings containing potential updates.
+ * 3. 'keysArray' (array of strings) - a list of specific key names that are allowed to be updated.
  *
- * The function should return a NEW copy of the 'user' object with the 'address.city' updated to 'newCity'.
- * It MUST NOT mutate the original 'user' object or the nested 'user.address' object.
+ * The function should check each key in 'keysArray'. If the key exists in the 'settings' object,
+ * update the 'target' object's property of that key to match the value from 'settings'.
+ * Return the updated 'target' object.
  *
  * HINT:
- * return {
- *   ...user,
- *   address: {
- *     ...user.address,
- *     city: newCity
- *   }
- * };
+ * Loop over keysArray (e.g. using .forEach() or a standard loop).
+ * If settings[key] !== undefined, set target[key] = settings[key].
  *
- * IMPORTANT: Call 'updateUserCity' in index.js to see it marked as completed!
+ * IMPORTANT: Call 'mergeConfigKeys' in index.js to see it marked as completed!
  */
 
 // YOUR CODE HERE
-function updateUserCity(user, newCity) {
+function mergeConfigKeys(target, settings, keysArray) {
   // TODO: Implement this function
 }
 
 // Export for validation
 export const lesson39 = {
-  updateUserCity: typeof updateUserCity !== "undefined" ? updateUserCity : null,
+  mergeConfigKeys: typeof mergeConfigKeys !== "undefined" ? mergeConfigKeys : null,
 };

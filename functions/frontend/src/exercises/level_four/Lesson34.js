@@ -1,25 +1,32 @@
 /**
- * LESSON 34: Method Chaining (Fluent Interface)
+ * LESSON 34: Inventory Filter & Map
  *
- * Method chaining allows you to call multiple methods on the same object in a single line.
- * This is achieved by returning the object itself ('this') from each modifying method.
+ * This exercise combines array filtering and transformation using multiple parameters.
  *
  * WHAT TO DO:
- * Create a function 'createChainableCalc' that takes an 'initialValue' (number).
- * It should return an object that maintains a running total and provides three methods:
- * 1. 'add(val)' - adds val to the total and returns 'this'
- * 2. 'subtract(val)' - subtracts val from the total and returns 'this'
- * 3. 'getResult()' - returns the final total number
+ * Create a function 'filterAndMapBooks' that takes two parameters:
+ * 1. 'books' (array of objects) - e.g. [{ title: "Book A", genre: "Sci-Fi", stock: 5 }, { title: "Book B", genre: "Sci-Fi", stock: 0 }]
+ * 2. 'targetGenre' (string) - e.g. "Sci-Fi"
  *
- * IMPORTANT: Call 'createChainableCalc' in index.js to see it marked as completed!
+ * The function should:
+ * - Filter the books to only keep those that belong to the 'targetGenre' AND have 'stock > 0'.
+ * - Map the filtered books array into an array of just their titles (strings).
+ * - Return the final array of titles.
+ *
+ * If no books match or the input array is empty, return an empty array [].
+ *
+ * HINT:
+ * Use .filter() first, then use .map() on the result.
+ *
+ * IMPORTANT: Call 'filterAndMapBooks' in index.js to see it marked as completed!
  */
 
 // YOUR CODE HERE
-function createChainableCalc(initialValue) {
+function filterAndMapBooks(books, targetGenre) {
   // TODO: Implement this function
 }
 
 // Export for validation
 export const lesson34 = {
-  createChainableCalc: typeof createChainableCalc !== "undefined" ? createChainableCalc : null,
+  filterAndMapBooks: typeof filterAndMapBooks !== "undefined" ? filterAndMapBooks : null,
 };

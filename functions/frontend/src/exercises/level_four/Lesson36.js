@@ -1,28 +1,34 @@
 /**
- * LESSON 36: Rest Parameters (...args)
+ * LESSON 36: Tag Cleanup & Array Mapping
  *
- * Rest parameters allow a function to accept an indefinite number of arguments as an array.
- * This is useful when you don't know beforehand how many parameters the user will pass.
+ * This exercise works with string transformations and array conversion.
  *
  * WHAT TO DO:
- * Create a function 'sumAll' that takes a rest parameter 'numbers' (representing all passed arguments).
- * The function should sum all these numbers and return the total sum.
- * If no numbers are passed, the function should return 0.
+ * Create a function 'sanitizeTags' that takes a single string of comma-separated hashtag tags,
+ * for example: "   #React, #javascript,  #HTML5   "
+ *
+ * The function should:
+ * 1. Trim outer whitespace of the main string.
+ * 2. Split the string by commas (',').
+ * 3. For each tag:
+ *    - Trim outer whitespace.
+ *    - Remove the leading '#' character (if present).
+ *    - Convert it to lowercase.
+ * 4. Return an array of clean tag strings: ["react", "javascript", "html5"]
  *
  * HINT:
- * function sumAll(...numbers) {
- *   return numbers.reduce((sum, n) => sum + n, 0);
- * }
+ * Use .split(',') to break it into an array, and then use .map() to clean each item using string methods
+ * like .trim(), .toLowerCase(), and .replace('#', '').
  *
- * IMPORTANT: Call 'sumAll' in index.js to see it marked as completed!
+ * IMPORTANT: Call 'sanitizeTags' in index.js to see it marked as completed!
  */
 
 // YOUR CODE HERE
-function sumAll(...numbers) {
+function sanitizeTags(tagStr) {
   // TODO: Implement this function
 }
 
 // Export for validation
 export const lesson36 = {
-  sumAll: typeof sumAll !== "undefined" ? sumAll : null,
+  sanitizeTags: typeof sanitizeTags !== "undefined" ? sanitizeTags : null,
 };

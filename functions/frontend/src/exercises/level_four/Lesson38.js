@@ -1,33 +1,33 @@
 /**
- * LESSON 38: List Mapping & Object Transformation
+ * LESSON 38: Apply Tax & Bounded Budget Limit
  *
- * Array.prototype.map() is one of the most widely used methods in modern JavaScript/React.
- * It transforms a list of one shape into a new list of another shape.
+ * This exercise works with basic math operations and boundary containment (clamping).
  *
  * WHAT TO DO:
- * Create a function 'formatTraineeList' that takes an array 'trainees' of objects containing:
- * { firstName: '...', lastName: '...', age: number }
+ * Create a function 'calculateBoundedTotal' that takes three parameters:
+ * 1. 'price' (number) - base cost of the transaction
+ * 2. 'taxRate' (number) - tax rate as a decimal (e.g. 0.15 for 15% tax)
+ * 3. 'maxBudget' (number) - the maximum budget limit
  *
- * The function should return a NEW array where each trainee object is transformed into:
- * { fullName: 'firstName lastName', isAdult: boolean } (where 'isAdult' is true if age >= 18, and false otherwise).
+ * The function should:
+ * - Calculate the total cost including tax: base price + (price * taxRate)
+ * - Compare the total cost with 'maxBudget'.
+ * - If the total cost exceeds 'maxBudget', return the 'maxBudget' value.
+ * - Otherwise, return the calculated total cost.
  *
  * HINT:
- * function formatTraineeList(trainees) {
- *   return trainees.map(t => ({
- *     fullName: `${t.firstName} ${t.lastName}`,
- *     isAdult: t.age >= 18
- *   }));
- * }
+ * const total = price * (1 + taxRate);
+ * return total > maxBudget ? ...
  *
- * IMPORTANT: Call 'formatTraineeList' in index.js to see it marked as completed!
+ * IMPORTANT: Call 'calculateBoundedTotal' in index.js to see it marked as completed!
  */
 
 // YOUR CODE HERE
-function formatTraineeList(trainees) {
+function calculateBoundedTotal(price, taxRate, maxBudget) {
   // TODO: Implement this function
 }
 
 // Export for validation
 export const lesson38 = {
-  formatTraineeList: typeof formatTraineeList !== "undefined" ? formatTraineeList : null,
+  calculateBoundedTotal: typeof calculateBoundedTotal !== "undefined" ? calculateBoundedTotal : null,
 };
