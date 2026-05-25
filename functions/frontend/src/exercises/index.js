@@ -233,37 +233,94 @@ const TotalPrice = lesson32.calculateOrderTotal(Total);
 console.log(TotalPrice);
 
 // Level Four Calls
-const doubleFn = lesson33.multiplyBy(2);
-console.log(doubleFn(10));
+try {
+  const doubleFn = typeof lesson33.multiplyBy === "function" ? lesson33.multiplyBy(2) : null;
+  if (typeof doubleFn === "function") {
+    console.log(doubleFn(10));
+  }
+} catch (e) {
+  console.warn("Lesson 33 is not fully implemented yet.", e.message);
+}
 
-const chainCalc = lesson34.createChainableCalc(10).add(5).subtract(3).getResult();
-console.log(chainCalc);
+try {
+  const calcInstance = typeof lesson34.createChainableCalc === "function" ? lesson34.createChainableCalc(10) : null;
+  if (calcInstance && typeof calcInstance.add === "function") {
+    console.log(calcInstance.add(5).subtract(3).getResult());
+  }
+} catch (e) {
+  console.warn("Lesson 34 is not fully implemented yet.", e.message);
+}
 
-const bankAcc = lesson35.createBankAccount(500);
-bankAcc.deposit(100);
-bankAcc.withdraw(50);
-console.log(bankAcc.getBalance());
+try {
+  const bankAcc = typeof lesson35.createBankAccount === "function" ? lesson35.createBankAccount(500) : null;
+  if (bankAcc && typeof bankAcc.deposit === "function") {
+    bankAcc.deposit(100);
+    bankAcc.withdraw(50);
+    console.log(bankAcc.getBalance());
+  }
+} catch (e) {
+  console.warn("Lesson 35 is not fully implemented yet.", e.message);
+}
 
-const totalSum = lesson36.sumAll(1, 2, 3, 4, 5);
-console.log(totalSum);
+try {
+  if (typeof lesson36.sumAll === "function") {
+    console.log(lesson36.sumAll(1, 2, 3, 4, 5));
+  }
+} catch (e) {
+  console.warn("Lesson 36 is not fully implemented yet.", e.message);
+}
 
-const borrowedStr = lesson37.borrowFormatter({ name: "Alice", role: "Developer" }, "LOGGER");
-console.log(borrowedStr);
+try {
+  if (typeof lesson37.borrowFormatter === "function") {
+    console.log(lesson37.borrowFormatter({ name: "Alice", role: "Developer" }, "LOGGER"));
+  }
+} catch (e) {
+  console.warn("Lesson 37 is not fully implemented yet.", e.message);
+}
 
-const mappedList = lesson38.formatTraineeList([{ firstName: "John", lastName: "Doe", age: 20 }]);
-console.log(mappedList);
+try {
+  if (typeof lesson38.formatTraineeList === "function") {
+    console.log(lesson38.formatTraineeList([{ firstName: "John", lastName: "Doe", age: 20 }]));
+  }
+} catch (e) {
+  console.warn("Lesson 38 is not fully implemented yet.", e.message);
+}
 
-const immutUser = lesson39.updateUserCity({ name: "Bob", address: { city: "NY", country: "US" } }, "LA");
-console.log(immutUser);
+try {
+  if (typeof lesson39.updateUserCity === "function") {
+    console.log(lesson39.updateUserCity({ name: "Bob", address: { city: "NY", country: "US" } }, "LA"));
+  }
+} catch (e) {
+  console.warn("Lesson 39 is not fully implemented yet.", e.message);
+}
 
-const runLater = lesson40.delayExecution(() => console.log("Delayed execution worked!"), 100);
-runLater();
+try {
+  if (typeof lesson40.delayExecution === "function") {
+    const runLater = lesson40.delayExecution(() => console.log("Delayed execution worked!"), 100);
+    if (typeof runLater === "function") runLater();
+  }
+} catch (e) {
+  console.warn("Lesson 40 is not fully implemented yet.", e.message);
+}
 
-const interUser = lesson41.createInteractiveUser("Jane", "Doe");
-console.log(interUser.fullName);
-interUser.fullName = "John Smith";
-console.log(interUser.firstName, interUser.lastName);
+try {
+  if (typeof lesson41.createInteractiveUser === "function") {
+    const interUser = lesson41.createInteractiveUser("Jane", "Doe");
+    if (interUser && typeof interUser.fullName !== "undefined") {
+      console.log(interUser.fullName);
+      interUser.fullName = "John Smith";
+      console.log(interUser.firstName, interUser.lastName);
+    }
+  }
+} catch (e) {
+  console.warn("Lesson 41 is not fully implemented yet.", e.message);
+}
 
-const groupedProds = lesson42.groupProductsByCategory([{ name: "Macbook", category: "Tech" }, { name: "Hoodie", category: "Apparel" }]);
-console.log(groupedProds);
+try {
+  if (typeof lesson42.groupProductsByCategory === "function") {
+    console.log(lesson42.groupProductsByCategory([{ name: "Macbook", category: "Tech" }, { name: "Hoodie", category: "Apparel" }]));
+  }
+} catch (e) {
+  console.warn("Lesson 42 is not fully implemented yet.", e.message);
+}
 

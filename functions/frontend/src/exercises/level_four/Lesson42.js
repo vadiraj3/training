@@ -29,14 +29,7 @@
 
 // YOUR CODE HERE
 function groupProductsByCategory(products) {
-  return products.reduce((acc, product) => {
-    const cat = product.category;
-    if (!acc[cat]) {
-      acc[cat] = [];
-    }
-    acc[cat].push(product.name);
-    return acc;
-  }, {});
+  // TODO: Implement this function
 }
 
 // Export for validation

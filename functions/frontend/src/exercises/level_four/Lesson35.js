@@ -20,20 +20,7 @@
 
 // YOUR CODE HERE
 function createBankAccount(initialBalance) {
-  let balance = initialBalance;
-  return {
-    deposit(amount) {
-      balance += amount;
-    },
-    withdraw(amount) {
-      if (balance >= amount) {
-        balance -= amount;
-      }
-    },
-    getBalance() {
-      return balance;
-    }
-  };
+  // TODO: Implement this function
 }
 
 // Export for validation

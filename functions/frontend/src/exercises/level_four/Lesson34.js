@@ -16,20 +16,7 @@
 
 // YOUR CODE HERE
 function createChainableCalc(initialValue) {
-  let total = initialValue;
-  return {
-    add(val) {
-      total += val;
-      return this;
-    },
-    subtract(val) {
-      total -= val;
-      return this;
-    },
-    getResult() {
-      return total;
-    }
-  };
+  // TODO: Implement this function
 }
 
 // Export for validation

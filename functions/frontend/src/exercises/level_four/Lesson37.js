@@ -29,7 +29,7 @@ export const formatter = {
 
 // YOUR CODE HERE
 function borrowFormatter(userObj, prefix) {
-  return formatter.printDetails.call(userObj, prefix);
+  // TODO: Implement this function
 }
 
 // Export for validation

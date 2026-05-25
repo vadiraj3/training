@@ -34,18 +34,7 @@
 
 // YOUR CODE HERE
 function createInteractiveUser(firstName, lastName) {
-  return {
-    firstName,
-    lastName,
-    get fullName() {
-      return `${this.firstName} ${this.lastName}`;
-    },
-    set fullName(nameStr) {
-      const parts = nameStr.split(" ");
-      this.firstName = parts[0] || "";
-      this.lastName = parts[1] || "";
-    }
-  };
+  // TODO: Implement this function
 }
 
 // Export for validation

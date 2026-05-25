@@ -27,13 +27,7 @@
 
 // YOUR CODE HERE
 function updateUserCity(user, newCity) {
-  return {
-    ...user,
-    address: {
-      ...user.address,
-      city: newCity
-    }
-  };
+  // TODO: Implement this function
 }
 
 // Export for validation

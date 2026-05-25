@@ -22,9 +22,7 @@
 
 // YOUR CODE HERE
 function multiplyBy(factor) {
-  return function (number) {
-    return number * factor;
-  };
+  // TODO: Implement this function
 }
 
 // Export for validation

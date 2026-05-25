@@ -24,10 +24,7 @@
 
 // YOUR CODE HERE
 function formatTraineeList(trainees) {
-  return trainees.map(t => ({
-    fullName: `${t.firstName} ${t.lastName}`,
-    isAdult: t.age >= 18
-  }));
+  // TODO: Implement this function
 }
 
 // Export for validation

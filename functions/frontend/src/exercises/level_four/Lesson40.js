@@ -26,9 +26,7 @@
 
 // YOUR CODE HERE
 function delayExecution(callback, delayMs) {
-  return function() {
-    setTimeout(callback, delayMs);
-  };
+  // TODO: Implement this function
 }
 
 // Export for validation
