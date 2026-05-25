@@ -12,9 +12,13 @@
  */
 
 // YOUR CODE HERE
-
+function calculateAverage(ratings) {
+  if (ratings.length === 0) return 0;
+  return ratings.reduce((a, b) => a + b, 0) / ratings.length;
+}
 
 // Export for validation
 export const lesson30 = {
-  calculateAverage: typeof calculateAverage !== "undefined" ? calculateAverage : null,
+  calculateAverage:
+    typeof calculateAverage !== "undefined" ? calculateAverage : null,
 };

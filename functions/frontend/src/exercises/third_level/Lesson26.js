@@ -12,7 +12,12 @@
  */
 
 // YOUR CODE HERE
-
+function cleanEmail(email) {
+  if (typeof email !== "string") return "";
+  const sanitizing = email.trim();
+  const cleanedEmail = sanitizing.toLowerCase();
+  return cleanedEmail;
+}
 
 // Export for validation
 export const lesson26 = {

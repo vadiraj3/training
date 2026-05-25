@@ -12,9 +12,12 @@
  */
 
 // YOUR CODE HERE
-
+function filterActiveProducts(products) {
+  return products.filter((product) => product.isActive === true);
+}
 
 // Export for validation
 export const lesson27 = {
-  filterActiveProducts: typeof filterActiveProducts !== "undefined" ? filterActiveProducts : null,
+  filterActiveProducts:
+    typeof filterActiveProducts !== "undefined" ? filterActiveProducts : null,
 };

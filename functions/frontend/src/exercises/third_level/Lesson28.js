@@ -13,9 +13,14 @@
  */
 
 // YOUR CODE HERE
-
+function applyBoundedDiscount(price, discountPercent) {
+  const cap = Math.min(discountPercent, 50);
+  const result = price * (1 - cap / 100);
+  return result;
+}
 
 // Export for validation
 export const lesson28 = {
-  applyBoundedDiscount: typeof applyBoundedDiscount !== "undefined" ? applyBoundedDiscount : null,
+  applyBoundedDiscount:
+    typeof applyBoundedDiscount !== "undefined" ? applyBoundedDiscount : null,
 };

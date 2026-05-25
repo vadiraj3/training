@@ -1,21 +1,22 @@
-import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import FunctionsPage from './pages/FunctionsPage';
-import FunctionsPageTwo from './pages/FunctionsPageTwo';
-import FunctionsPageThree from './pages/FunctionsPageThree';
+import React from "react";
+import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import FunctionsPage from "./pages/FunctionsPage";
+import FunctionsPageTwo from "./pages/FunctionsPageTwo";
+import FunctionsPageThree from "./pages/FunctionsPageThree";
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#2196f3',
-      light: '#64b5f6',
-      dark: '#1976d2',
+      main: "#2196f3",
+      light: "#64b5f6",
+      dark: "#1976d2",
     },
     secondary: {
-      main: '#f50057',
+      main: "#f50057",
     },
     background: {
-      default: '#f8f9fa',
+      default: "#f8f9fa",
     },
   },
   typography: {
@@ -31,7 +32,7 @@ const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          textTransform: 'none',
+          textTransform: "none",
           borderRadius: 8,
         },
       },
@@ -48,16 +49,18 @@ const theme = createTheme({
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<FunctionsPage />} />
-          <Route path="/level-two" element={<FunctionsPageTwo />} />
-          <Route path="/level-three" element={<FunctionsPageThree />} />
-        </Routes>
-      </BrowserRouter>
-    </ThemeProvider>
+    <React.StrictMode>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<FunctionsPage />} />
+            <Route path="/level-two" element={<FunctionsPageTwo />} />
+            <Route path="/level-three" element={<FunctionsPageThree />} />
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
+    </React.StrictMode>
   );
 }
 

@@ -12,7 +12,9 @@
  */
 
 // YOUR CODE HERE
-
+function getStreetName(user) {
+  return user?.address?.street ?? "Street Not Found";
+}
 
 // Export for validation
 export const lesson25 = {

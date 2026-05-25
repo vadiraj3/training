@@ -11,7 +11,10 @@
  */
 
 // YOUR CODE HERE
-
+function formatProfile(Guest) {
+  const { username, role = "Guest" } = Guest;
+  return "User: " + username + "," + "Role: " + role;
+}
 
 // Export for validation
 export const lesson23 = {

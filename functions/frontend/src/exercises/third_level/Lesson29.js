@@ -13,7 +13,10 @@
  */
 
 // YOUR CODE HERE
-
+function updateConfig(config, key, value) {
+  config[key] = value;
+  return config;
+}
 
 // Export for validation
 export const lesson29 = {

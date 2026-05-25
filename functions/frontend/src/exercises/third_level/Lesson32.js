@@ -1,4 +1,7 @@
+"use strict";
+
 /**
+ *
  * LESSON 32: Nested Destructuring & Total Calculation
  *
  * Deeply destructuring parameters to perform calculations.
@@ -12,9 +15,16 @@
  */
 
 // YOUR CODE HERE
-
+function calculateOrderTotal(order) {
+  const { price, taxRate } = order;
+  console.log(price, taxRate);
+  const Totaltax = price * taxRate;
+  const TotalPrice = price + Totaltax;
+  return TotalPrice;
+}
 
 // Export for validation
 export const lesson32 = {
-  calculateOrderTotal: typeof calculateOrderTotal !== "undefined" ? calculateOrderTotal : null,
+  calculateOrderTotal:
+    typeof calculateOrderTotal !== "undefined" ? calculateOrderTotal : null,
 };

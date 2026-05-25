@@ -12,7 +12,9 @@
  */
 
 // YOUR CODE HERE
-
+function getTopThree(scores) {
+  return scores.sort((a, b) => b - a).slice(0, 3);
+}
 
 // Export for validation
 export const lesson31 = {

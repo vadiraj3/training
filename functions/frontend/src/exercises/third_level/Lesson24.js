@@ -12,9 +12,13 @@
  */
 
 // YOUR CODE HERE
-
+function updateCartQuantity(cart, index, incrementBy) {
+  cart[index] = cart[index] + incrementBy;
+  return cart;
+}
 
 // Export for validation
 export const lesson24 = {
-  updateCartQuantity: typeof updateCartQuantity !== "undefined" ? updateCartQuantity : null,
+  updateCartQuantity:
+    typeof updateCartQuantity !== "undefined" ? updateCartQuantity : null,
 };

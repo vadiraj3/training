@@ -121,6 +121,15 @@ console.log(evaluateResult);
 const fullname = lesson8.getFullName("basava", "gopal");
 console.log(fullname);
 
+const TotalResult = lesson9.sumOfSquares(5, 6);
+console.log(TotalResult);
+
+const card = lesson11.formatUserCard({
+  username: "jsmith",
+  email: "j@s.com",
+});
+console.log(card);
+
 const isMember = lesson13.calculatePrice(100, 20, true);
 console.log(isMember);
 const NonMember = lesson13.calculatePrice(100, 20, false);
@@ -159,3 +168,45 @@ console.log(setting);
 
 const sum = lesson22.finalInvoice(1000);
 console.log(sum);
+
+const format = { username: "Ram", role: "Admin" };
+const profile = lesson23.formatProfile(format);
+console.log(profile);
+
+const cart = [1, 5, 2];
+const index = 1;
+const incrementBy = 3;
+const quantity = lesson24.updateCartQuantity(cart, index, incrementBy);
+console.log(quantity);
+
+const street = { address: { street: "Streetname" } };
+const streetAddress = lesson25.getStreetName(street);
+console.log(streetAddress);
+
+const cleanedEmail = " TrAinEE@GmAil.CoM ";
+const sanitize = lesson26.cleanEmail(cleanedEmail);
+console.log(sanitize);
+
+const storeProduct = [{ name: "LapTop", price: 999, isActive: true }];
+const product = lesson27.filterActiveProducts(storeProduct);
+console.log(product);
+
+const Discount = lesson28.applyBoundedDiscount(100, 75);
+console.log(Discount);
+
+const config = {};
+const key = "port";
+const value = 8080;
+const update = lesson29.updateConfig(config, key, value);
+console.log(update);
+
+const calculate = lesson30.calculateAverage([4, 5, 3]);
+console.log(calculate);
+
+const score = [10, 30, 50, 70, 90];
+const Three = lesson31.getTopThree(score);
+console.log(Three);
+
+const Total = { price: 100, taxRate: 0.18 };
+const TotalPrice = lesson32.calculateOrderTotal(Total);
+console.log(TotalPrice);
