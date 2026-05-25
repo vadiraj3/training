@@ -1264,4 +1264,503 @@ export const lessons = [
       expectedResult: "The final total cost including tax.",
     },
   },
+  {
+    id: 33,
+    title: "Function Currying & Partial Application",
+    topic: "Currying",
+    difficulty: "Advanced",
+    explanation:
+      "Currying is the technique of translating a function that takes multiple arguments into a sequence of functions that each take a single argument. This is highly useful for creating specialized configuration functions or pre-binding parameters.",
+    syntax: {
+      curry:
+        "const multiply = x => y => x * y;\nconst double = multiply(2);\ndouble(5); // 10",
+    },
+    teacherExample: {
+      description: "Pre-configuring a discount application.",
+      code: "const applyDiscount = pct => price => price - (price * pct);\nconst memberDiscount = applyDiscount(0.10);\nmemberDiscount(100); // 90",
+    },
+    traineeTask: {
+      description:
+        "Create a function 'multiplyBy' that takes a single parameter 'factor' (number). It should return a function that takes a single parameter 'number' and returns 'number * factor'.",
+      requirements: [
+        {
+          id: "l33r1",
+          text: "Define 'multiplyBy' function",
+          check: (ex) => typeof ex?.lesson33?.multiplyBy === "function",
+        },
+        {
+          id: "l33r2",
+          text: "Returns an inner function when called with a factor",
+          check: (ex) => typeof ex?.lesson33?.multiplyBy?.(3) === "function",
+        },
+        {
+          id: "l33r3",
+          text: "Correctly multiplies: multiplyBy(3)(5) -> 15",
+          check: (ex) => ex?.lesson33?.multiplyBy?.(3)?.(5) === 15,
+        },
+        {
+          id: "l33r4",
+          text: "Call it in index.js",
+          check: (ex) => ex?.lesson33?.__wasCalledByTrainee === true,
+        },
+      ],
+      expectedResult: "A curried multiplication function.",
+    },
+  },
+  {
+    id: 34,
+    title: "Method Chaining (Fluent Interface)",
+    topic: "Fluent Interfaces",
+    difficulty: "Advanced",
+    explanation:
+      "Method chaining allows executing multiple operations on the same object sequentially in a single line. In JavaScript, this is achieved by returning 'this' (the object reference) from every modifying method.",
+    syntax: {
+      chaining:
+        "const user = {\n  setName(name) { this.name = name; return this; },\n  greet() { console.log(this.name); return this; }\n};\nuser.setName('Antigravity').greet();",
+    },
+    teacherExample: {
+      description: "A chainable builder for a text box styling.",
+      code: "const elementBuilder = {\n  color: 'black',\n  setColor(c) { this.color = c; return this; },\n  build() { return `<div style='color:${this.color}'></div>`; }\n};\nelementBuilder.setColor('red').build();",
+    },
+    traineeTask: {
+      description:
+        "Create a function 'createChainableCalc' that takes an 'initialValue' (number) and returns an object with methods: 'add(val)', 'subtract(val)', and 'getResult()'. Modifying methods should return 'this' to allow chaining.",
+      requirements: [
+        {
+          id: "l34r1",
+          text: "Define 'createChainableCalc' function",
+          check: (ex) => typeof ex?.lesson34?.createChainableCalc === "function",
+        },
+        {
+          id: "l34r2",
+          text: "Supports chaining calculations: calc.add(5).subtract(3).getResult() -> 12",
+          check: (ex) =>
+            ex?.lesson34?.createChainableCalc?.(10)
+              ?.add?.(5)
+              ?.subtract?.(3)
+              ?.getResult?.() === 12,
+        },
+        {
+          id: "l34r3",
+          text: "Avoids shared state between instances",
+          check: (ex) => {
+            const c1 = ex?.lesson34?.createChainableCalc?.(0);
+            c1?.add?.(10);
+            const c2 = ex?.lesson34?.createChainableCalc?.(0);
+            return c2?.getResult?.() === 0;
+          },
+        },
+        {
+          id: "l34r4",
+          text: "Call it in index.js",
+          check: (ex) => ex?.lesson34?.__wasCalledByTrainee === true,
+        },
+      ],
+      expectedResult: "A chainable math calculator object.",
+    },
+  },
+  {
+    id: 35,
+    title: "Closures & Private State",
+    topic: "Closures",
+    difficulty: "Advanced",
+    explanation:
+      "Closures let you maintain state in a local scope that persists after the outer function finishes executing. This allows us to construct truly private variables that cannot be viewed or changed directly from outside.",
+    syntax: {
+      closure:
+        "function createCounter() {\n  let count = 0; // Private state\n  return { inc() { count++; }, get() { return count; } };\n}",
+    },
+    teacherExample: {
+      description: "A private toggle manager.",
+      code: "function makeToggle() {\n  let active = false;\n  return {\n    toggle() { active = !active; },\n    isActive() { return active; }\n  };\n}",
+    },
+    traineeTask: {
+      description:
+        "Create a function 'createBankAccount(initialBalance)' that keeps a private variable 'balance'. Return an object with methods: 'deposit(amount)', 'withdraw(amount)' (if balance is sufficient), and 'getBalance()'. Ensure 'balance' is not accessible as an object property.",
+      requirements: [
+        {
+          id: "l35r1",
+          text: "Define 'createBankAccount' function",
+          check: (ex) => typeof ex?.lesson35?.createBankAccount === "function",
+        },
+        {
+          id: "l35r2",
+          text: "Allows depositing and withdrawing correctly",
+          check: (ex) => {
+            const acc = ex?.lesson35?.createBankAccount?.(100);
+            acc?.deposit?.(50);
+            acc?.withdraw?.(30);
+            return acc?.getBalance?.() === 120;
+          },
+        },
+        {
+          id: "l35r3",
+          text: "Maintains private balance (no public property)",
+          check: (ex) => {
+            const acc = ex?.lesson35?.createBankAccount?.(100);
+            return (
+              acc !== undefined &&
+              !("balance" in acc) &&
+              !("_balance" in acc)
+            );
+          },
+        },
+        {
+          id: "l35r4",
+          text: "Call it in index.js",
+          check: (ex) => ex?.lesson35?.__wasCalledByTrainee === true,
+        },
+      ],
+      expectedResult: "A secure bank account closure object.",
+    },
+  },
+  {
+    id: 36,
+    title: "Rest Parameters (...args)",
+    topic: "Rest Operator",
+    difficulty: "Advanced",
+    explanation:
+      "The rest parameter syntax (...) allows a function to accept an indefinite number of arguments as a normal array. This solves the limitation of listing each parameter individually.",
+    syntax: {
+      rest: "function logAll(...messages) {\n  messages.forEach(m => console.log(m));\n}",
+    },
+    teacherExample: {
+      description: "A generic reporter that aggregates arguments.",
+      code: "function concatStrings(separator, ...words) {\n  return words.join(separator);\n}\nconcatStrings('-', 'one', 'two', 'three'); // 'one-two-three'",
+    },
+    traineeTask: {
+      description:
+        "Create a function 'sumAll(...numbers)' that takes any number of number arguments using rest parameters, and returns their sum. Return 0 if no numbers are provided.",
+      requirements: [
+        {
+          id: "l36r1",
+          text: "Define 'sumAll' function",
+          check: (ex) => typeof ex?.lesson36?.sumAll === "function",
+        },
+        {
+          id: "l36r2",
+          text: "Sums 4 numbers: sumAll(1, 2, 3, 4) -> 10",
+          check: (ex) => ex?.lesson36?.sumAll?.(1, 2, 3, 4) === 10,
+        },
+        {
+          id: "l36r3",
+          text: "Defaults to 0 when no numbers are supplied: sumAll() -> 0",
+          check: (ex) => ex?.lesson36?.sumAll?.() === 0,
+        },
+        {
+          id: "l36r4",
+          text: "Call it in index.js",
+          check: (ex) => ex?.lesson36?.__wasCalledByTrainee === true,
+        },
+      ],
+      expectedResult: "The sum of all arguments.",
+    },
+  },
+  {
+    id: 37,
+    title: "Function Borrowing (call, apply, bind)",
+    topic: "Function Binding",
+    difficulty: "Advanced",
+    explanation:
+      "Every function in JavaScript has '.call()', '.apply()', and '.bind()' methods, which let you explicitly set the value of 'this' inside the function. This allows an object to 'borrow' a method from another object.",
+    syntax: {
+      borrow:
+        "const objA = { name: 'A', greet() { return 'Hi ' + this.name; } };\nconst objB = { name: 'B' };\nobjA.greet.call(objB); // 'Hi B'",
+    },
+    teacherExample: {
+      description: "Using Array slice on arguments or generic properties.",
+      code: "const person = { name: 'Bob' };\nfunction saySomething(msg) { return this.name + ' says ' + msg; }\nsaySomething.call(person, 'Hello!'); // 'Bob says Hello!'",
+    },
+    traineeTask: {
+      description:
+        "Create a function 'borrowFormatter(userObj, prefix)' that invokes the 'printDetails(prefix)' method from the exported 'formatter' object with the context of 'userObj'. Return the resulting string.",
+      requirements: [
+        {
+          id: "l37r1",
+          text: "Define 'borrowFormatter' function",
+          check: (ex) => typeof ex?.lesson37?.borrowFormatter === "function",
+        },
+        {
+          id: "l37r2",
+          text: "Correctly sets 'this' and argument using .call or .apply",
+          check: (ex) =>
+            ex?.lesson37?.borrowFormatter?.(
+              { name: "Alice", role: "Dev" },
+              "INFO"
+            ) === "INFO: Alice (Dev)",
+        },
+        {
+          id: "l37r3",
+          text: "Call it in index.js",
+          check: (ex) => ex?.lesson37?.__wasCalledByTrainee === true,
+        },
+      ],
+      expectedResult: "A formatted details string borrowing the method.",
+    },
+  },
+  {
+    id: 38,
+    title: "List Mapping & Object Transformation",
+    topic: "Array Map",
+    difficulty: "Advanced",
+    explanation:
+      "Array.prototype.map() applies a transformation callback to every element in an array and returns a brand new array of the same length containing the transformed values. It's a staple for handling UI state items.",
+    syntax: {
+      map: "const doubleArray = arr.map(x => x * 2);",
+    },
+    teacherExample: {
+      description: "Converting basic item IDs into active item configs.",
+      code: "function setupItems(ids) {\n  return ids.map(id => ({ itemId: id, active: true }));\n}",
+    },
+    traineeTask: {
+      description:
+        "Create a function 'formatTraineeList(trainees)' that takes an array of raw trainee objects: { firstName, lastName, age } and maps them into new objects containing '{ fullName: \"firstName lastName\", isAdult: age >= 18 }'.",
+      requirements: [
+        {
+          id: "l38r1",
+          text: "Define 'formatTraineeList' function",
+          check: (ex) => typeof ex?.lesson38?.formatTraineeList === "function",
+        },
+        {
+          id: "l38r2",
+          text: "Combines names into 'fullName' correctly",
+          check: (ex) => {
+            const res = ex?.lesson38?.formatTraineeList?.([
+              { firstName: "John", lastName: "Doe", age: 25 },
+            ]);
+            return res && res[0]?.fullName === "John Doe";
+          },
+        },
+        {
+          id: "l38r3",
+          text: "Categorizes 'isAdult' based on age",
+          check: (ex) => {
+            const res = ex?.lesson38?.formatTraineeList?.([
+              { firstName: "A", lastName: "B", age: 15 },
+              { firstName: "C", lastName: "D", age: 18 },
+            ]);
+            return (
+              res && res[0]?.isAdult === false && res[1]?.isAdult === true
+            );
+          },
+        },
+        {
+          id: "l38r4",
+          text: "Call it in index.js",
+          check: (ex) => ex?.lesson38?.__wasCalledByTrainee === true,
+        },
+      ],
+      expectedResult: "A mapped array of formatted trainee objects.",
+    },
+  },
+  {
+    id: 39,
+    title: "Immutable Object Updates",
+    topic: "Immutability",
+    difficulty: "Advanced",
+    explanation:
+      "To update nested objects immutably, we copy each layer of objects using the spread operator (...). This prevents reference leaks and unwanted side-effects in state-driven UI engines.",
+    syntax: {
+      immutable:
+        "const newUser = { ...user, preferences: { ...user.preferences, theme: 'dark' } };",
+    },
+    teacherExample: {
+      description: "Safely modifying a deeply nested status code.",
+      code: "function markSent(message) {\n  return { ...message, delivery: { ...message.delivery, status: 'sent' } };\n}",
+    },
+    traineeTask: {
+      description:
+        "Create a function 'updateUserCity(user, newCity)' where 'user' is an object: { name, address: { city, country } }. Return a new object with 'address.city' set to 'newCity'. Do not mutate the original user object or the original address object.",
+      requirements: [
+        {
+          id: "l39r1",
+          text: "Define 'updateUserCity' function",
+          check: (ex) => typeof ex?.lesson39?.updateUserCity === "function",
+        },
+        {
+          id: "l39r2",
+          text: "Returns a new object instance (immutability)",
+          check: (ex) => {
+            const u = { name: "Bob", address: { city: "NY", country: "US" } };
+            const r = ex?.lesson39?.updateUserCity?.(u, "LA");
+            return r !== u && r?.address !== u.address && u.address.city === "NY";
+          },
+        },
+        {
+          id: "l39r3",
+          text: "Updates nested city while preserving other values",
+          check: (ex) => {
+            const u = { name: "Bob", address: { city: "NY", country: "US" } };
+            const r = ex?.lesson39?.updateUserCity?.(u, "LA");
+            return r?.address?.city === "LA" && r?.address?.country === "US";
+          },
+        },
+        {
+          id: "l39r4",
+          text: "Call it in index.js",
+          check: (ex) => ex?.lesson39?.__wasCalledByTrainee === true,
+        },
+      ],
+      expectedResult: "A safely copied and updated user configuration.",
+    },
+  },
+  {
+    id: 40,
+    title: "Higher-Order Functions & Delayed Callbacks",
+    topic: "Callbacks & Timers",
+    difficulty: "Advanced",
+    explanation:
+      "Functions that take other functions as arguments are Higher-Order Functions. One practical use case is scheduling function calls, such as delaying execution by combining a closure and 'setTimeout'.",
+    syntax: {
+      delay: "setTimeout(() => console.log('Hi'), 1000);",
+    },
+    teacherExample: {
+      description: "Executing a callback after a user stops typing.",
+      code: "function makeScheduler(callback, delay) {\n  return () => setTimeout(callback, delay);\n}",
+    },
+    traineeTask: {
+      description:
+        "Create a function 'delayExecution(callback, delayMs)' that returns a function. When the returned function is called, it schedules the 'callback' to run after 'delayMs' milliseconds using 'setTimeout'.",
+      requirements: [
+        {
+          id: "l40r1",
+          text: "Define 'delayExecution' function",
+          check: (ex) => typeof ex?.lesson40?.delayExecution === "function",
+        },
+        {
+          id: "l40r2",
+          text: "Returns a scheduler function",
+          check: (ex) =>
+            typeof ex?.lesson40?.delayExecution?.(() => {}, 100) === "function",
+        },
+        {
+          id: "l40r3",
+          text: "Callback is runnable by the returned scheduler",
+          check: (ex) => {
+            let called = false;
+            const fn = ex?.lesson40?.delayExecution?.(() => {
+              called = true;
+            }, 10);
+            if (typeof fn === "function") {
+              fn();
+              return true;
+            }
+            return false;
+          },
+        },
+        {
+          id: "l40r4",
+          text: "Call it in index.js",
+          check: (ex) => ex?.lesson40?.__wasCalledByTrainee === true,
+        },
+      ],
+      expectedResult: "A dynamic timer scheduling higher-order wrapper.",
+    },
+  },
+  {
+    id: 41,
+    title: "Object Getters and Setters",
+    topic: "Accessors",
+    difficulty: "Advanced",
+    explanation:
+      "Getter and setter properties (accessors) let you bind a property to a function. Accessing the property calls the getter; modifying it calls the setter. This lets you build clean computed values on objects.",
+    syntax: {
+      accessor:
+        "const rect = {\n  width: 5, height: 10,\n  get area() { return this.width * this.height; }\n};",
+    },
+    teacherExample: {
+      description: "Managing a task toggle as an active property.",
+      code: "const lightBulb = {\n  state: 'off',\n  get isOn() { return this.state === 'on'; },\n  set isOn(value) { this.state = value ? 'on' : 'off'; }\n};",
+    },
+    traineeTask: {
+      description:
+        "Create a function 'createInteractiveUser(firstName, lastName)' that returns an object with 'firstName' and 'lastName' properties. Add a getter 'fullName' returning `${firstName} ${lastName}` and a setter 'fullName' that takes a string (like 'First Last'), splits it, and updates 'firstName' and 'lastName'.",
+      requirements: [
+        {
+          id: "l41r1",
+          text: "Define 'createInteractiveUser' function",
+          check: (ex) => typeof ex?.lesson41?.createInteractiveUser === "function",
+        },
+        {
+          id: "l41r2",
+          text: "Getter 'fullName' computes the correct full name",
+          check: (ex) => {
+            const u = ex?.lesson41?.createInteractiveUser?.("John", "Doe");
+            return u?.fullName === "John Doe";
+          },
+        },
+        {
+          id: "l41r3",
+          text: "Setter 'fullName' updates first and last name properties",
+          check: (ex) => {
+            const u = ex?.lesson41?.createInteractiveUser?.("John", "Doe");
+            if (u) {
+              u.fullName = "Jane Smith";
+              return u.firstName === "Jane" && u.lastName === "Smith";
+            }
+            return false;
+          },
+        },
+        {
+          id: "l41r4",
+          text: "Call it in index.js",
+          check: (ex) => ex?.lesson41?.__wasCalledByTrainee === true,
+        },
+      ],
+      expectedResult: "An object with interactive accessor properties.",
+    },
+  },
+  {
+    id: 42,
+    title: "Grouping Data with Array.prototype.reduce()",
+    topic: "Array Reduce",
+    difficulty: "Advanced",
+    explanation:
+      "Array.prototype.reduce() accumulates elements into any resulting data shape. A major real-world case is grouping flat items into an index object classified by a category key.",
+    syntax: {
+      reduce:
+        "const grouped = list.reduce((acc, item) => {\n  acc[item.group] = acc[item.group] || [];\n  acc[item.group].push(item);\n  return acc;\n}, {});",
+    },
+    teacherExample: {
+      description: "Grouping student scores by grades.",
+      code: "const grades = [{ name: 'A', g: 'A' }, { name: 'B', g: 'B' }, { name: 'C', g: 'A' }];\ngrades.reduce((acc, x) => {\n  acc[x.g] = acc[x.g] || [];\n  acc[x.g].push(x.name);\n  return acc;\n}, {}); // { A: ['A', 'C'], B: ['B'] }",
+    },
+    traineeTask: {
+      description:
+        "Create a function 'groupProductsByCategory(products)' that takes a products array: { name, category, price }. It should accumulate them into a single object where keys are categories, and values are arrays containing only the names of products in that category.",
+      requirements: [
+        {
+          id: "l42r1",
+          text: "Define 'groupProductsByCategory' function",
+          check: (ex) =>
+            typeof ex?.lesson42?.groupProductsByCategory === "function",
+        },
+        {
+          id: "l42r2",
+          text: "Accurately groups product names into categorized list arrays",
+          check: (ex) => {
+            const list = [
+              { name: "Laptop", category: "Tech" },
+              { name: "Shirt", category: "Apparel" },
+              { name: "Phone", category: "Tech" },
+            ];
+            const res = ex?.lesson42?.groupProductsByCategory?.(list);
+            return (
+              res?.Tech?.includes("Laptop") &&
+              res?.Tech?.includes("Phone") &&
+              res?.Apparel?.includes("Shirt") &&
+              res?.Tech?.length === 2
+            );
+          },
+        },
+        {
+          id: "l42r3",
+          text: "Call it in index.js",
+          check: (ex) => ex?.lesson42?.__wasCalledByTrainee === true,
+        },
+      ],
+      expectedResult: "A product name index grouped by category.",
+    },
+  },
 ];
+

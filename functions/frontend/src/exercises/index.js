@@ -32,6 +32,17 @@ import { lesson29 } from "./third_level/Lesson29";
 import { lesson30 } from "./third_level/Lesson30";
 import { lesson31 } from "./third_level/Lesson31";
 import { lesson32 } from "./third_level/Lesson32";
+// Lessons 33-42 are in level_four folder
+import { lesson33 } from "./level_four/Lesson33";
+import { lesson34 } from "./level_four/Lesson34";
+import { lesson35 } from "./level_four/Lesson35";
+import { lesson36 } from "./level_four/Lesson36";
+import { lesson37 } from "./level_four/Lesson37";
+import { lesson38 } from "./level_four/Lesson38";
+import { lesson39 } from "./level_four/Lesson39";
+import { lesson40 } from "./level_four/Lesson40";
+import { lesson41 } from "./level_four/Lesson41";
+import { lesson42 } from "./level_four/Lesson42";
 
 /**
  * CALL TRACKER
@@ -92,6 +103,16 @@ export const traineeExercises = {
   lesson30: wrapWithTracker(lesson30, 30),
   lesson31: wrapWithTracker(lesson31, 31),
   lesson32: wrapWithTracker(lesson32, 32),
+  lesson33: wrapWithTracker(lesson33, 33),
+  lesson34: wrapWithTracker(lesson34, 34),
+  lesson35: wrapWithTracker(lesson35, 35),
+  lesson36: wrapWithTracker(lesson36, 36),
+  lesson37: wrapWithTracker(lesson37, 37),
+  lesson38: wrapWithTracker(lesson38, 38),
+  lesson39: wrapWithTracker(lesson39, 39),
+  lesson40: wrapWithTracker(lesson40, 40),
+  lesson41: wrapWithTracker(lesson41, 41),
+  lesson42: wrapWithTracker(lesson42, 42),
 };
 
 // Disable tracking after initial execution
@@ -210,3 +231,39 @@ console.log(Three);
 const Total = { price: 100, taxRate: 0.18 };
 const TotalPrice = lesson32.calculateOrderTotal(Total);
 console.log(TotalPrice);
+
+// Level Four Calls
+const doubleFn = lesson33.multiplyBy(2);
+console.log(doubleFn(10));
+
+const chainCalc = lesson34.createChainableCalc(10).add(5).subtract(3).getResult();
+console.log(chainCalc);
+
+const bankAcc = lesson35.createBankAccount(500);
+bankAcc.deposit(100);
+bankAcc.withdraw(50);
+console.log(bankAcc.getBalance());
+
+const totalSum = lesson36.sumAll(1, 2, 3, 4, 5);
+console.log(totalSum);
+
+const borrowedStr = lesson37.borrowFormatter({ name: "Alice", role: "Developer" }, "LOGGER");
+console.log(borrowedStr);
+
+const mappedList = lesson38.formatTraineeList([{ firstName: "John", lastName: "Doe", age: 20 }]);
+console.log(mappedList);
+
+const immutUser = lesson39.updateUserCity({ name: "Bob", address: { city: "NY", country: "US" } }, "LA");
+console.log(immutUser);
+
+const runLater = lesson40.delayExecution(() => console.log("Delayed execution worked!"), 100);
+runLater();
+
+const interUser = lesson41.createInteractiveUser("Jane", "Doe");
+console.log(interUser.fullName);
+interUser.fullName = "John Smith";
+console.log(interUser.firstName, interUser.lastName);
+
+const groupedProds = lesson42.groupProductsByCategory([{ name: "Macbook", category: "Tech" }, { name: "Hoodie", category: "Apparel" }]);
+console.log(groupedProds);
+

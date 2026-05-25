@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import FunctionsPage from "./pages/FunctionsPage";
 import FunctionsPageTwo from "./pages/FunctionsPageTwo";
 import FunctionsPageThree from "./pages/FunctionsPageThree";
+import FunctionsPageFour from "./pages/FunctionsPageFour";
 
 const theme = createTheme({
   palette: {
@@ -57,6 +58,7 @@ function App() {
             <Route path="/" element={<FunctionsPage />} />
             <Route path="/level-two" element={<FunctionsPageTwo />} />
             <Route path="/level-three" element={<FunctionsPageThree />} />
+            <Route path="/level-four" element={<FunctionsPageFour />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

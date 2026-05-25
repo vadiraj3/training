@@ -35,8 +35,8 @@ import { lessons } from '../data/lessons';
 import CodeBlock from '../components/CodeBlock';
 import { traineeExercises } from '../exercises';
 
-const FunctionsPageThree = () => {
-  const [expanded, setExpanded] = useState('panel23');
+const FunctionsPageFour = () => {
+  const [expanded, setExpanded] = useState('panel33');
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -62,21 +62,21 @@ const FunctionsPageThree = () => {
           gutterBottom 
           sx={{ 
             fontWeight: 800, 
-            background: 'linear-gradient(45deg, #7C4DFF 30%, #00B0FF 90%)',
+            background: 'linear-gradient(45deg, #FF1744 30%, #D500F9 90%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             mb: 1
           }}
         >
-          Functions Level 3: Real-World Engineering
+          Functions Level 4: Master Architect & Design Patterns
         </Typography>
         <Typography variant="h5" color="text.secondary" sx={{ maxWidth: '800px', mx: 'auto', mb: 4 }}>
-          Mastering production-grade Javascript techniques: nesting, destructuring, optional chaining, and advanced array manipulation.
+          Harnessing advanced concepts: Closures, Currying, Borrowing, Accessors, Immutability, rest parameters, and custom array transformations.
         </Typography>
         
-        <Alert severity="info" icon={<StarsIcon />} sx={{ borderRadius: 2, textAlign: 'left', mb: 4, bgcolor: 'rgba(124, 77, 255, 0.08)', border: '1px solid rgba(124, 77, 255, 0.2)' }}>
-          <AlertTitle sx={{ color: '#7C4DFF', fontWeight: 700 }}>Production-Ready Engineering Track</AlertTitle>
-          These 10 exercises focus on real-world engineering paradigms. You will learn to clean inputs, safely traverse nested objects, dynamic properties, and run array calculations.
+        <Alert severity="success" icon={<StarsIcon />} sx={{ borderRadius: 2, textAlign: 'left', mb: 4, bgcolor: 'rgba(213, 0, 249, 0.08)', border: '1px solid rgba(213, 0, 249, 0.2)' }}>
+          <AlertTitle sx={{ color: '#D500F9', fontWeight: 700 }}>Senior Engineering & Architecture Track</AlertTitle>
+          These final 10 exercises push your boundaries into full JavaScript expertise. You will master lexical closures, method chaining, function borrowing, object accessors, immutable updates, currying, and advanced list reduction.
           <br />
           Each task requires you to call the function in <code>src/exercises/index.js</code> to complete the lesson!
         </Alert>
@@ -84,7 +84,7 @@ const FunctionsPageThree = () => {
 
       {/* Lessons Accordion */}
       <Box sx={{ mb: 4 }}>
-        {lessons.filter(l => l.id >= 23 && l.id <= 32).map((lesson) => {
+        {lessons.filter(l => l.id >= 33 && l.id <= 42).map((lesson) => {
           const progress = getLessonProgress(lesson);
           return (
             <Accordion 
@@ -98,7 +98,7 @@ const FunctionsPageThree = () => {
                 boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
                 overflow: 'hidden',
                 border: '1px solid',
-                borderColor: expanded === `panel${lesson.id}` ? '#7C4DFF' : 'divider'
+                borderColor: expanded === `panel${lesson.id}` ? '#D500F9' : 'divider'
               }}
             >
               <AccordionSummary
@@ -106,7 +106,7 @@ const FunctionsPageThree = () => {
                 sx={{ 
                   px: 3,
                   py: 1,
-                  bgcolor: expanded === `panel${lesson.id}` ? 'rgba(124, 77, 255, 0.04)' : 'transparent'
+                  bgcolor: expanded === `panel${lesson.id}` ? 'rgba(213, 0, 249, 0.04)' : 'transparent'
                 }}
               >
                 <Box sx={{ display: 'flex', alignItems: 'center', width: '100%', gap: 2 }}>
@@ -127,13 +127,13 @@ const FunctionsPageThree = () => {
                   <Chip 
                     label={lesson.topic} 
                     size="small" 
-                    sx={{ fontWeight: 600, color: '#7C4DFF', borderColor: '#7C4DFF' }} 
+                    sx={{ fontWeight: 600, color: '#D500F9', borderColor: '#D500F9' }} 
                     variant="outlined" 
                   />
                   <Chip 
                     label={lesson.difficulty} 
                     size="small" 
-                    color="error"
+                    color="secondary"
                     sx={{ fontWeight: 600 }}
                   />
                 </Box>
@@ -145,7 +145,7 @@ const FunctionsPageThree = () => {
                 <Grid container spacing={4}>
                   <Grid item xs={12} md={6}>
                     <Box sx={{ mb: 4 }}>
-                      <Typography variant="subtitle1" sx={{ display: 'flex', alignItems: 'center', gap: 1, fontWeight: 700, mb: 2, color: '#7C4DFF' }}>
+                      <Typography variant="subtitle1" sx={{ display: 'flex', alignItems: 'center', gap: 1, fontWeight: 700, mb: 2, color: '#D500F9' }}>
                         <SchoolIcon fontSize="small" /> Teacher's Explanation
                       </Typography>
                       <Typography variant="body1" sx={{ mb: 3, lineHeight: 1.7, color: 'text.secondary' }}>
@@ -227,7 +227,7 @@ const FunctionsPageThree = () => {
                           <TerminalIcon fontSize="small" /> Exercise File:
                         </Typography>
                         <Paper sx={{ p: 1, bgcolor: 'grey.100', mb: 2, fontFamily: 'monospace', fontSize: '0.8rem' }}>
-                          src/exercises/third_level/Lesson{lesson.id}.js
+                          src/exercises/level_four/Lesson{lesson.id}.js
                         </Paper>
                         
                         <Alert 
@@ -235,7 +235,7 @@ const FunctionsPageThree = () => {
                           icon={<PlayArrowIcon />} 
                           sx={{ mt: 2 }}
                         >
-                          {progress.isFullyCompleted ? "Task Completed! Great work." : `Expected Result: ${lesson.traineeTask.expectedResult}`}
+                          {progress.isFullyCompleted ? "Task Completed! Outstanding work, master!" : `Expected Result: ${lesson.traineeTask.expectedResult}`}
                         </Alert>
                       </Box>
                     </Paper>
@@ -248,56 +248,36 @@ const FunctionsPageThree = () => {
       </Box>
 
       {/* Footer Info */}
-      <Paper sx={{ p: 4, borderRadius: 4, bgcolor: '#7C4DFF', color: 'white', textAlign: 'center' }}>
+      <Paper sx={{ p: 4, borderRadius: 4, bgcolor: '#D500F9', color: 'white', textAlign: 'center' }}>
         <Typography variant="h5" gutterBottom sx={{ fontWeight: 700 }}>
-          You've Arrived at Level 3!
+          Congratulations on reaching Level 4!
         </Typography>
         <Typography variant="body1" sx={{ mb: 3, opacity: 0.9 }}>
-          Congratulations on tackling real-world code structures and deep manipulation.
+          You are now standardizing code at a professional, enterprise architecture level.
         </Typography>
-        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, flexWrap: 'wrap' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
           <Button 
             variant="contained" 
             color="inherit" 
             size="large" 
             component={Link}
-            to="/level-two"
+            to="/level-three"
             startIcon={<ArrowBackIcon />}
-            sx={{ borderRadius: 10, px: 4, py: 1.5, fontWeight: 700, color: '#7C4DFF' }}
+            sx={{ borderRadius: 10, px: 4, py: 1.5, fontWeight: 700, color: '#D500F9' }}
           >
-            Back to Level 2
+            Back to Level 3
           </Button>
           <Button 
             variant="contained" 
-            color="secondary" 
+            color="primary" 
             size="large" 
             sx={{ borderRadius: 10, px: 4, py: 1.5, fontWeight: 700, boxShadow: '0 4px 14px 0 rgba(0,0,0,0.39)' }}
             onClick={() => {
-              const nextLesson = lessons.filter(l => l.id >= 23 && l.id <= 32).find(l => !getLessonProgress(l).isFullyCompleted);
+              const nextLesson = lessons.filter(l => l.id >= 33 && l.id <= 42).find(l => !getLessonProgress(l).isFullyCompleted);
               if (nextLesson) setExpanded(`panel${nextLesson.id}`);
             }}
           >
             Next Challenge
-          </Button>
-          <Button 
-            variant="outlined" 
-            color="inherit" 
-            size="large" 
-            component={Link}
-            to="/level-four"
-            sx={{ 
-              borderRadius: 10, 
-              px: 4, 
-              py: 1.5, 
-              fontWeight: 700, 
-              border: '2px solid white',
-              '&:hover': {
-                border: '2px solid white',
-                bgcolor: 'rgba(255,255,255,0.1)'
-              }
-            }}
-          >
-            Level 4 Lessons →
           </Button>
         </Box>
       </Paper>
@@ -305,4 +285,4 @@ const FunctionsPageThree = () => {
   );
 };
 
-export default FunctionsPageThree;
+export default FunctionsPageFour;
