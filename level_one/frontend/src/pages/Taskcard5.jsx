@@ -1,21 +1,21 @@
+import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
+import { getSkillsUsers } from "../services/api";
 import { Grid } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import UserCard6 from "../components/UserCard6";
-import { getCompanyUsers } from "../services/api";
+import UserCard5 from "../../../../frontend/src/components/UserCard5";
 
-const Task6 = () => {
+const Taskcard5 = () => {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
   useEffect(() => {
     const dataFatch = async () => {
-      {
-        loading === true;
-      }
       try {
-        const apiData = await getCompanyUsers();
-        setData(apiData);
+        const apidata = await getSkillsUsers();
+        setData(apidata.data);
+        console.log(apidata);
       } catch (error) {
         setError(true);
         console.log(error);
@@ -25,29 +25,28 @@ const Task6 = () => {
     dataFatch();
   }, []);
 
-  if (loading === true) {
+  if (loading) {
     return <div>Loading...</div>;
   }
 
-  if (error === true) {
-    return <div>something went wronge...</div>;
+  if (error) {
+    return <div>something went wronge..</div>;
   }
+
   return (
     <Grid container spacing={2}>
-      {data.data.map((user) => (
-        <UserCard6
+      {data.map((user) => (
+        <UserCard5
           key={user.id}
           id={user.id}
           name={user.name}
           email={user.email}
-          company={user.company}
-          address={user.address}
-          employees={user.employees}
-          founded={user.founded}
+          profile={user.profile}
+          skills={user.skills}
         />
       ))}
     </Grid>
   );
 };
 
-export default Task6;
+export default Taskcard5;

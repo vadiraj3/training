@@ -15,12 +15,27 @@ Goal:
 Return one readable profile summary string.
 */
 
-function profileSummary(profile) {
+export function profileSummary(profile) {
+  if (typeof profile !== "object") {
+    return "profile is not a object";
+  }
+  if (
+    typeof profile.name !== "string" ||
+    typeof profile.age !== "number" ||
+    typeof profile.isStudent !== "boolean"
+  ) {
+    return "profile is not a name,age,isStudent";
+  }
+
+  if (profile.isStudent !== true) {
+    return "Student";
+  } else {
+    return "Professional";
+  }
+
   // Step 1: Check profile is an object and not null.
   // Step 2: Check required fields exist in the object.
   // Step 3: Validate data types of name, age, and isStudent.
   // Step 4: Use if/else to convert isStudent into "Student" or "Professional".
   // Step 5: Return a final sentence using all values.
 }
-
-module.exports = profileSummary;

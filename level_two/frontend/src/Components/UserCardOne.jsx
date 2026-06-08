@@ -1,8 +1,8 @@
 import {
+  Box,
   Card,
   CardContent,
   CardHeader,
-  Chip,
   Grid,
   Stack,
   Typography,
@@ -16,36 +16,38 @@ const UserCardOne = ({ id, name, email, organization, departments }) => {
         <CardHeader></CardHeader>
         <CardContent>
           <Stack textAlign={"left"}>
-            <Typography variant="h5">{id}</Typography>
-            <Typography variant="h5">{name}</Typography>
-            <Typography variant="h5">{email}</Typography>
-            <Typography variant="h5">{organization.company}</Typography>
-            <Chip label={organization.headquarters.city} variant="outlined" />
-            <Chip
-              label={
-                <Typography textAlign={"left"}>
-                  organization.headquarters.country
+            <Typography variant="h4">{id}</Typography>
+            <Typography variant="h4">Name : {name}</Typography>
+            <Typography variant="h6" pb={1}>
+              Email : {email}
+            </Typography>
+            <Typography variant="h6" pb={1}>
+              Company : {organization.company}
+            </Typography>
+            <Typography variant="h6" pb={1}>
+              City : {organization.headquarters.city}
+            </Typography>
+            <Typography variant="h6" pb={1}>
+              Country : {organization.headquarters.country}
+            </Typography>
+            <Typography variant="h6" pb={1}>
+              manager : {organization.manager.name}
+            </Typography>
+            <Typography variant="h6">
+              contact : {organization.manager.contact.email}
+            </Typography>
+            <Typography variant="h6" pb={1}>
+              contact : {organization.manager.contact.phone}
+            </Typography>
+            <Typography variant="h3">DEPARTMENTS</Typography>
+            {organization.departments.map((depart) => (
+              <Box>
+                <Typography variant="h6">Name : {depart.name}</Typography>
+                <Typography variant="h6">Budget : {depart.budget}</Typography>
+                <Typography variant="h6">
+                  IsHiring : {depart.isHiring ? "true" : "false"}
                 </Typography>
-              }
-              variant="outlined"
-              sx={{ textAlign: "left" }}
-            />
-            <Typography variant="h5">{organization.manager.name}</Typography>
-            <Typography variant="h5">
-              {organization.manager.contact.email}
-            </Typography>
-            <Typography variant="h5">
-              {organization.manager.contact.phone}
-            </Typography>
-            {organization.departments.map((depart, index) => (
-              <React.Fragment key={index}>
-                <Chip label={depart.name} variant="outlined" />
-                <Chip label={depart.budget} variant="outlined" />
-                <Chip
-                  label={depart.isHiring ? "Yes" : "No"}
-                  variant="outlined"
-                />
-              </React.Fragment>
+              </Box>
             ))}
           </Stack>
         </CardContent>

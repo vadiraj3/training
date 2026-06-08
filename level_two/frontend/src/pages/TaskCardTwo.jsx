@@ -4,7 +4,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 import { Box, Grid } from "@mui/material";
 import UserCardTwo from "../Components/UserCardTwo";
 
-const TaskPageTwo = () => {
+const TaskCardTwo = () => {
   const [progress, setProgress] = React.useState(0);
   const [buffer, setBuffer] = React.useState(10);
 
@@ -60,4 +60,4 @@ const TaskPageTwo = () => {
   );
 };
 
-export default TaskPageTwo;
+export default TaskCardTwo;

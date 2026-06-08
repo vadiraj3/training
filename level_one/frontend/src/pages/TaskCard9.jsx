@@ -1,26 +1,22 @@
-import { Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { getAdvancedUsers } from "../services/api";
-import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
-import UserCard9 from "../components/UserCard9";
+import UserCard9 from "../../../../frontend/src/components/UserCard9";
+import { Grid } from "@mui/material";
 
-const Task9 = () => {
+const TaskCard9 = () => {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
   useEffect(() => {
     const dataFatch = async () => {
-      {
-        loading === true;
-      }
       try {
         const apiData = await getAdvancedUsers();
         setData(apiData.data);
+        console.log(apiData);
       } catch (error) {
-        console.log(error);
         setError(true);
+        console.log(error);
       }
       setLoading(false);
     };
@@ -28,17 +24,11 @@ const Task9 = () => {
   }, []);
 
   if (loading) {
-    return (
-      <div>
-        <Box sx={{ display: "flex" }}>
-          <CircularProgress />
-        </Box>
-      </div>
-    );
+    return <div>Loading...</div>;
   }
 
   if (error) {
-    return <div>No work history found...</div>;
+    return <div>Something went wronge...</div>;
   }
 
   return (
@@ -57,4 +47,4 @@ const Task9 = () => {
   );
 };
 
-export default Task9;
+export default TaskCard9;

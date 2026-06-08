@@ -11,14 +11,20 @@ const UserCard5 = ({ id, name, email, profile, skills }) => {
           <Typography fontSize={"30px"}>{id}</Typography>
           <Typography variant="h3">{name}</Typography>
           <Typography variant="h4">{email}</Typography>
-          <Typography variant="h5">{profile}</Typography>
-          {skills.map((skill) => (
-            <Box>
-              <Typography>{skill.name}</Typography>
-              <Typography>{skill.level}</Typography>
-              <Typography>{skill.years}</Typography>
-            </Box>
-          ))}
+          <Typography variant="h4" pb={1}>
+            {profile}
+          </Typography>
+          <Box>
+            {skills.map((skill) => (
+              <>
+                <Typography variant="h6">{skill.name}</Typography>
+                <Typography variant="h6">{skill.level}</Typography>
+                <Typography variant="h6" pb={1}>
+                  {skill.years}
+                </Typography>
+              </>
+            ))}
+          </Box>
         </Card>
       </Box>
     </Grid>

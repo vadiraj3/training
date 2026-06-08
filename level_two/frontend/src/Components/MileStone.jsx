@@ -1,19 +1,20 @@
-import { Divider, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React from "react";
 
-const MileStone = ({ title, dueDate, completion, blockers }) => {
+const MileStone = ({ stone }) => {
   return (
-    <React.Fragment>
-      <Typography variant="subtitle2">{title}</Typography>
-      <Typography variant="subtitle2">{dueDate}</Typography>
-      <Typography variant="subtitle2">{completion}</Typography>
-      <Divider sx={{ my: 2, backgroundColor: "black" }} />
-      {blockers.map((block, index) => (
-        <Typography variant="subtitle2" key={index}>
+    <Box>
+      <Typography variant="h6">Titla : {stone.title}</Typography>
+      <Typography variant="h6">Duedate : {stone.dueDate}</Typography>
+      <Typography variant="h6" pb={1}>
+        Completion : {stone.completion}
+      </Typography>
+      {stone.blockers.map((block) => (
+        <Typography variant="h6" pb={1}>
           {block}
         </Typography>
       ))}
-    </React.Fragment>
+    </Box>
   );
 };
 

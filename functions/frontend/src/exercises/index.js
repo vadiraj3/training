@@ -43,6 +43,16 @@ import { lesson39 } from "./level_four/Lesson39";
 import { lesson40 } from "./level_four/Lesson40";
 import { lesson41 } from "./level_four/Lesson41";
 import { lesson42 } from "./level_four/Lesson42";
+import { cleanAndGreet } from "../../../../level_three_new/01_string_clean_and_greet";
+import { compareAndLabel } from "../../../../level_three_new/02_number_compare_and_label";
+import { booleanStatusMessage } from "../../../../level_three_new/03_boolean_status_message";
+import { profileSummary } from "../../../../level_three_new/04_object_profile_summary";
+import { arrayBasicReport } from "../../../../level_three_new/05_array_basic_report";
+import { passwordHint } from "../../../../level_three_new/06_string_number_password_hint";
+import { discountLabel } from "../../../../level_three_new/07_number_boolean_discount_label";
+import { accessCheck } from "../../../../level_three_new/08_object_boolean_access_check";
+import { activeUsersReport } from "../../../../level_three_new/09_array_object_active_users";
+import { orderSummary } from "../../../../level_three_new/10_mixed_inputs_order_summary";
 
 /**
  * CALL TRACKER
@@ -232,100 +242,82 @@ const Total = { price: 100, taxRate: 0.18 };
 const TotalPrice = lesson32.calculateOrderTotal(Total);
 console.log(TotalPrice);
 
-// Level Four Calls
-try {
-  if (typeof lesson33.formatProductDetail === "function") {
-    const product = { brand: "Nike", details: { name: "Air Max", price: 120, releaseYear: 2024 } };
-    console.log(lesson33.formatProductDetail(product));
-  }
-} catch (e) {
-  console.warn("Lesson 33 is not fully implemented yet.", e.message);
-}
+// Level three new Calls
+const cleanGreet = cleanAndGreet(" Riya ", " Pune ");
+console.log(cleanGreet);
+// const Trimmed = cleanAndGreet(" Suryakumar ");
+// console.log(Trimmed);
 
-try {
-  if (typeof lesson34.filterAndMapBooks === "function") {
-    const books = [
-      { title: "Book A", genre: "Sci-Fi", stock: 5 },
-      { title: "Book B", genre: "Sci-Fi", stock: 0 }
-    ];
-    console.log(lesson34.filterAndMapBooks(books, "Sci-Fi"));
-  }
-} catch (e) {
-  console.warn("Lesson 34 is not fully implemented yet.", e.message);
-}
+// const compare = compareAndLabel(6, 2);
+// console.log(compare);
+const scordcard = compareAndLabel(100, 90);
+console.log(scordcard);
 
-try {
-  if (typeof lesson35.getServerUrl === "function") {
-    const config = { server: { connection: { host: "127.0.0.1", port: 8080 } } };
-    console.log(lesson35.getServerUrl(config));
-  }
-} catch (e) {
-  console.warn("Lesson 35 is not fully implemented yet.", e.message);
-}
+const message = booleanStatusMessage(true, "string");
+console.log(message);
 
-try {
-  if (typeof lesson36.sanitizeTags === "function") {
-    console.log(lesson36.sanitizeTags("  #react, #javascript  "));
-  }
-} catch (e) {
-  console.warn("Lesson 36 is not fully implemented yet.", e.message);
-}
+// const summary = profileSummary({});
+// console.log(summary);
+const validate = profileSummary({
+  profile: {},
+  name: "vijay",
+  age: 30,
+  isStudent: true,
+});
+console.log(validate);
 
-try {
-  if (typeof lesson37.classifyStudents === "function") {
-    const students = [{ name: "Alice", score: 85 }, { name: "Bob", score: 55 }];
-    console.log(lesson37.classifyStudents(students));
-  }
-} catch (e) {
-  console.warn("Lesson 37 is not fully implemented yet.", e.message);
-}
+const reports = arrayBasicReport([]);
+console.log(reports);
 
-try {
-  if (typeof lesson38.calculateBoundedTotal === "function") {
-    console.log(lesson38.calculateBoundedTotal(100, 0.15, 200));
-  }
-} catch (e) {
-  console.warn("Lesson 38 is not fully implemented yet.", e.message);
-}
+const basicSum = ["Apple", "Banana", "Orange", "Date"];
+const sumTotal = arrayBasicReport(basicSum);
+console.log(sumTotal);
 
-try {
-  if (typeof lesson39.mergeConfigKeys === "function") {
-    console.log(lesson39.mergeConfigKeys({ a: 1, b: 2 }, { b: 10, c: 20 }, ["b"]));
-  }
-} catch (e) {
-  console.warn("Lesson 39 is not fully implemented yet.", e.message);
-}
+const hint = passwordHint("sachin", 24);
+console.log(hint);
+const hints = passwordHint(" He is a Student", 10);
+console.log(hints);
 
-try {
-  if (typeof lesson40.calculateWeightedAverage === "function") {
-    const grades = [{ score: 80, weight: 0.3 }, { score: 90, weight: 0.7 }];
-    console.log(lesson40.calculateWeightedAverage(grades));
-  }
-} catch (e) {
-  console.warn("Lesson 40 is not fully implemented yet.", e.message);
-}
+const discount = discountLabel(25, true);
+console.log(discount);
+const finalAmount = discountLabel(100, true);
+console.log(finalAmount);
 
-try {
-  if (typeof lesson41.getBottomThree === "function") {
-    console.log(lesson41.getBottomThree([100, 50, 200, 20, 80]));
-  }
-} catch (e) {
-  console.warn("Lesson 41 is not fully implemented yet.", e.message);
-}
+const checkpoint = accessCheck({}, true);
+console.log(checkpoint);
 
-try {
-  if (typeof lesson42.calculateInvoice === "function") {
-    const invoice = {
-      items: [
-        { name: "A", price: 10, qty: 2 },
-        { name: "B", price: 20, qty: 1 }
-      ],
-      coupon: { type: "percent", value: 0.1 }
-    };
-    console.log(lesson42.calculateInvoice(invoice));
-  }
-} catch (e) {
-  console.warn("Lesson 42 is not fully implemented yet.", e.message);
-}
+const acc = accessCheck("Prathap");
+console.log(acc);
+const checkpoints = accessCheck(true);
+console.log(checkpoints);
+const checks = accessCheck(true);
+console.log(checks);
 
+const validateCheck = {
+  user: {},
+  name: "Vinay",
+  role: "admin,editor,viewer",
+  isBlocked: "true",
+  adminOverride: "false",
+};
+console.log(validateCheck);
 
+const act = activeUsersReport([
+  { name: "varun", isActive: true },
+  { name: "sudha", isActive: false },
+  { name: "dhanush", isActive: true },
+  { name: "varidhi", isActive: false },
+]);
+console.log(act);
+
+const mixed = orderSummary(
+  "vasudha",
+  33,
+  true,
+  {
+    city: "mysore",
+    pincode: "583227",
+  },
+  ["gouri"],
+);
+console.log(mixed);

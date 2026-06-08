@@ -1,4 +1,5 @@
 import {
+  Box,
   Card,
   CardContent,
   Chip,
@@ -17,28 +18,27 @@ const UserCardfive = ({ name, email, assets }) => {
         <CardContent>
           <Stack textAlign={"left"}>
             <Typography variant="h5">Name :{name}</Typography>
-            <Typography variant="h5">Email :{email}</Typography>
-            {assets.map((asset, index) => (
-              <React.Fragment key={index}>
-                <Chip label={asset.assetId} variant="outlined" />
-                <Chip label={asset.type} variant="outlined" />
-                <Chip label={asset.serialNumber} variant="outlined" />
-
-                <Typography variant="h5">
-                  Warranty :{asset.warranty.provider}
+            <Typography variant="h5" pb={1}>
+              Email :{email}
+            </Typography>
+            {assets.map((asset) => (
+              <Box>
+                <Typography variant="h6">{asset.assetId}</Typography>
+                <Typography variant="h6">{asset.type}</Typography>
+                <Typography variant="h6" pb={1}>
+                  {asset.serialNumber}
                 </Typography>
-                <Typography variant="h5">
-                  Warranty :{asset.warranty.expiresOn}
+                <Typography variant="h6">{asset.warranty.provider}</Typography>
+                <Typography variant="h6" pb={1}>
+                  {asset.warranty.expiresOn}
                 </Typography>
-                <Divider sx={{ backgroundColor: "black", my: 2 }} />
-                <Typography variant="h5">
-                  maintenance :{asset.maintenance.lastService}
+                <Typography variant="h6">
+                  {asset.maintenance.lastService}
                 </Typography>
-                <Divider sx={{ backgroundColor: "black", my: 2 }} />
-                {asset.maintenance.history.map((tory, index) => (
-                  <Maintenance key={index} tory={tory} />
+                {asset.maintenance.history.map((tory) => (
+                  <Maintenance tory={tory} />
                 ))}
-              </React.Fragment>
+              </Box>
             ))}
           </Stack>
         </CardContent>

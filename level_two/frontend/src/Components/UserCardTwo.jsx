@@ -1,4 +1,5 @@
 import {
+  Box,
   Card,
   CardContent,
   CardHeader,
@@ -10,6 +11,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import MileStone from "./MileStone";
+import Project from "./Project";
 
 const UserCardTwo = ({ name, email, projects }) => {
   return (
@@ -18,25 +20,13 @@ const UserCardTwo = ({ name, email, projects }) => {
         <CardHeader></CardHeader>
         <CardContent>
           <Stack textAlign={"left"}>
-            <Typography variant="h4">{name}</Typography>
-            <Typography variant="subtitle2">{email}</Typography>
-            {projects.map((pro, indexOne) => (
-              <React.Fragment key={indexOne}>
-                <Chip label={pro.projectId} variant="outlined" />
-                <Chip label={pro.name} variant="outlined" />
-                <Chip label={pro.status} variant="outlined" />
-
-                <Divider sx={{ my: 2, backgroundColor: "black" }} />
-                {pro.milestones.map((mile, indexTwo) => (
-                  <MileStone
-                    key={indexTwo}
-                    title={mile.title}
-                    dueDate={mile.dueDate}
-                    completion={mile.completion}
-                    blockers={mile.blockers}
-                  />
-                ))}
-              </React.Fragment>
+            <Typography variant="h4">Name : {name}</Typography>
+            <Typography variant="h6" pb={1}>
+              Email : {email}
+            </Typography>
+            <Typography variant="h4">PROJECTS</Typography>
+            {projects.map((pro) => (
+              <Project pro={pro} />
             ))}
           </Stack>
         </CardContent>

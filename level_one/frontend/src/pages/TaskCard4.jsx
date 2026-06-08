@@ -1,41 +1,41 @@
-import { Grid } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import UserCard4 from "../components/UserCard4";
+import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import { getHobbiesUsers } from "../services/api";
+import { Grid } from "@mui/material";
+import UserCard4 from "../../../../frontend/src/components/UserCard4";
 
-const Task4 = () => {
+const TaskCard4 = () => {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState();
+  const [error, setError] = useState(false);
 
   useEffect(() => {
-    const dataFetch = async () => {
-      {
-        setLoading === true;
-      }
+    const dataFatch = async () => {
       try {
         const apiData = await getHobbiesUsers();
-        setData(apiData);
+        setData(apiData.data);
+        console.log(apiData);
       } catch (error) {
         setError(true);
         console.log(error);
       }
       setLoading(false);
     };
-    dataFetch();
+    dataFatch();
   }, []);
 
-  if (loading === true) {
+  if (loading) {
     return <div>Loading...</div>;
   }
 
-  if (error === true) {
-    return <div>something went wronge...</div>;
+  if (error) {
+    return <div>something went wronge..</div>;
   }
 
   return (
     <Grid container spacing={2}>
-      {data.data.map((user) => (
+      {data.map((user) => (
         <UserCard4
           key={user.id}
           id={user.id}
@@ -49,4 +49,4 @@ const Task4 = () => {
   );
 };
 
-export default Task4;
+export default TaskCard4;

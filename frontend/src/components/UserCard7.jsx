@@ -15,28 +15,24 @@ const UserCard7 = ({ id, name, email, education }) => {
           <Typography fontSize={"30px"}>{id}</Typography>
           <Typography variant="h3">{name}</Typography>
           <Typography variant="h4">{email}</Typography>
-          {education.map((education) => (
-            <Box>
-              <Typography variant="subtitle1" fontWeight={600} color="red">
-                {education.school}
-              </Typography>
-              <Typography variant="subtitle1" fontWeight={500} color="green">
-                {education.degree}
-              </Typography>
-              <Typography variant="subtitle1" color="grey">
-                {education.year}
-              </Typography>
-              <Typography variant="subtitle1">
-                {education.details.gpa}
-              </Typography>
-              <Typography variant="subtitle1">
-                {education.details.honors}
-              </Typography>
-              <Typography variant="subtitle1">
-                {education.details.major}
-              </Typography>
-            </Box>
-          ))}
+          <Box>
+            {education.map((educate) => (
+              <>
+                <Typography variant="h6" pt={1} color="red">
+                  {educate.school}
+                </Typography>
+                <Typography variant="h6">{educate.degree}</Typography>
+                <Typography variant="h6" pb={1}>
+                  {educate.year}
+                </Typography>
+                <Typography variant="h6" color="blue">
+                  {educate.details.gpa}
+                </Typography>
+                <Typography variant="h6">{educate.details.honors}</Typography>
+                <Typography variant="h6">{educate.details.major}</Typography>
+              </>
+            ))}
+          </Box>
         </Card>
       </Box>
     </Grid>

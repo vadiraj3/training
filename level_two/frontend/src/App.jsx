@@ -15,16 +15,10 @@ import {
 } from "@mui/material";
 import TasksPage from "./pages/TasksPage";
 import "./App.css";
-import TaskPageOne from "./pages/TaskPageOne";
-import TaskPageTwo from "./pages/TaskPageTwo";
-import TaskPageThree from "./pages/TaskPageThree";
-import TaskPageFour from "./pages/TaskPageFour";
-import TaskPageFive from "./pages/TaskPageFive";
-import TaskPageSix from "./pages/TaskPageSix";
-import TaskPageSeven from "./pages/TaskPageSeven";
-import TaskPageEight from "./pages/TaskPageEight";
-import TaskPageNine from "./pages/TaskPageNine";
-import TaskPageTen from "./pages/TaskPageTen";
+import TaskCardOne from "./pages/TaskCardOne";
+import TaskCardTwo from "./pages/TaskCardTwo";
+import TaskCardThree from "./pages/TaskCardThree";
+import TaskCardFive from "./pages/TaskCardFive";
 
 function Navigation() {
   const location = useLocation();
@@ -79,16 +73,10 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/tasks" element={<TasksPage />} />
-          <Route path="/TaskPageOne" element={<TaskPageOne />} />
-          <Route path="/TaskPageTwo" element={<TaskPageTwo />} />
-          <Route path="/TaskPageThree" element={<TaskPageThree />} />
-          <Route path="/TaskPageFour" element={<TaskPageFour />} />
-          <Route path="/TaskPageFive" element={<TaskPageFive />} />
-          <Route path="/TaskPageSix" element={<TaskPageSix />} />
-          <Route path="/TaskPageSeven" element={<TaskPageSeven />} />
-          <Route path="/TaskPageEight" element={<TaskPageEight />} />
-          <Route path="/TaskPageNine" element={<TaskPageNine />} />
-          <Route path="/TaskPageTen" element={<TaskPageTen />} />
+          <Route path="/taskcardone" element={<TaskCardOne />} />
+          <Route path="/taskcardtwo" element={<TaskCardTwo />} />
+          <Route path="/taskcardthree" element={<TaskCardThree />} />
+          <Route path="/taskcardfive" element={<TaskCardFive />} />
         </Routes>
       </Box>
     </Router>

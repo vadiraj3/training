@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { getOrgUsers } from "../services/api";
+import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
+import { getCompanyUsers } from "../services/api";
 import { Grid } from "@mui/material";
-import UserCardOne from "../Components/UserCardOne";
+import UserCard6 from "../../../../frontend/src/components/UserCard6";
 
-const TaskPageOne = () => {
+const TaskCard6 = () => {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -11,42 +13,40 @@ const TaskPageOne = () => {
   useEffect(() => {
     const dataFatch = async () => {
       try {
-        const apiData = await getOrgUsers();
+        const apiData = await getCompanyUsers();
         setData(apiData.data);
         console.log(apiData);
       } catch (error) {
         setError(true);
         console.log(error);
       }
-      {
-        setLoading(false);
-      }
+      setLoading(false);
     };
     dataFatch();
   }, []);
 
   if (loading) {
-    return <div>Loading ...</div>;
+    return <div>Loading...</div>;
   }
 
   if (error) {
-    return <div>Something went wronge ...</div>;
+    return <div>something went wronge..</div>;
   }
 
   return (
     <Grid container spacing={2}>
       {data.map((user) => (
-        <UserCardOne
+        <UserCard6
           key={user.id}
           id={user.id}
           name={user.name}
           email={user.email}
-          organization={user.organization}
-          departments={user.departments}
+          company={user.company}
+          address={user.address}
         />
       ))}
     </Grid>
   );
 };
 
-export default TaskPageOne;
+export default TaskCard6;

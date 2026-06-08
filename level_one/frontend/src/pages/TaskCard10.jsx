@@ -1,26 +1,22 @@
-import { Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { Grid } from "@mui/material";
 import { getComplexUsers } from "../services/api";
-import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
-import UserCard10 from "../components/UserCard10";
+import UserCard10 from "../../../../frontend/src/components/UserCard10";
 
-const Task10 = () => {
+const TaskCard10 = () => {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
   useEffect(() => {
     const dataFatch = async () => {
-      {
-        loading === true;
-      }
       try {
         const apiData = await getComplexUsers();
         setData(apiData.data);
+        console.log(apiData);
       } catch (error) {
-        console.log(error);
         setError(true);
+        console.log(error);
       }
       setLoading(false);
     };
@@ -28,19 +24,12 @@ const Task10 = () => {
   }, []);
 
   if (loading) {
-    return (
-      <div>
-        <Box sx={{ display: "flex" }}>
-          <CircularProgress />
-        </Box>
-      </div>
-    );
+    return <div>loading...</div>;
   }
 
   if (error) {
-    return <div>No work history found...</div>;
+    return <div>Something went wronge...</div>;
   }
-
   return (
     <Grid container spacing={2}>
       {data.map((user) => (
@@ -54,6 +43,7 @@ const Task10 = () => {
           contact={user.contact}
           social={user.social}
           workHistory={user.workHistory}
+          projects={user.projects}
           education={user.education}
           hobbies={user.hobbies}
           skills={user.skills}
@@ -63,4 +53,4 @@ const Task10 = () => {
   );
 };
 
-export default Task10;
+export default TaskCard10;

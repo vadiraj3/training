@@ -1,52 +1,51 @@
+import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
+import { getBasicUsers } from "../services/api";
 import { Grid } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import UserCard3 from "../components/UserCard3";
-import { getMediumUsers } from "../services/api";
+import UserCard2 from "../../../../frontend/src/components/UserCard2";
 
-const Task3 = () => {
+const Taskcard2 = () => {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState();
+  const [error, setError] = useState(false);
 
   useEffect(() => {
-    const dataFetch = async () => {
-      {
-        setLoading === true;
-      }
+    const dataFatch = async () => {
       try {
-        const apiData = await getMediumUsers();
-        setData(apiData);
+        const apiData = await getBasicUsers();
+        setData(apiData.data);
+        console.log(apiData);
       } catch (error) {
         setError(true);
         console.log(error);
       }
       setLoading(false);
     };
-    dataFetch();
+    dataFatch();
   }, []);
 
-  if (loading === true) {
+  if (loading) {
     return <div>Loading...</div>;
   }
 
-  if (error === true) {
+  if (error) {
     return <div>something went wronge...</div>;
   }
+
   return (
     <Grid container spacing={2}>
-      {data.data.map((user) => (
-        <UserCard3
+      {data.map((user) => (
+        <UserCard2
           key={user.id}
-          id={user.id}
           name={user.name}
           email={user.email}
           address={user.address}
           contact={user.contact}
-          profile={user.profile}
         />
       ))}
     </Grid>
   );
 };
 
-export default Task3;
+export default Taskcard2;

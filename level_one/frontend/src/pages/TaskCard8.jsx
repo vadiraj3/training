@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { getFullUsers } from "../services/api";
+import UserCard8 from "../../../../frontend/src/components/UserCard8";
 import { Grid } from "@mui/material";
-import UserCard8 from "../components/UserCard8";
 
-const Task8 = () => {
+const TaskCard8 = () => {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
   useEffect(() => {
     const dataFatch = async () => {
-      {
-        loading === true;
-      }
       try {
         const apiData = await getFullUsers();
-        setData(apiData);
+        setData(apiData.data);
+        console.log(apiData);
       } catch (error) {
         setError(true);
         console.log(error);
@@ -30,12 +28,12 @@ const Task8 = () => {
   }
 
   if (error) {
-    return <div>something went wronge...</div>;
+    return <div>Something went wronge...</div>;
   }
 
   return (
     <Grid container spacing={2}>
-      {data.data.map((user) => (
+      {data.map((user) => (
         <UserCard8
           key={user.id}
           id={user.id}
@@ -51,4 +49,4 @@ const Task8 = () => {
   );
 };
 
-export default Task8;
+export default TaskCard8;

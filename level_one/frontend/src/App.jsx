@@ -15,16 +15,16 @@ import {
 } from "@mui/material";
 import TasksPage from "./pages/TasksPage";
 import "./App.css";
-import Task1 from "./pages/Task1";
-import Task2 from "./pages/Task2";
-import Task3 from "./pages/Task3";
-import Task4 from "./pages/Task4";
-import Task5 from "./pages/Task5";
-import Task6 from "./pages/Task6";
-import Task7 from "./pages/Task7";
-import Task8 from "./pages/Task8";
-import Task9 from "./pages/Task9";
-import Task10 from "./pages/Task10";
+import TaskCard1 from "./pages/TaskCard1";
+import Taskcard2 from "./pages/Taskcard2";
+import TaskCard3 from "./pages/TaskCard3";
+import TaskCard4 from "./pages/TaskCard4";
+import Taskcard5 from "./pages/Taskcard5";
+import TaskCard6 from "./pages/TaskCard6";
+import TaskCard7 from "./pages/TaskCard7";
+import TaskCard8 from "./pages/TaskCard8";
+import TaskCard9 from "./pages/TaskCard9";
+import TaskCard10 from "./pages/TaskCard10";
 
 function Navigation() {
   const location = useLocation();
@@ -79,16 +79,16 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/tasks" element={<TasksPage />} />
-          <Route path="/task1" element={<Task1 />} />
-          <Route path="/task2" element={<Task2 />} />
-          <Route path="/task3" element={<Task3 />} />
-          <Route path="/task4" element={<Task4 />} />
-          <Route path="/task5" element={<Task5 />} />
-          <Route path="/task6" element={<Task6 />} />
-          <Route path="/task7" element={<Task7 />} />
-          <Route path="/task8" element={<Task8 />} />
-          <Route path="/task9" element={<Task9 />} />
-          <Route path="/task10" element={<Task10 />} />
+          <Route path="/taskcard1" element={<TaskCard1 />} />
+          <Route path="/taskcard2" element={<Taskcard2 />} />
+          <Route path="/taskcard3" element={<TaskCard3 />} />
+          <Route path="/taskcard4" element={<TaskCard4 />} />
+          <Route path="/taskcard5" element={<Taskcard5 />} />
+          <Route path="/taskcard6" element={<TaskCard6 />} />
+          <Route path="/taskcard7" element={<TaskCard7 />} />
+          <Route path="/taskcard8" element={<TaskCard8 />} />
+          <Route path="/taskcard9" element={<TaskCard9 />} />
+          <Route path="/taskcard10" element={<TaskCard10 />} />
         </Routes>
       </Box>
     </Router>
