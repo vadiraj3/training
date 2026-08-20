@@ -19,6 +19,7 @@ import TaskCardOne from "./pages/TaskCardOne";
 import TaskCardTwo from "./pages/TaskCardTwo";
 import TaskCardThree from "./pages/TaskCardThree";
 import TaskCardFive from "./pages/TaskCardFive";
+import TaskPageFour from "./pages/TaskPageFour";
 
 function Navigation() {
   const location = useLocation();
@@ -77,6 +78,7 @@ function App() {
           <Route path="/taskcardtwo" element={<TaskCardTwo />} />
           <Route path="/taskcardthree" element={<TaskCardThree />} />
           <Route path="/taskcardfive" element={<TaskCardFive />} />
+          <Route path="/taskpagefour" element={<TaskPageFour />} />
         </Routes>
       </Box>
     </Router>

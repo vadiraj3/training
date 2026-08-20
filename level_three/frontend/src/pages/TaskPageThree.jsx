@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { getOrgUsers } from "../services/api";
+import { getWarehouseInsights } from "../services/api";
 import { Grid } from "@mui/material";
-import UserCardOne from "../Components/UserCardOne";
+import UserCardThree from "../components/UserCardThree";
 
-const TaskCardOne = () => {
+const TaskPageThree = () => {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    const datafatch = async () => {
+    const dataFatch = async () => {
       try {
-        const apiData = await getOrgUsers();
+        const apiData = await getWarehouseInsights();
         setData(apiData.data);
         console.log(apiData);
       } catch (error) {
@@ -20,7 +20,7 @@ const TaskCardOne = () => {
       }
       setLoading(false);
     };
-    datafatch();
+    dataFatch();
   }, []);
 
   if (loading) {
@@ -28,22 +28,20 @@ const TaskCardOne = () => {
   }
 
   if (error) {
-    return <div>Something went wronge</div>;
+    <div>Something went wronge...</div>;
   }
-
   return (
     <Grid container spacing={2}>
       {data.map((user) => (
-        <UserCardOne
+        <UserCardThree
           key={user.id}
           id={user.id}
-          name={user.name}
-          email={user.email}
-          organization={user.organization}
+          owner={user.owner}
+          warehouse={user.warehouse}
         />
       ))}
     </Grid>
   );
 };
 
-export default TaskCardOne;
+export default TaskPageThree;

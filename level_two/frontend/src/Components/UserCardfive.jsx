@@ -25,18 +25,24 @@ const UserCardfive = ({ name, email, assets }) => {
               <Box>
                 <Typography variant="h6">{asset.assetId}</Typography>
                 <Typography variant="h6">{asset.type}</Typography>
-                <Typography variant="h6" pb={1}>
+                <Typography variant="h6" pb={2}>
                   {asset.serialNumber}
                 </Typography>
                 <Typography variant="h6">{asset.warranty.provider}</Typography>
-                <Typography variant="h6" pb={1}>
+                <Typography variant="h6" pb={2}>
                   {asset.warranty.expiresOn}
                 </Typography>
                 <Typography variant="h6">
                   {asset.maintenance.lastService}
                 </Typography>
-                {asset.maintenance.history.map((tory) => (
-                  <Maintenance tory={tory} />
+                {asset.maintenance.history.map((hist) => (
+                  <Box>
+                    <Typography variant="h6">{hist.date}</Typography>
+                    <Typography variant="h6">{hist.notes}</Typography>
+                    <Typography variant="h6" pb={2}>
+                      {hist.cost}
+                    </Typography>
+                  </Box>
                 ))}
               </Box>
             ))}

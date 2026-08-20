@@ -34,17 +34,13 @@ const UserCard8 = ({
           </Typography>
           <>
             {hobbies.map((hobby) => (
-              <Typography variant="h6" color="blue" pb={1}>
-                {hobby}
-              </Typography>
+              <Typography variant="h6">{hobby}</Typography>
             ))}
 
             {skills.map((skill) => (
               <Box>
-                <Typography variant="h6" color="green">
-                  {skill.name}
-                </Typography>
-                <Typography variant="h6" color="green" pb={1}>
+                <Typography variant="h6">{skill.name}</Typography>
+                <Typography variant="h6" pb={2}>
                   {skill.level}
                 </Typography>
               </Box>
@@ -52,15 +48,9 @@ const UserCard8 = ({
 
             {education.map((educate) => (
               <Box>
-                <Typography variant="h6" color="orange">
-                  {educate.school}
-                </Typography>
-                <Typography variant="h6" color="orange" pb={1}>
-                  {educate.degree}
-                </Typography>
-                <Typography variant="h6" color="orange" pb={1}>
-                  {educate.year}
-                </Typography>
+                <Typography variant="h6">{educate.school}</Typography>
+                <Typography variant="h6">{educate.degree}</Typography>
+                <Typography variant="h6">{educate.year}</Typography>
               </Box>
             ))}
           </>

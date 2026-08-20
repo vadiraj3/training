@@ -5,12 +5,12 @@ import MileStone from "./MileStone";
 const Project = ({ pro }) => {
   return (
     <Box>
-      <Typography variant="h6">Project ID : {pro.projectId}</Typography>
-      <Typography variant="h6">Name : {pro.name}</Typography>
-      <Typography variant="h6" pb={1}>
-        Status : {pro.status}
+      <Typography variant="h6">projectId : {pro.projectId}</Typography>
+      <Typography variant="h6">name : {pro.name}</Typography>
+      <Typography variant="h6" pb={2}>
+        status : {pro.status}
       </Typography>
-      <Typography variant="h4">MILESTONES</Typography>
+      <Typography variant="h5">MILESTONE</Typography>
       {pro.milestones.map((stone) => (
         <MileStone stone={stone} />
       ))}

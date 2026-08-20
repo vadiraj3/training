@@ -18,18 +18,16 @@ const UserCard7 = ({ id, name, email, education }) => {
           <Box>
             {education.map((educate) => (
               <>
-                <Typography variant="h6" pt={1} color="red">
-                  {educate.school}
-                </Typography>
+                <Typography variant="h6">{educate.school}</Typography>
                 <Typography variant="h6">{educate.degree}</Typography>
-                <Typography variant="h6" pb={1}>
+                <Typography variant="h6" pb={2}>
                   {educate.year}
                 </Typography>
-                <Typography variant="h6" color="blue">
-                  {educate.details.gpa}
-                </Typography>
+                <Typography variant="h6">{educate.details.gpa}</Typography>
                 <Typography variant="h6">{educate.details.honors}</Typography>
-                <Typography variant="h6">{educate.details.major}</Typography>
+                <Typography variant="h6" pb={2}>
+                  {educate.details.major}
+                </Typography>
               </>
             ))}
           </Box>

@@ -67,17 +67,11 @@ const UserCard10 = ({
             {workHistory.map((history) => (
               <Box>
                 <Typography variant="h6">{history.company.name}</Typography>
-                <Typography variant="h4" color="red" fontWeight={600}>
-                  WORK LOCATION
-                </Typography>
                 <Typography variant="h6">
                   {history.company.location.city}
                 </Typography>
                 <Typography variant="h6">
                   {history.company.location.country}
-                </Typography>
-                <Typography variant="h4" color="red" fontWeight={600}>
-                  WORK ADDRESS
                 </Typography>
                 <Typography variant="h6">
                   {history.company.location.address.street}
@@ -85,84 +79,87 @@ const UserCard10 = ({
                 <Typography variant="h6">
                   {history.company.location.address.zipCode}
                 </Typography>
-                <Typography variant="h4" color="red" fontWeight={600}>
-                  WORK POSITION
-                </Typography>
                 <Typography variant="h6">{history.position}</Typography>
-                <Typography variant="h4" color="red" fontWeight={600}>
-                  WORK DURATION
-                </Typography>
                 <Typography variant="h6">{history.duration.start}</Typography>
                 <Typography variant="h6">{history.duration.end}</Typography>
                 <Typography variant="h6">{history.duration.months}</Typography>
-                <Typography variant="h4" color="red" fontWeight={600}>
-                  PROJECTS
-                </Typography>
                 {history.projects.map((pro) => (
                   <Box>
-                    <Typography variant="h6">{pro.name}</Typography>
-                    <Typography variant="h4" color="red" fontWeight={600}>
-                      PROJECTS TECH
+                    <Typography variant="h6" pb={1}>
+                      {pro.name}
                     </Typography>
-                    <Typography variant="h6">{pro.tech}</Typography>
+                    {pro.tech.map((tech) => (
+                      <>
+                        <Typography variant="h6">{tech}</Typography>
+                      </>
+                    ))}
                     <Typography variant="h6">{pro.team.size}</Typography>
-                    <Typography variant="h6">{pro.team.roles}</Typography>
-                    <Typography variant="h6">{pro.achievements}</Typography>
+                    {pro.team.roles.map((role) => (
+                      <Typography variant="h6">{role}</Typography>
+                    ))}
+                    {pro.achievements.map((achive) => (
+                      <>
+                        <Typography variant="h6">{achive}</Typography>
+                      </>
+                    ))}
                   </Box>
                 ))}
               </Box>
             ))}
-            <Typography variant="h4" color="red" fontWeight={600}>
-              EDUCATION
-            </Typography>
-            {education.map((cation) => (
-              <Box>
-                <Typography variant="h5" color="red" fontWeight={600}>
-                  SCHOOL
-                </Typography>
-                <Typography variant="h6">{cation.school.name}</Typography>
-                <Typography variant="h5" color="red" fontWeight={600}>
-                  LOCATION
-                </Typography>
-                <Typography variant="h6">
-                  {cation.school.location.city}
-                </Typography>
-                <Typography variant="h6">
-                  {cation.school.location.country}
-                </Typography>
-                <Typography variant="h6">{cation.degree}</Typography>
-                <Typography variant="h6">{cation.year}</Typography>
-                <Typography variant="h5" color="red" fontWeight={600}>
-                  EDUCATION DETAILS
-                </Typography>
-                <Typography variant="h6">{cation.details.gpa}</Typography>
-                <Typography variant="h6">{cation.details.honors}</Typography>
-                <Typography variant="h6">{cation.details.major}</Typography>
-                <Typography variant="h5" color="red" fontWeight={600}>
-                  EDUCATION COURSES
-                </Typography>
-                <Typography variant="h6">{cation.details.courses}</Typography>
-              </Box>
-            ))}
-            <Typography variant="h4" color="red" fontWeight={600}>
-              HOBBIES
-            </Typography>
-            {hobbies.map((hobby) => (
-              <Typography variant="h6">{hobby}</Typography>
-            ))}
-            <Typography variant="h4" color="red" fontWeight={600}>
-              SKILLS
-            </Typography>
-            {skills.map((skill) => (
-              <Box>
-                <Typography variant="h6">{skill.name}</Typography>
-                <Typography variant="h6">{skill.level}</Typography>
-                <Typography variant="h6">{skill.years}</Typography>
-
-                <Typography variant="h6">{skill.certifications}</Typography>
-              </Box>
-            ))}
           </>
+          <Typography variant="h4" color="red" fontWeight={600}>
+            EDUCATION
+          </Typography>
+          {education.map((educate) => (
+            <>
+              <Typography variant="h6" pb={1}>
+                {educate.school.name}
+              </Typography>
+              <Typography variant="h6" pb={1}>
+                {educate.school.location.city}
+              </Typography>
+              <Typography variant="h6" pb={1}>
+                {educate.school.location.country}
+              </Typography>
+              <Typography variant="h6">{educate.degree}</Typography>
+              <Typography variant="h6" pb={1}>
+                {educate.year}
+              </Typography>
+              <Typography variant="h6">{educate.details.gpa}</Typography>
+              <Typography variant="h6">{educate.details.honors}</Typography>
+              <Typography variant="h6" pb={1}>
+                {educate.details.major}
+              </Typography>
+              {educate.details.courses.map((cours) => (
+                <Typography variant="h6">{cours}</Typography>
+              ))}
+            </>
+          ))}
+          <Typography variant="h4" color="red" fontWeight={600}>
+            HOBBIES
+          </Typography>
+          {hobbies.map((hobby) => (
+            <Typography variant="h6" pt={1}>
+              {hobby}
+            </Typography>
+          ))}
+          <Typography variant="h4" color="red" fontWeight={600}>
+            SKILLS
+          </Typography>
+          {skills.map((skill) => (
+            <>
+              <Typography variant="h6" pt={1}>
+                {skill.name}
+              </Typography>
+              <Typography variant="h6">{skill.level}</Typography>
+              <Typography variant="h6">{skill.year}</Typography>
+              {skill.certifications.map((certify) => (
+                <Typography variant="h6" pt={1}>
+                  {certify}
+                </Typography>
+              ))}
+            </>
+          ))}
         </Card>
       </Box>
     </Grid>

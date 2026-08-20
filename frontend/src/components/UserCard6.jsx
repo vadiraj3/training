@@ -9,13 +9,15 @@ const UserCard6 = ({ id, name, email, company, address }) => {
         <Card sx={{ mb: 2, p: 2 }}>
           <Typography fontSize={"30px"}>{id}</Typography>
           <Typography variant="h3">{name}</Typography>
-          <Typography variant="h4">{email}</Typography>
-          <Typography variant="h4" pb={1}>
+          <Typography variant="h4" pb={2}>
+            {email}
+          </Typography>
+          <Typography variant="h6" pb={2}>
             {company.name}
           </Typography>
-          <Typography variant="h5">{company.address.street}</Typography>
-          <Typography variant="h5">{company.address.city}</Typography>
-          <Typography variant="h5" pb={1}>
+          <Typography variant="h6">{company.address.street}</Typography>
+          <Typography variant="h6">{company.address.city}</Typography>
+          <Typography variant="h6" pb={2}>
             {company.address.zipCode}
           </Typography>
           <Typography variant="h6">{company.employees}</Typography>

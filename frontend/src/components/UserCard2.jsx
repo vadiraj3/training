@@ -10,8 +10,10 @@ const UserCard2 = ({ id, name, email, address, contact }) => {
         <Card sx={{ mb: 2, p: 2 }}>
           <Typography fontSize={"30px"}>{id}</Typography>
           <Typography variant="h3">{name}</Typography>
-          <Typography variant="h5">{email}</Typography>
-          <Box>
+          <Typography variant="h5" pb={1}>
+            {email}
+          </Typography>
+          <Box pb={1}>
             <Typography variant="h5">{address.street}</Typography>
             <Typography variant="h5">{address.city}</Typography>
             <Typography variant="h5">{address.country}</Typography>

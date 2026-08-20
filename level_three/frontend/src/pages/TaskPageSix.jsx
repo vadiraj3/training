@@ -1,17 +1,18 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from "react";
-import { getOrgUsers } from "../services/api";
+import { getKnowledgeInsights } from "../services/api";
 import { Grid } from "@mui/material";
-import UserCardOne from "../Components/UserCardOne";
+import UserCardSix from "../components/UserCardSix";
 
-const TaskCardOne = () => {
+const TaskPageSix = () => {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    const datafatch = async () => {
+    const dataFatch = async () => {
       try {
-        const apiData = await getOrgUsers();
+        const apiData = await getKnowledgeInsights();
         setData(apiData.data);
         console.log(apiData);
       } catch (error) {
@@ -20,30 +21,29 @@ const TaskCardOne = () => {
       }
       setLoading(false);
     };
-    datafatch();
+    dataFatch();
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>loading...</div>;
   }
 
   if (error) {
-    return <div>Something went wronge</div>;
+    return <div>Something went wronge...</div>;
   }
 
   return (
     <Grid container spacing={2}>
       {data.map((user) => (
-        <UserCardOne
+        <UserCardSix
           key={user.id}
           id={user.id}
-          name={user.name}
-          email={user.email}
-          organization={user.organization}
+          editor={user.editor}
+          knowledgeBase={user.knowledgeBase}
         />
       ))}
     </Grid>
   );
 };
 
-export default TaskCardOne;
+export default TaskPageSix;

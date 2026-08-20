@@ -10,18 +10,18 @@ const UserCard5 = ({ id, name, email, profile, skills }) => {
         <Card sx={{ mb: 2, p: 2 }}>
           <Typography fontSize={"30px"}>{id}</Typography>
           <Typography variant="h3">{name}</Typography>
-          <Typography variant="h4">{email}</Typography>
           <Typography variant="h4" pb={1}>
+            {email}
+          </Typography>
+          <Typography variant="h5" pb={1}>
             {profile}
           </Typography>
           <Box>
             {skills.map((skill) => (
               <>
-                <Typography variant="h6">{skill.name}</Typography>
-                <Typography variant="h6">{skill.level}</Typography>
-                <Typography variant="h6" pb={1}>
-                  {skill.years}
-                </Typography>
+                <Typography variant="h5">{skill.name}</Typography>
+                <Typography variant="h5">{skill.level}</Typography>
+                <Typography variant="h5">{skill.years}</Typography>
               </>
             ))}
           </Box>

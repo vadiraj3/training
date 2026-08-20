@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { getOrgUsers } from "../services/api";
+import { getProfileInsights } from "../services/api";
 import { Grid } from "@mui/material";
-import UserCardOne from "../Components/UserCardOne";
+import UserCardOne from "../components/UserCardOne";
 
-const TaskCardOne = () => {
+const TaskPageOne = () => {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    const datafatch = async () => {
+    const dataFatch = async () => {
       try {
-        const apiData = await getOrgUsers();
+        const apiData = await getProfileInsights();
         setData(apiData.data);
         console.log(apiData);
       } catch (error) {
@@ -20,15 +20,15 @@ const TaskCardOne = () => {
       }
       setLoading(false);
     };
-    datafatch();
+    dataFatch();
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>Loading ... </div>;
   }
 
   if (error) {
-    return <div>Something went wronge</div>;
+    return <div>Something went wronge...</div>;
   }
 
   return (
@@ -39,11 +39,14 @@ const TaskCardOne = () => {
           id={user.id}
           name={user.name}
           email={user.email}
-          organization={user.organization}
+          profile={user.profile}
+          devices={user.devices}
+          badges={user.badges}
+          activity={user.activity}
         />
       ))}
     </Grid>
   );
 };
 
-export default TaskCardOne;
+export default TaskPageOne;

@@ -11,12 +11,12 @@ const UserCard4 = ({ id, name, email, profile, hobbies }) => {
           <Typography fontSize={"30px"}>{id}</Typography>
           <Typography variant="h3">{name}</Typography>
           <Typography variant="h4">{email}</Typography>
-          <Typography variant="h4">{profile}</Typography>
-          <Box>
-            {hobbies.map((hobby) => (
-              <Typography variant="h6">{hobby}</Typography>
-            ))}
-          </Box>
+          <Typography variant="h5" pb={1}>
+            {profile}
+          </Typography>
+          {hobbies.map((hobby) => (
+            <Typography variant="h5">{hobby}</Typography>
+          ))}
         </Card>
       </Box>
     </Grid>

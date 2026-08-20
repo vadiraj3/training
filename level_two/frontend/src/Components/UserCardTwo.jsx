@@ -10,7 +10,6 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import MileStone from "./MileStone";
 import Project from "./Project";
 
 const UserCardTwo = ({ name, email, projects }) => {
@@ -24,7 +23,7 @@ const UserCardTwo = ({ name, email, projects }) => {
             <Typography variant="h6" pb={1}>
               Email : {email}
             </Typography>
-            <Typography variant="h4">PROJECTS</Typography>
+            <Typography variant="h5">PROJECTS</Typography>
             {projects.map((pro) => (
               <Project pro={pro} />
             ))}

@@ -19,7 +19,7 @@ export function compareAndLabel(score, passMark) {
   console.log(typeof score);
   console.log(typeof passMark);
   if (typeof score !== "number") {
-    return " Score not a numer";
+    return " Score not a number";
   }
 
   if (typeof passMark !== "number") {

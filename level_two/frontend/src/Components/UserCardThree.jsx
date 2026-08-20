@@ -17,51 +17,65 @@ const UserCardThree = ({ name, email, communication }) => {
       <Card>
         <CardContent>
           <Stack textAlign={"left"}>
+            <Typography variant="h5" pb={1}>
+              NAME
+            </Typography>
             <Typography variant="h4" pb={1}>
               Name : {name}
+            </Typography>
+            <Typography variant="h5" pb={1}>
+              EMAIL
             </Typography>
             <Typography variant="h6" pb={1}>
               Email : {email}
             </Typography>
+            <Typography variant="h5" pb={2}>
+              COMMUNICATION
+            </Typography>
             <Typography variant="h6" pb={1}>
               preferredChannel : {communication.preferredChannel}
             </Typography>
-            <Typography variant="h5">CHANNELS</Typography>
             <Typography variant="h6">
-              Work : {communication.channels.email.work}
+              work email : {communication.channels.email.work}
             </Typography>
             <Typography variant="h6" pb={1}>
-              Personal : {communication.channels.email.personal}
-            </Typography>
-            <Typography variant="h5">PHONE</Typography>
-            <Typography variant="h6">
-              Mobile : {communication.channels.phone.mobile}
+              personal email : {communication.channels.email.personal}
             </Typography>
             <Typography variant="h6" pb={1}>
-              Office : {communication.channels.phone.office}
-            </Typography>
-            <Typography variant="h5">SLACK</Typography>
-            <Typography variant="h6">
-              Username : {communication.channels.slack.username}
+              mobile : {communication.channels.phone.mobile}
             </Typography>
             <Typography variant="h6" pb={1}>
-              Workspace : {communication.channels.slack.workspace}
+              office : {communication.channels.phone.office}
             </Typography>
-            <Typography variant="h5">EMERGENCY CONTACTS</Typography>
+            <Typography variant="h6" pb={1}>
+              username : {communication.channels.slack.username}
+            </Typography>
+            <Typography variant="h6" pb={1}>
+              workspace : {communication.channels.slack.workspace}
+            </Typography>
+            <Typography variant="h5" pb={2}>
+              EMERGENCYCONTACTS
+            </Typography>
             {communication.emergencyContacts.map((emergency) => (
               <Box>
-                <Typography variant="h6">{emergency.relation}</Typography>
                 <Typography variant="h6" pb={1}>
-                  {emergency.name}
+                  relation : {emergency.relation}
                 </Typography>
-                <Typography variant="h5">METHODS</Typography>
+                <Typography variant="h6" pb={1}>
+                  name : {emergency.name}
+                </Typography>
+                <Typography variant="h5" pb={2}>
+                  METHODS
+                </Typography>
                 {emergency.methods.map((meth) => (
-                  <Box>
-                    <Typography variant="h6">{meth.type}</Typography>
+                  <>
                     <Typography variant="h6" pb={1}>
-                      {meth.value}
+                      type : {meth.type}
                     </Typography>
-                  </Box>
+                    <Typography variant="h6" pb={1}>
+                      value : {meth.value}
+                    </Typography>
+                  </>
                 ))}
               </Box>
             ))}

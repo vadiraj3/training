@@ -54,6 +54,7 @@ const TaskCardTwo = () => {
           name={user.name}
           email={user.email}
           projects={user.projects}
+          milestone={user.milestone}
         />
       ))}
     </Grid>

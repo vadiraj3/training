@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { getOrgUsers } from "../services/api";
+/* eslint-disable no-unused-vars */
 import { Grid } from "@mui/material";
-import UserCardOne from "../Components/UserCardOne";
+import React, { useEffect, useState } from "react";
+import UserCardFive from "../components/UserCardFive";
+import { getRiskInsights } from "../services/api";
 
-const TaskCardOne = () => {
+const TaskPageFive = () => {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    const datafatch = async () => {
+    const dataFatch = async () => {
       try {
-        const apiData = await getOrgUsers();
+        const apiData = await getRiskInsights();
         setData(apiData.data);
         console.log(apiData);
       } catch (error) {
@@ -20,7 +21,7 @@ const TaskCardOne = () => {
       }
       setLoading(false);
     };
-    datafatch();
+    dataFatch();
   }, []);
 
   if (loading) {
@@ -28,22 +29,21 @@ const TaskCardOne = () => {
   }
 
   if (error) {
-    return <div>Something went wronge</div>;
+    return <div>Something went wronge...</div>;
   }
 
   return (
     <Grid container spacing={2}>
       {data.map((user) => (
-        <UserCardOne
+        <UserCardFive
           key={user.id}
           id={user.id}
-          name={user.name}
-          email={user.email}
-          organization={user.organization}
+          owner={user.owner}
+          riskRegister={user.riskRegister}
         />
       ))}
     </Grid>
   );
 };
 
-export default TaskCardOne;
+export default TaskPageFive;

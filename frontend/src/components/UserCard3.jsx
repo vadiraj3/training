@@ -14,22 +14,36 @@ const UserCard3 = ({ id, name, email, address, contact, profile }) => {
           <Typography variant="h4" pb={1} color="blue">
             {email}
           </Typography>
-          <Typography variant="h5">{address.street}</Typography>
-          <Typography variant="h5" color="red">
-            {address.city}
-          </Typography>
-          <Typography variant="h5" pb={1}>
-            {address.country}
-          </Typography>
-          <Typography variant="h6">{contact.phone}</Typography>
-          <Typography variant="h6" pb={1} color="blue">
-            {contact.email}
-          </Typography>
-          <Typography variant="h6">{profile.bio}</Typography>
-          <Typography variant="h6" color="red">
-            {profile.age}
-          </Typography>
-          <Typography variant="h6">{profile.joinDate}</Typography>
+          <Box pb={1}>
+            <Typography variant="h5" color="blue">
+              {address.street}
+            </Typography>
+            <Typography variant="h5" color="blue">
+              {address.city}
+            </Typography>
+            <Typography variant="h5" color="blue">
+              {address.country}
+            </Typography>
+          </Box>
+          <Box pb={1}>
+            <Typography variant="h5" color="red">
+              {contact.phone}
+            </Typography>
+            <Typography variant="h5" color="red">
+              {contact.email}
+            </Typography>
+          </Box>
+          <Box pb={1}>
+            <Typography variant="h5" color="blue">
+              {profile.bio}
+            </Typography>
+            <Typography variant="h5" color="blue">
+              {profile.age}
+            </Typography>
+            <Typography variant="h5" color="blue">
+              {profile.joinDate}
+            </Typography>
+          </Box>
         </Card>
       </Box>
     </Grid>
