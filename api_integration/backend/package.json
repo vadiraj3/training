@@ -1,0 +1,24 @@
+{
+  "name": "api-integration-post-patch-delete-backend",
+  "version": "1.0.0",
+  "description": "Training API for POST, PATCH, and DELETE integration practice.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "reset:data": "node scripts/resetData.js"
+  },
+  "keywords": [
+    "api",
+    "training",
+    "express"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
+  }
+}

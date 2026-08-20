@@ -15,6 +15,8 @@ training/
 ├── level_three/      # Advanced progression (complex and unusual response shapes)
 │   ├── backend/      # Node.js Express API server
 │   └── frontend/     # React + Vite application
+├── api_integration/  # POST, PATCH, and DELETE practice with file-backed storage
+│   └── backend/      # Node.js Express API server
 └── README.md
 ```
 
@@ -87,6 +89,7 @@ training/
 - `level_one` keeps the original beginner-to-advanced progression (`/api/users/simple` through `/api/users/complex`).
 - `level_two` provides a new intermediate progression (`/api/users/org` through `/api/users/strategy`).
 - `level_three` introduces advanced payload shapes, including deep objects plus primitive, null, and matrix responses.
+- `api_integration` provides 10 POST endpoints, 5 PATCH endpoints, and 5 DELETE endpoints for write-method practice.
 
 ## Training Tasks
 
