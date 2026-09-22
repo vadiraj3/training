@@ -1,0 +1,25 @@
+{
+  "name": "api-integration-two-server",
+  "version": "1.0.0",
+  "description": "CRUD API training server for products, todos, projects, orders, and support tickets.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "reset:data": "node scripts/resetData.js"
+  },
+  "keywords": [
+    "api",
+    "training",
+    "crud",
+    "express"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
+  }
+}

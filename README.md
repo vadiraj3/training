@@ -17,6 +17,9 @@ training/
 │   └── frontend/     # React + Vite application
 ├── api_integration/  # POST, PATCH, and DELETE practice with file-backed storage
 │   └── backend/      # Node.js Express API server
+├── api_integration_two/  # Full CRUD practice (GET/POST/PUT/DELETE)
+│   ├── server/       # Express + Swagger + JSON store
+│   └── client/       # React + Axios services + MUI pages
 └── README.md
 ```
 
