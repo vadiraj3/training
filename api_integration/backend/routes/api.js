@@ -1,127 +1,105 @@
-const express = require('express');
+const express = require("express");
 const {
   readStore,
   getCollection,
   createRecord,
   updateRecord,
   deleteRecord,
-} = require('../data/store');
+} = require("../data/store");
 
 const router = express.Router();
 
 const collectionLabels = {
-  contacts: 'Contact',
-  tasks: 'Task',
-  products: 'Product',
-  feedback: 'Feedback',
-  events: 'Event',
-  orders: 'Order',
-  projects: 'Project',
-  jobApplications: 'Job application',
-  supportTickets: 'Support ticket',
-  courseEnrollments: 'Course enrollment',
+  contacts: "Contact",
+  tasks: "Task",
+  products: "Product",
+  events: "Event",
+  orders: "Order",
+  feedback: "Feedback",
+  projects: "Project",
+  jobApplications: "Job Application",
+  supportTickets: "Support Ticket",
+  courseEnrollments: "Course Enrollment",
 };
 
 const postExercises = [
+  { method: "POST", endpoint: "/api/contacts", collection: "contacts" },
+  { method: "POST", endpoint: "/api/tasks", collection: "tasks" },
+  { method: "POST", endpoint: "/api/products", collection: "products" },
+  { method: "POST", endpoint: "/api/feedback", collection: "feedback" },
+  { method: "POST", endpoint: "/api/events", collection: "events" },
+  { method: "POST", endpoint: "/api/orders", collection: "orders" },
+  { method: "POST", endpoint: "/api/projects", collection: "projects" },
   {
-    method: 'POST',
-    endpoint: '/api/contacts',
-    difficulty: 'easy',
-    collection: 'contacts',
-    requiredFields: ['name', 'email'],
+    method: "POST",
+    endpoint: "/api/job-applications",
+    collection: "jobApplications",
   },
   {
-    method: 'POST',
-    endpoint: '/api/tasks',
-    difficulty: 'easy',
-    collection: 'tasks',
-    requiredFields: ['title', 'dueDate'],
+    method: "POST",
+    endpoint: "/api/support-tickets",
+    collection: "supportTickets",
   },
   {
-    method: 'POST',
-    endpoint: '/api/products',
-    difficulty: 'easy-medium',
-    collection: 'products',
-    requiredFields: ['name', 'price', 'inStock'],
+    method: "POST",
+    endpoint: "/api/course-enrollments",
+    collection: "courseEnrollments",
   },
+];
+
+const putExercises = [
+  { method: "PUT", endpoint: "/api/contacts/:id", collection: "contacts" },
+  { method: "PUT", endpoint: "/api/tasks/:id", collection: "tasks" },
+  { method: "PUT", endpoint: "/api/products/:id", collection: "products" },
+  { method: "PUT", endpoint: "/api/events/:id", collection: "events" },
+  { method: "PUT", endpoint: "/api/orders/:id", collection: "orders" },
   {
-    method: 'POST',
-    endpoint: '/api/feedback',
-    difficulty: 'easy-medium',
-    collection: 'feedback',
-    requiredFields: ['rating', 'comment'],
-  },
-  {
-    method: 'POST',
-    endpoint: '/api/events',
-    difficulty: 'medium',
-    collection: 'events',
-    requiredFields: ['title', 'date', 'attendees'],
-  },
-  {
-    method: 'POST',
-    endpoint: '/api/orders',
-    difficulty: 'medium',
-    collection: 'orders',
-    requiredFields: ['customer', 'items', 'shippingAddress'],
-  },
-  {
-    method: 'POST',
-    endpoint: '/api/projects',
-    difficulty: 'medium',
-    collection: 'projects',
-    requiredFields: ['name', 'owner', 'milestones'],
-  },
-  {
-    method: 'POST',
-    endpoint: '/api/job-applications',
-    difficulty: 'medium-hard',
-    collection: 'jobApplications',
-    requiredFields: ['candidate', 'role', 'skills'],
-  },
-  {
-    method: 'POST',
-    endpoint: '/api/support-tickets',
-    difficulty: 'harder',
-    collection: 'supportTickets',
-    requiredFields: ['subject', 'priority', 'requester', 'messages'],
-  },
-  {
-    method: 'POST',
-    endpoint: '/api/course-enrollments',
-    difficulty: 'harder',
-    collection: 'courseEnrollments',
-    requiredFields: ['student', 'course', 'modules'],
+    method: "PUT",
+    endpoint: "/api/support-tickets/:id",
+    collection: "supportTickets",
   },
 ];
 
 const patchExercises = [
-  { method: 'PATCH', endpoint: '/api/tasks/:id', collection: 'tasks' },
-  { method: 'PATCH', endpoint: '/api/products/:id', collection: 'products' },
-  { method: 'PATCH', endpoint: '/api/events/:id', collection: 'events' },
-  { method: 'PATCH', endpoint: '/api/orders/:id', collection: 'orders' },
-  { method: 'PATCH', endpoint: '/api/support-tickets/:id', collection: 'supportTickets' },
+  {
+    method: "PATCH",
+    endpoint: "/api/contacts/:id",
+    collection: "contacts",
+  },
+  { method: "PATCH", endpoint: "/api/tasks/:id", collection: "tasks" },
+  { method: "PATCH", endpoint: "/api/products/:id", collection: "products" },
+  { method: "PATCH", endpoint: "/api/events/:id", collection: "events" },
+  { method: "PATCH", endpoint: "/api/orders/:id", collection: "orders" },
+  {
+    method: "PATCH",
+    endpoint: "/api/support-tickets/:id",
+    collection: "supportTickets",
+  },
 ];
 
 const deleteExercises = [
-  { method: 'DELETE', endpoint: '/api/contacts/:id', collection: 'contacts' },
-  { method: 'DELETE', endpoint: '/api/tasks/:id', collection: 'tasks' },
-  { method: 'DELETE', endpoint: '/api/products/:id', collection: 'products' },
-  { method: 'DELETE', endpoint: '/api/events/:id', collection: 'events' },
-  { method: 'DELETE', endpoint: '/api/support-tickets/:id', collection: 'supportTickets' },
+  { method: "DELETE", endpoint: "/api/contacts/:id", collection: "contacts" },
+  { method: "DELETE", endpoint: "/api/tasks/:id", collection: "tasks" },
+  { method: "DELETE", endpoint: "/api/products/:id", collection: "products" },
+  { method: "DELETE", endpoint: "/api/events/:id", collection: "events" },
+  {
+    method: "DELETE",
+    endpoint: "/api/support-tickets/:id",
+    collection: "supportTickets",
+  },
 ];
 
 function isPlainObject(value) {
-  return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
+  return Boolean(value) && typeof value === "object" && !Array.isArray(value);
 }
 
 function isBlank(value) {
-  return value === undefined || value === null || value === '';
+  return value === undefined || value === null || value === "";
 }
 
 function validatePayload(payload, requiredFields) {
   if (!isPlainObject(payload)) {
-    return ['Request body must be a JSON object.'];
+    return ["Request body must be a JSON object."];
   }
 
   return requiredFields.filter((field) => isBlank(payload[field]));
@@ -156,14 +134,18 @@ function sendDeletedResponse(res, label, record) {
   });
 }
 
-function createPostHandler(collectionName, requiredFields, extraValidation = () => null) {
+function createPostHandler(
+  collectionName,
+  requiredFields,
+  extraValidation = () => null,
+) {
   return (req, res) => {
     const missingFields = validatePayload(req.body, requiredFields);
     const extraError = extraValidation(req.body);
 
     if (missingFields.length > 0 || extraError) {
       return res.status(400).json({
-        message: 'Please fix the request payload.',
+        message: "Please fix the request payload.",
         missingFields,
         error: extraError,
       });
@@ -174,11 +156,11 @@ function createPostHandler(collectionName, requiredFields, extraValidation = () 
   };
 }
 
-function createPatchHandler(collectionName) {
+function createUpdateHandler(collectionName) {
   return (req, res) => {
     if (!isPlainObject(req.body) || Object.keys(req.body).length === 0) {
       return res.status(400).json({
-        message: 'PATCH request body must include at least one field to update.',
+        message: `${req.method} request body must include at least one field to update.`,
       });
     }
 
@@ -218,10 +200,12 @@ function createDeleteHandler(collectionName) {
  *       200:
  *         description: Endpoint list grouped by method
  */
-router.get('/', (req, res) => {
+router.get("/", (req, res) => {
   res.json({
-    message: 'Use these endpoints to practice POST, PATCH, and DELETE API integration.',
+    message:
+      "Use these endpoints to practice POST, PUT, PATCH, and DELETE API integration.",
     postExercises,
+    putExercises,
     patchExercises,
     deleteExercises,
   });
@@ -237,7 +221,7 @@ router.get('/', (req, res) => {
  *       200:
  *         description: Complete JSON-file backed data store
  */
-router.get('/records', (req, res) => {
+router.get("/records", (req, res) => {
   res.json(readStore());
 });
 
@@ -259,17 +243,63 @@ router.get('/records', (req, res) => {
  *       404:
  *         description: Collection was not found
  */
-router.get('/records/:collection', (req, res) => {
+router.get("/records/:collection", (req, res) => {
   const records = getCollection(req.params.collection);
 
   if (!records) {
     return res.status(404).json({
-      message: 'Collection was not found.',
+      message: "Collection was not found.",
       validCollections: Object.keys(collectionLabels),
     });
   }
 
   return res.json(records);
+});
+
+/**
+ * @swagger
+ * /api/records/{collection}/{id}:
+ *   get:
+ *     summary: Get a single record by ID from a collection
+ *     tags: [Records]
+ *     parameters:
+ *       - in: path
+ *         name: collection
+ *         required: true
+ *         schema:
+ *           type: string
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: The requested record
+ *       404:
+ *         description: Record or collection not found
+ */
+router.get("/records/:collection/:id", (req, res) => {
+  const { collection, id } = req.params;
+  const records = getCollection(collection);
+
+  if (!records) {
+    return res.status(404).json({
+      message: "Collection was not found.",
+      validCollections: Object.keys(collectionLabels),
+    });
+  }
+
+  const record = records.find((item) => String(item.id) === String(id));
+
+  if (!record) {
+    const label = collectionLabels[collection] || "Record";
+    return res.status(404).json({
+      message: `${label} with ID '${id}' was not found.`,
+    });
+  }
+
+  return res.json(record);
 });
 
 /**
@@ -285,12 +315,79 @@ router.get('/records/:collection', (req, res) => {
  *           example:
  *             name: Aarav Sharma
  *             email: aarav@example.com
- *             phone: '9876543210'
+ *             phone: "9876543210"
  *     responses:
  *       201:
  *         description: Contact created
  */
-router.post('/contacts', createPostHandler('contacts', ['name', 'email']));
+router.post("/contacts", createPostHandler("contacts", ["name", "email"]));
+
+/**
+ * @swagger
+ * /api/contacts/{id}:
+ *   put:
+ *     summary: Update a contact
+ *     tags: [PUT Practice]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         example: "1"
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           example:
+ *             name: Aarav Sharma Updated
+ *             email: aarav.updated@example.com
+ *             phone: "9999999999"
+ *     responses:
+ *       200:
+ *         description: Contact updated
+ *       404:
+ *         description: Contact not found
+ *   patch:
+ *     summary: Partially update a contact
+ *     tags: [PATCH Practice]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         example: "1"
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           example:
+ *             phone: "9999999999"
+ *     responses:
+ *       200:
+ *         description: Contact updated
+ *       404:
+ *         description: Contact not found
+ *   delete:
+ *     summary: Delete a contact
+ *     tags: [DELETE Practice]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         example: "1"
+ *     responses:
+ *       200:
+ *         description: Contact deleted
+ *       404:
+ *         description: Contact not found
+ */
+router.put("/contacts/:id", createUpdateHandler("contacts"));
+router.patch("/contacts/:id", createUpdateHandler("contacts"));
+router.delete("/contacts/:id", createDeleteHandler("contacts"));
 
 /**
  * @swagger
@@ -310,7 +407,51 @@ router.post('/contacts', createPostHandler('contacts', ['name', 'email']));
  *       201:
  *         description: Task created
  */
-router.post('/tasks', createPostHandler('tasks', ['title', 'dueDate']));
+router.post("/tasks", createPostHandler("tasks", ["title", "dueDate"]));
+
+/**
+ * @swagger
+ * /api/tasks/{id}:
+ *   put:
+ *     summary: Replace/update a task
+ *     tags: [PUT Practice]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Task updated
+ *   patch:
+ *     summary: Update a task
+ *     tags: [PATCH Practice]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Task updated
+ *   delete:
+ *     summary: Delete a task
+ *     tags: [DELETE Practice]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Task deleted
+ */
+router.put("/tasks/:id", createUpdateHandler("tasks"));
+router.patch("/tasks/:id", createUpdateHandler("tasks"));
+router.delete("/tasks/:id", createDeleteHandler("tasks"));
 
 /**
  * @swagger
@@ -333,7 +474,54 @@ router.post('/tasks', createPostHandler('tasks', ['title', 'dueDate']));
  *       201:
  *         description: Product created
  */
-router.post('/products', createPostHandler('products', ['name', 'price', 'inStock']));
+router.post(
+  "/products",
+  createPostHandler("products", ["name", "price", "inStock"]),
+);
+
+/**
+ * @swagger
+ * /api/products/{id}:
+ *   put:
+ *     summary: Replace/update a product
+ *     tags: [PUT Practice]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Product updated
+ *   patch:
+ *     summary: Update a product
+ *     tags: [PATCH Practice]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Product updated
+ *   delete:
+ *     summary: Delete a product
+ *     tags: [DELETE Practice]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Product deleted
+ */
+router.put("/products/:id", createUpdateHandler("products"));
+router.patch("/products/:id", createUpdateHandler("products"));
+router.delete("/products/:id", createDeleteHandler("products"));
 
 /**
  * @swagger
@@ -353,7 +541,7 @@ router.post('/products', createPostHandler('products', ['name', 'price', 'inStoc
  *       201:
  *         description: Feedback created
  */
-router.post('/feedback', createPostHandler('feedback', ['rating', 'comment']));
+router.post("/feedback", createPostHandler("feedback", ["rating", "comment"]));
 
 /**
  * @swagger
@@ -378,11 +566,55 @@ router.post('/feedback', createPostHandler('feedback', ['rating', 'comment']));
  *         description: Event created
  */
 router.post(
-  '/events',
-  createPostHandler('events', ['title', 'date', 'attendees'], (payload) =>
-    validateArrayField(payload, 'attendees')
-  )
+  "/events",
+  createPostHandler("events", ["title", "date", "attendees"], (payload) =>
+    validateArrayField(payload, "attendees"),
+  ),
 );
+
+/**
+ * @swagger
+ * /api/events/{id}:
+ *   put:
+ *     summary: Replace/update an event
+ *     tags: [PUT Practice]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Event updated
+ *   patch:
+ *     summary: Update an event
+ *     tags: [PATCH Practice]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Event updated
+ *   delete:
+ *     summary: Delete an event
+ *     tags: [DELETE Practice]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Event deleted
+ */
+router.put("/events/:id", createUpdateHandler("events"));
+router.patch("/events/:id", createUpdateHandler("events"));
+router.delete("/events/:id", createDeleteHandler("events"));
 
 /**
  * @swagger
@@ -412,11 +644,44 @@ router.post(
  *         description: Order created
  */
 router.post(
-  '/orders',
-  createPostHandler('orders', ['customer', 'items', 'shippingAddress'], (payload) =>
-    validateArrayField(payload, 'items')
-  )
+  "/orders",
+  createPostHandler(
+    "orders",
+    ["customer", "items", "shippingAddress"],
+    (payload) => validateArrayField(payload, "items"),
+  ),
 );
+
+/**
+ * @swagger
+ * /api/orders/{id}:
+ *   put:
+ *     summary: Replace/update an order
+ *     tags: [PUT Practice]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Order updated
+ *   patch:
+ *     summary: Update an order
+ *     tags: [PATCH Practice]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Order updated
+ */
+router.put("/orders/:id", createUpdateHandler("orders"));
+router.patch("/orders/:id", createUpdateHandler("orders"));
 
 /**
  * @swagger
@@ -440,10 +705,10 @@ router.post(
  *         description: Project created
  */
 router.post(
-  '/projects',
-  createPostHandler('projects', ['name', 'owner', 'milestones'], (payload) =>
-    validateArrayField(payload, 'milestones')
-  )
+  "/projects",
+  createPostHandler("projects", ["name", "owner", "milestones"], (payload) =>
+    validateArrayField(payload, "milestones"),
+  ),
 );
 
 /**
@@ -471,10 +736,12 @@ router.post(
  *         description: Job application created
  */
 router.post(
-  '/job-applications',
-  createPostHandler('jobApplications', ['candidate', 'role', 'skills'], (payload) =>
-    validateArrayField(payload, 'skills')
-  )
+  "/job-applications",
+  createPostHandler(
+    "jobApplications",
+    ["candidate", "role", "skills"],
+    (payload) => validateArrayField(payload, "skills"),
+  ),
 );
 
 /**
@@ -502,11 +769,57 @@ router.post(
  *         description: Support ticket created
  */
 router.post(
-  '/support-tickets',
-  createPostHandler('supportTickets', ['subject', 'priority', 'requester', 'messages'], (payload) =>
-    validateArrayField(payload, 'messages')
-  )
+  "/support-tickets",
+  createPostHandler(
+    "supportTickets",
+    ["subject", "priority", "requester", "messages"],
+    (payload) => validateArrayField(payload, "messages"),
+  ),
 );
+
+/**
+ * @swagger
+ * /api/support-tickets/{id}:
+ *   put:
+ *     summary: Replace/update a support ticket
+ *     tags: [PUT Practice]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Support ticket updated
+ *   patch:
+ *     summary: Update a support ticket
+ *     tags: [PATCH Practice]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Support ticket updated
+ *   delete:
+ *     summary: Delete a support ticket
+ *     tags: [DELETE Practice]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Support ticket deleted
+ */
+router.put("/support-tickets/:id", createUpdateHandler("supportTickets"));
+router.patch("/support-tickets/:id", createUpdateHandler("supportTickets"));
+router.delete("/support-tickets/:id", createDeleteHandler("supportTickets"));
 
 /**
  * @swagger
@@ -534,80 +847,12 @@ router.post(
  *         description: Course enrollment created
  */
 router.post(
-  '/course-enrollments',
-  createPostHandler('courseEnrollments', ['student', 'course', 'modules'], (payload) =>
-    validateArrayField(payload, 'modules')
-  )
+  "/course-enrollments",
+  createPostHandler(
+    "courseEnrollments",
+    ["student", "course", "modules"],
+    (payload) => validateArrayField(payload, "modules"),
+  ),
 );
-
-/**
- * @swagger
- * /api/tasks/{id}:
- *   patch:
- *     summary: Update a task
- *     tags: [PATCH Practice]
- *   delete:
- *     summary: Delete a task
- *     tags: [DELETE Practice]
- */
-router.patch('/tasks/:id', createPatchHandler('tasks'));
-router.delete('/tasks/:id', createDeleteHandler('tasks'));
-
-/**
- * @swagger
- * /api/products/{id}:
- *   patch:
- *     summary: Update a product
- *     tags: [PATCH Practice]
- *   delete:
- *     summary: Delete a product
- *     tags: [DELETE Practice]
- */
-router.patch('/products/:id', createPatchHandler('products'));
-router.delete('/products/:id', createDeleteHandler('products'));
-
-/**
- * @swagger
- * /api/events/{id}:
- *   patch:
- *     summary: Update an event
- *     tags: [PATCH Practice]
- *   delete:
- *     summary: Delete an event
- *     tags: [DELETE Practice]
- */
-router.patch('/events/:id', createPatchHandler('events'));
-router.delete('/events/:id', createDeleteHandler('events'));
-
-/**
- * @swagger
- * /api/orders/{id}:
- *   patch:
- *     summary: Update an order
- *     tags: [PATCH Practice]
- */
-router.patch('/orders/:id', createPatchHandler('orders'));
-
-/**
- * @swagger
- * /api/support-tickets/{id}:
- *   patch:
- *     summary: Update a support ticket
- *     tags: [PATCH Practice]
- *   delete:
- *     summary: Delete a support ticket
- *     tags: [DELETE Practice]
- */
-router.patch('/support-tickets/:id', createPatchHandler('supportTickets'));
-router.delete('/support-tickets/:id', createDeleteHandler('supportTickets'));
-
-/**
- * @swagger
- * /api/contacts/{id}:
- *   delete:
- *     summary: Delete a contact
- *     tags: [DELETE Practice]
- */
-router.delete('/contacts/:id', createDeleteHandler('contacts'));
 
 module.exports = router;

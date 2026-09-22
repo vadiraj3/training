@@ -29,6 +29,7 @@ import JavaScriptArrays from "./pages/JavaScriptArrays";
 import Form from "./pages/Form";
 import JavaScriptForm from "./pages/JavaScriptForm";
 import JavascriptNewForm from "./pages/JavascriptNewForm";
+import ApiTaskPage from "./pages/ApiTaskPage";
 
 function Navigation() {
   const location = useLocation();
@@ -128,6 +129,7 @@ function App() {
           <Route path="/form" element={<Form />} />
           <Route path="/javascript-form" element={<JavaScriptForm />} />
           <Route path="/javascript-new-form" element={<JavascriptNewForm />} />
+          <Route path="/api-task-page" element={<ApiTaskPage />} />
         </Routes>
       </Box>
     </Router>
