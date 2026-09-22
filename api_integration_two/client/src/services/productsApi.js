@@ -1,5 +1,7 @@
 import apiClient from './apiClient';
 
+// Example for learners: copy this pattern into the other *Api.js files.
+
 export const getProducts = () => apiClient.get('/products');
 
 export const getProductById = (id) => apiClient.get(`/products/${id}`);

@@ -57,6 +57,12 @@ client/
 - API details live in `services/` (not scattered full URLs).
 - Changing the backend host means editing **one file**: `apiClient.js`.
 
+### What is already filled vs what you write
+
+- Filled for you: `apiClient.js` + `productsApi.js` (example pattern)
+- Empty for you: `todosApi.js`, `projectsApi.js`, `ordersApi.js`, `ticketsApi.js`
+- Pages are UI shells only (no GET/POST/PUT/DELETE wiring yet)
+
 ---
 
 ## Stop Writing Full URLs In Every File

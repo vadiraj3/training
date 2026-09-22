@@ -41,3 +41,5 @@ npm run dev
 ```
 
 Open http://localhost:5174 and follow `client/README.md` for folder structure, Axios service pattern, and MUI guidance.
+
+Note: frontend pages are UI shells. Learners must write the integration code. Only `productsApi.js` is pre-filled as an example.

@@ -1,5 +1,6 @@
 import {
   Alert,
+  Button,
   Card,
   CardContent,
   Chip,
@@ -51,8 +52,8 @@ function HomePage() {
         CRUD Practice Modules
       </Typography>
       <Alert severity="info">
-        Do not hardcode full API URLs in pages. Import helpers from{' '}
-        <code>src/services</code> (see README).
+        Integration code is intentionally missing. Use <code>src/services</code> helpers
+        (start from <code>productsApi.js</code>) and wire GET / POST / PUT / DELETE yourself.
       </Alert>
       <List>
         {modules.map((module) => (
