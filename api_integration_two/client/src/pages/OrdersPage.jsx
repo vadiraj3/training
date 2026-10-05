@@ -1,80 +1,61 @@
-import {
-  Alert,
-  Button,
-  Card,
-  CardContent,
-  Chip,
-  Paper,
-  Stack,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  TextField,
-  Typography,
-} from '@mui/material';
+import React, { useEffect, useState } from "react";
+import { getOrders } from "../services/ordersApi";
+import { Button, Grid } from "@mui/material";
+import OrderCard from "../components/OrderCard";
+import OrderModal from "../components/OrderModal";
 
-/**
- * UI shell only.
- * TODO: implement ordersApi.js, then wire GET / POST / PUT / DELETE here.
- */
-function OrdersPage() {
+const OrdersPage = () => {
+  const [data, setData] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const dataFatch = async () => {
+      try {
+        const apiData = await getOrders();
+        console.log(apiData);
+        setData(apiData.data);
+      } catch (error) {
+        setError(true);
+        console.log(error);
+      }
+      setLoading(false);
+    };
+    dataFatch();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Somethind went wronge...</div>;
+  }
+
   return (
-    <Stack spacing={2}>
-      <Typography variant="h4">Orders CRUD</Typography>
-      <Alert severity="info">
-        Required array field: <strong>items</strong>. Use Table for line items.
-      </Alert>
+    <>
+      <Button variant="contained" onClick={handleOpen}>
+        Add Orders
+      </Button>
+      <Grid>
+        {data.map((order) => (
+          <OrderCard
+            key={order.id}
+            id={order.id}
+            customerName={order.customerName}
+            customerEmail={order.customerEmail}
+            status={order.status}
+            shippingCity={order.shippingCity}
+            items={order.items}
+          />
+        ))}
+      </Grid>
 
-      <Card>
-        <CardContent>
-          <Stack spacing={2}>
-            <TextField label="Customer name" />
-            <TextField label="Customer email" />
-            <TextField label="Shipping city" />
-            <TextField
-              label="Items"
-              helperText="Format: sku|name|qty|price ; sku|name|qty|price"
-              multiline
-              minRows={2}
-            />
-            <Button variant="contained">Create Order</Button>
-          </Stack>
-        </CardContent>
-      </Card>
-
-      <Paper sx={{ p: 2 }}>
-        <Stack direction="row" spacing={1} alignItems="center" mb={1}>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            Sample order (UI only)
-          </Typography>
-          <Chip label="pending" color="warning" size="small" />
-        </Stack>
-        <Table size="small">
-          <TableHead>
-            <TableRow>
-              <TableCell>SKU</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>Qty</TableCell>
-              <TableCell>Price</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            <TableRow>
-              <TableCell>KEY-101</TableCell>
-              <TableCell>Wireless Keyboard</TableCell>
-              <TableCell>1</TableCell>
-              <TableCell>2499</TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-        <Button sx={{ mt: 1 }} color="error">
-          Delete
-        </Button>
-      </Paper>
-    </Stack>
+      {open && <OrderModal open={open} setOpen={setOpen} />}
+    </>
   );
-}
+};
 
 export default OrdersPage;

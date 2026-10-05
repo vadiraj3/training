@@ -66,6 +66,12 @@ const SupportPostPage = () => {
     }
   };
 
+  const handleDeleteMessage = (body) => {
+    const newMessages = messages.filter((message) => message.body !== body);
+
+    setMessages(newMessages);
+  };
+
   return (
     <div>
       <label>Subject: </label>
@@ -151,10 +157,16 @@ const SupportPostPage = () => {
       <div>
         {messages.length > 0 && <h3>Messages added:</h3>}
         {messages.map((message) => (
-          <Box key={message.from}>
-            {message.from}
-            {message.body}
-            {message.createdAt}
+          <Box sx={{ display: "flex" }}>
+            <button onClick={() => handleDeleteMessage(message.body)}>
+              Delete
+            </button>
+
+            <Box key={message.from}>
+              {message.from}
+              {message.body}
+              {message.createdAt}
+            </Box>
           </Box>
         ))}
       </div>

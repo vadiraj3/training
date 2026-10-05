@@ -1,83 +1,62 @@
-import {
-  Alert,
-  Button,
-  Card,
-  CardContent,
-  Chip,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  List,
-  ListItem,
-  ListItemText,
-  Stack,
-  TextField,
-  Typography,
-} from '@mui/material';
+import React, { useEffect, useState } from "react";
+import { getTickets } from "../services/ticketsApi";
+import { Button, Grid } from "@mui/material";
+import TicketsCard from "../components/TicketsCard";
+import TicketsModal from "../components/TicketsModal";
 
-/**
- * UI shell only.
- * TODO: implement ticketsApi.js, then wire GET / POST / PUT / DELETE here.
- */
-function TicketsPage() {
+const TicketsPage = () => {
+  const [data, setData] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const fatch = async () => {
+      try {
+        const apiData = await getTickets();
+        console.log(apiData);
+        setData(apiData.data);
+      } catch (error) {
+        setError(true);
+        console.log(error);
+      }
+      setLoading(false);
+    };
+    fatch();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Something went wronge...</div>;
+  }
+
   return (
-    <Stack spacing={2}>
-      <Typography variant="h4">Support Tickets CRUD</Typography>
-      <Alert severity="info">
-        Required array field: <strong>messages</strong>. Use Dialog for detail threads.
-      </Alert>
+    <>
+      <Button variant="contained" onClick={handleOpen}>
+        Add Tickets
+      </Button>
+      <Grid>
+        {data.map((tickets) => (
+          <TicketsCard
+            key={tickets.id}
+            id={tickets.id}
+            subject={tickets.subject}
+            priority={tickets.priority}
+            status={tickets.status}
+            requesterName={tickets.requesterName}
+            requesterEmail={tickets.requesterEmail}
+            messages={tickets.messages}
+          />
+        ))}
+      </Grid>
 
-      <Card>
-        <CardContent>
-          <Stack spacing={2}>
-            <TextField label="Subject" />
-            <TextField label="Priority" defaultValue="medium" />
-            <TextField label="Requester name" />
-            <TextField label="Requester email" />
-            <TextField label="First message" multiline minRows={3} />
-            <Button variant="contained">Create Ticket</Button>
-          </Stack>
-        </CardContent>
-      </Card>
-
-      <Card variant="outlined">
-        <CardContent>
-          <Stack direction="row" spacing={1} alignItems="center">
-            <Typography variant="h6" sx={{ flexGrow: 1 }}>
-              Sample ticket (UI only)
-            </Typography>
-            <Chip label="high" color="error" size="small" />
-            <Chip label="open" size="small" />
-          </Stack>
-          <Typography color="text.secondary" sx={{ mb: 1 }}>
-            Sara Khan · sara@example.com
-          </Typography>
-          <Stack direction="row" spacing={1}>
-            <Button variant="outlined">View messages</Button>
-            <Button color="error">Delete</Button>
-          </Stack>
-        </CardContent>
-      </Card>
-
-      <Dialog open={false}>
-        <DialogTitle>Sample ticket thread</DialogTitle>
-        <DialogContent>
-          <List>
-            <ListItem alignItems="flex-start">
-              <ListItemText
-                primary="customer"
-                secondary="The app showed an error after payment."
-              />
-            </ListItem>
-          </List>
-        </DialogContent>
-        <DialogActions>
-          <Button>Close</Button>
-        </DialogActions>
-      </Dialog>
-    </Stack>
+      {open && <TicketsModal open={open} setOpen={setOpen} />}
+    </>
   );
-}
+};
 
 export default TicketsPage;

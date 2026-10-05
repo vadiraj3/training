@@ -1,74 +1,61 @@
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Alert,
-  Button,
-  Card,
-  CardContent,
-  Checkbox,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Stack,
-  TextField,
-  Typography,
-} from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import React, { useEffect, useState } from "react";
+import { getTodos } from "../services/todosApi";
+import { Button, Grid } from "@mui/material";
+import TodosCard from "../components/TodosCard";
+import TodosModal from "../components/TodosModal";
 
-/**
- * UI shell only.
- * TODO: implement todosApi.js, then wire GET / POST / PUT / DELETE here.
- */
-function TodosPage() {
+const TodosPage = () => {
+  const [data, setData] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const fatch = async () => {
+      try {
+        const apidata = await getTodos();
+        console.log(apidata);
+        setData(apidata.data);
+      } catch (error) {
+        setError(true);
+        console.log(error);
+      }
+      setLoading(false);
+    };
+    fatch();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Something went wronge...</div>;
+  }
+
   return (
-    <Stack spacing={2}>
-      <Typography variant="h4">Todos CRUD</Typography>
-      <Alert severity="info">
-        Required array field: <strong>subTasks</strong>. Prefer Accordion + Checkbox list.
-      </Alert>
+    <>
+      <Button variant="contained" onClick={handleOpen}>
+        Add Todos
+      </Button>
+      <Grid container spacing={2}>
+        {data.map((todo) => (
+          <TodosCard
+            key={todo.id}
+            id={todo.id}
+            title={todo.title}
+            dueDate={todo.dueDate}
+            priority={todo.priority}
+            status={todo.status}
+            subTasks={todo.subTasks}
+          />
+        ))}
+      </Grid>
 
-      <Card>
-        <CardContent>
-          <Stack spacing={2}>
-            <TextField label="Title" />
-            <TextField label="Due date" type="date" InputLabelProps={{ shrink: true }} />
-            <TextField label="Priority" defaultValue="medium" />
-            <TextField
-              label="Sub tasks (comma separated)"
-              helperText="Example: Draft API, Build form, Write tests"
-            />
-            <Button variant="contained">Create Todo</Button>
-          </Stack>
-        </CardContent>
-      </Card>
-
-      <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography sx={{ flexGrow: 1 }}>Sample todo (UI only)</Typography>
-          <Typography color="text.secondary">2026-09-30</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <List dense>
-            <ListItem>
-              <ListItemIcon>
-                <Checkbox edge="start" checked disabled />
-              </ListItemIcon>
-              <ListItemText primary="Draft endpoints" />
-            </ListItem>
-            <ListItem>
-              <ListItemIcon>
-                <Checkbox edge="start" disabled />
-              </ListItemIcon>
-              <ListItemText primary="Build forms" />
-            </ListItem>
-          </List>
-          <Button color="error">Delete</Button>
-        </AccordionDetails>
-      </Accordion>
-    </Stack>
+      {open && <TodosModal open={open} setOpen={setOpen} />}
+    </>
   );
-}
+};
 
 export default TodosPage;
