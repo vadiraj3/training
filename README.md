@@ -20,6 +20,8 @@ training/
 ├── api_integration_two/  # Full CRUD practice (GET/POST/PUT/DELETE)
 │   ├── server/       # Express + Swagger + JSON store
 │   └── client/       # React + Axios services + MUI pages
+├── api_integration_three/  # Same APIs, now with RTK Query
+│   └── client/       # React + Redux Toolkit Query + MUI pages
 └── README.md
 ```
 
