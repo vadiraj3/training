@@ -1,8 +1,7 @@
 import { Box, Button, Card, Grid, Typography } from "@mui/material";
 import React, { useState } from "react";
-import { deleteProduct } from "../services/productsApi";
-import ProductsModal from "./ProductsModal";
 import { useDeleteProductMutation } from "../../../../api_integration_three/client/src/store/api/productsApi";
+import ProductsModal from "./ProductsModal";
 
 const ProductsCard = ({ id, name, price, inStock, category, tags }) => {
   const [productModalOpen, setProductModalOpen] = useState(false);

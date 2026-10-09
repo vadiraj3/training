@@ -9,7 +9,10 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { createTodos, getTodosById, updateTodos } from "../services/todosApi";
+import {
+  useCreateTodosMutation,
+  useUpdateTodosMutation,
+} from "../store/api/todosApi";
 
 const style = {
   position: "absolute",
@@ -24,15 +27,16 @@ const style = {
   overflow: "scroll",
   height: "90vh",
 };
+
 const TodosModal = ({
   id = null,
   open,
   setOpen,
-  propTitle,
-  propDueDate,
-  PropPriority,
-  propStatus,
-  propSubTasks,
+  propTitle = "",
+  propDueDate = "",
+  propPriority = "",
+  propStatus = "",
+  propSubTasks = [],
 }) => {
   const [title, setTitle] = useState("");
   const [dueDate, setDueDate] = useState("");
@@ -40,11 +44,25 @@ const TodosModal = ({
   const [status, setStatus] = useState("");
   const [subTasks, setSubTasks] = useState([]);
   const [subTaskObject, setSubTaskObject] = useState({ title: "", done: true });
+
+  useEffect(() => {
+    if (id !== null) {
+      setTitle(propTitle);
+      setDueDate(propDueDate);
+      setPriority(propPriority);
+      setStatus(propStatus);
+      setSubTasks(propSubTasks);
+    }
+  }, [id]);
+
+  const [createTodos] = useCreateTodosMutation();
+  const [updateTodos] = useUpdateTodosMutation();
+
   const handleClose = () => setOpen(false);
 
-  const handelSubTasks = () => {
-    if (subTaskObject.title === "") {
-      alert("Please enter subtitle here");
+  const handleTodosItems = () => {
+    if (subTaskObject.title.trim() === "") {
+      alert("please enter title here");
       return;
     }
     setSubTasks([
@@ -54,45 +72,29 @@ const TodosModal = ({
         done: subTaskObject.done,
       },
     ]);
-    setSubTaskObject({ title: "", done: "" });
+    setSubTaskObject({ title: "", done: true });
   };
 
-  const handleDeleteTasks = (ClickedTasks) => {
-    const newTasks = subTasks.filter((task) => task !== ClickedTasks);
-
-    setSubTasks(newTasks);
+  const handleDeleteTodos = (deleteTodo) => {
+    const newTodos = subTasks.filter((task) => task !== deleteTodo);
+    setSubTasks(newTodos);
   };
 
-  useEffect(() => {
-    console.log(id !== null);
-    if (id !== null) {
-      setTitle(propTitle);
-      setDueDate(propDueDate);
-      setPriority(PropPriority);
-      setStatus(propStatus);
-      setSubTasks(propSubTasks);
-    }
-  }, [id]);
-
-  const handelSubmit = async () => {
+  const handleSubmit = async () => {
     if (title.trim() === "") {
-      alert("Please enter title here");
+      alert("please enter title here");
       return;
     }
     if (!dueDate) {
-      alert("Please enter dueDate here");
+      alert("please enter date here");
       return;
     }
     if (priority.trim() === "") {
-      alert("Please enter priority here");
+      alert("please enter priority here");
       return;
     }
     if (status.trim() === "") {
-      alert("Please enter status here");
-      return;
-    }
-    if (subTasks.length === 0) {
-      alert("please add at least one subtask");
+      alert("please enter status here");
       return;
     }
 
@@ -107,11 +109,11 @@ const TodosModal = ({
     try {
       if (id === null) {
         const response = await createTodos(payload);
-        alert("Submitted Data Successfully");
+        alert("Data Submitted Successefully");
       } else {
-        const response = await updateTodos(id, payload);
-        // alert("Updated");
-        // location.reload();
+        console.log(id);
+        const response = await updateTodos({ id: id, payload: payload });
+        alert("Updated");
       }
 
       handleClose();
@@ -133,21 +135,22 @@ const TodosModal = ({
       <Box sx={style}>
         <Card>
           <Typography variant="h6" gutterBottom>
-            {id === null ? "Create" : "Update"} Todos
+            {id === null ? "Create" : "Update"} Product
           </Typography>
           <Stack spacing={2}>
             <TextField
-              label="Title"
+              label="title"
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
             <TextField
-              label="dueDate"
+              label="duedate"
               type="date"
               value={dueDate}
               onChange={(e) => setDueDate(e.target.value)}
             />
+
             <TextField
               label="priority"
               type="text"
@@ -160,11 +163,11 @@ const TodosModal = ({
               value={status}
               onChange={(e) => setStatus(e.target.value)}
             />
-
             {/* Display tag iteams */}
             {/* Add delete button and cal handle delete tag function send name */}
             <Box>
-              {subTasks.length > 0 && <h3>Add Tasks</h3>}
+              {subTasks.length > 0 && <h3>Add SubTasks</h3>}
+
               {subTasks.map((task, index) => (
                 <Box
                   key={index}
@@ -174,15 +177,14 @@ const TodosModal = ({
                   <Typography variant="subtitle2">
                     Done{task.done ? "" : ""}
                   </Typography>
-                  <Button onClick={() => handleDeleteTasks(task)}>
+                  <Button onClick={() => handleDeleteTodos(task)}>
                     Delete
                   </Button>
                 </Box>
               ))}
             </Box>
-            <h3>SubTasks</h3>
             <TextField
-              label="Title"
+              label="title"
               type="text"
               value={subTaskObject.title}
               onChange={(e) =>
@@ -202,10 +204,15 @@ const TodosModal = ({
               />
               DONE
             </Box>
-            <Button variant="contained" onClick={handelSubTasks} sx={{ mb: 2 }}>
-              AddSubTasks
+
+            <Button
+              variant="contained"
+              onClick={handleTodosItems}
+              sx={{ mb: 2 }}
+            >
+              Add Todos
             </Button>
-            <Button variant="contained" onClick={handelSubmit}>
+            <Button variant="contained" onClick={handleSubmit}>
               {id === null ? "Submit" : "Update"}
             </Button>
           </Stack>

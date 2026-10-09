@@ -1,68 +1,45 @@
-import {
-  Alert,
-  Button,
-  Card,
-  CardContent,
-  Chip,
-  Stack,
-  Step,
-  StepLabel,
-  Stepper,
-  TextField,
-  Typography,
-} from '@mui/material';
+import React, { useState } from "react";
+import { useGetProjectsQuery } from "../store/api/projectsApi";
+import { Button, Grid } from "@mui/material";
+import ProjectsCard from "../components/ProjectsCard";
+import ProjectsModal from "../components/ProjectsModal";
 
-/**
- * UI shell only.
- * TODO: implement store/api/projectsApi.js, then wire hooks here.
- */
-function ProjectsPage() {
+const ProjectsPage = () => {
+  const { data, isLoading, isError } = useGetProjectsQuery();
+
+  const handleOpen = () => setOpen(true);
+  const [open, setOpen] = useState(false);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Something went wronge...</div>;
+  }
+
   return (
-    <Stack spacing={2}>
-      <Typography variant="h4">Projects CRUD (RTK Query)</Typography>
-      <Alert severity="info">
-        Required array field: <strong>milestones</strong>. Implement the slice first.
-      </Alert>
+    <>
+      <Button variant="contained" onClick={handleOpen}>
+        Add projects
+      </Button>
+      <Grid container spacing={2}>
+        {data.map((project) => (
+          <ProjectsCard
+            key={project.id}
+            id={project.id}
+            name={project.name}
+            owner={project.owner}
+            budget={project.budget}
+            status={project.status}
+            milestones={project.milestones}
+          />
+        ))}
+      </Grid>
 
-      <Card>
-        <CardContent>
-          <Stack spacing={2}>
-            <TextField label="Project name" />
-            <TextField label="Owner" />
-            <TextField label="Budget" type="number" />
-            <TextField
-              label="Milestones (comma separated)"
-              helperText="Example: Discovery, Build, Launch"
-            />
-            <Button variant="contained">Create Project</Button>
-          </Stack>
-        </CardContent>
-      </Card>
-
-      <Card variant="outlined">
-        <CardContent>
-          <Stack direction="row" spacing={1} alignItems="center" mb={1}>
-            <Typography variant="h6" sx={{ flexGrow: 1 }}>
-              Sample project (UI only)
-            </Typography>
-            <Chip label="active" size="small" />
-          </Stack>
-          <Stepper alternativeLabel sx={{ mb: 2 }}>
-            <Step completed>
-              <StepLabel>Discovery</StepLabel>
-            </Step>
-            <Step active>
-              <StepLabel>Build</StepLabel>
-            </Step>
-            <Step>
-              <StepLabel>Launch</StepLabel>
-            </Step>
-          </Stepper>
-          <Button color="error">Delete</Button>
-        </CardContent>
-      </Card>
-    </Stack>
+      {open && <ProjectsModal open={open} setOpen={setOpen} />}
+    </>
   );
-}
+};
 
 export default ProjectsPage;

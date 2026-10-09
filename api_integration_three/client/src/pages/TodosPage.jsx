@@ -1,74 +1,44 @@
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Alert,
-  Button,
-  Card,
-  CardContent,
-  Checkbox,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Stack,
-  TextField,
-  Typography,
-} from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import React, { useState } from "react";
+import { useGetTodosQuery } from "../store/api/todosApi";
+import { Button, Grid } from "@mui/material";
+import TodosCard from "../components/TodosCard";
+import TodosModal from "../components/TodosModal";
 
-/**
- * UI shell only.
- * TODO: implement store/api/todosApi.js, then wire hooks here.
- */
-function TodosPage() {
+const TodosPage = () => {
+  const { data, isLoading, isError } = useGetTodosQuery();
+  const handleOpen = () => setOpen(true);
+  const [open, setOpen] = useState(false);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Something went wronge...</div>;
+  }
+
   return (
-    <Stack spacing={2}>
-      <Typography variant="h4">Todos CRUD (RTK Query)</Typography>
-      <Alert severity="info">
-        Required array field: <strong>subTasks</strong>. Implement the slice first.
-      </Alert>
+    <>
+      <Button variant="contained" sx={{ mb: 2 }} onClick={handleOpen}>
+        Add Todos
+      </Button>
+      <Grid container spacing={2}>
+        {data.map((todos) => (
+          <TodosCard
+            key={todos.id}
+            id={todos.id}
+            title={todos.title}
+            dueDate={todos.dueDate}
+            priority={todos.priority}
+            status={todos.status}
+            subTasks={todos.subTasks}
+          />
+        ))}
+      </Grid>
 
-      <Card>
-        <CardContent>
-          <Stack spacing={2}>
-            <TextField label="Title" />
-            <TextField label="Due date" type="date" InputLabelProps={{ shrink: true }} />
-            <TextField label="Priority" defaultValue="medium" />
-            <TextField
-              label="Sub tasks (comma separated)"
-              helperText="Example: Draft API, Build form, Write tests"
-            />
-            <Button variant="contained">Create Todo</Button>
-          </Stack>
-        </CardContent>
-      </Card>
-
-      <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography sx={{ flexGrow: 1 }}>Sample todo (UI only)</Typography>
-          <Typography color="text.secondary">2026-09-30</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <List dense>
-            <ListItem>
-              <ListItemIcon>
-                <Checkbox edge="start" checked disabled />
-              </ListItemIcon>
-              <ListItemText primary="Draft endpoints" />
-            </ListItem>
-            <ListItem>
-              <ListItemIcon>
-                <Checkbox edge="start" disabled />
-              </ListItemIcon>
-              <ListItemText primary="Build forms" />
-            </ListItem>
-          </List>
-          <Button color="error">Delete</Button>
-        </AccordionDetails>
-      </Accordion>
-    </Stack>
+      {open && <TodosModal open={open} setOpen={setOpen} />}
+    </>
   );
-}
+};
 
 export default TodosPage;

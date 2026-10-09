@@ -1,18 +1,64 @@
+import { baseApi } from "./baseApi";
+
 /**
- * TODO: Implement Todos RTK Query endpoints.
- * Copy the pattern from productsApi.js
+ * EXAMPLE SLICE — Todoss (filled for learners to copy)
  *
- * Needed:
- * - getTodos (query)        GET /todos
- * - getTodoById (query)     GET /todos/:id
- * - createTodo (mutation)   POST /todos
- * - updateTodo (mutation)   PUT /todos/:id
- * - deleteTodo (mutation)   DELETE /todos/:id
- *
- * Remember: required array field in body is `subTasks`
- * Tag type already registered on baseApi: 'Todo'
- *
- * import { baseApi } from './baseApi';
- * export const todosApi = baseApi.injectEndpoints({ ... });
- * export const { useGetTodosQuery, ... } = todosApi;
+ * Pattern to follow for todos / projects / orders / tickets:
+ * 1. injectEndpoints on baseApi
+ * 2. define query / mutation endpoints
+ * 3. provideTags / invalidatesTags for cache refresh
+ * 4. export the auto-generated hooks
  */
+export const todosApi = baseApi.injectEndpoints({
+  endpoints: (builder) => ({
+    getTodos: builder.query({
+      query: () => "/todos",
+      providesTags: [{ type: "Todos", id: "LIST" }],
+    }),
+
+    getTodosById: builder.query({
+      query: (id) => `/todos/${id}`,
+      providesTags: (_result, _error, id) => [{ type: "Todos", id }],
+    }),
+
+    createTodos: builder.mutation({
+      query: (payload) => ({
+        url: "/todos",
+        method: "POST",
+        body: payload,
+      }),
+      invalidatesTags: [{ type: "Todos", id: "LIST" }],
+    }),
+
+    updateTodos: builder.mutation({
+      query: ({ id, payload }) => ({
+        url: `/todos/${id}`,
+        method: "PUT",
+        body: payload,
+      }),
+      invalidatesTags: (_result, _error, { id }) => [
+        { type: "Todos", id },
+        { type: "Todos", id: "LIST" },
+      ],
+    }),
+
+    deleteTodos: builder.mutation({
+      query: (id) => ({
+        url: `/todos/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: (_result, _error, id) => [
+        { type: "Todos", id },
+        { type: "Todos", id: "LIST" },
+      ],
+    }),
+  }),
+});
+
+export const {
+  useGetTodosQuery,
+  useGetTodosByIdQuery,
+  useCreateTodosMutation,
+  useUpdateTodosMutation,
+  useDeleteTodosMutation,
+} = todosApi;

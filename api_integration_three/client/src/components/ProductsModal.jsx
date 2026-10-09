@@ -12,7 +12,6 @@ import {
   useCreateProductMutation,
   useUpdateProductMutation,
 } from "../../../../api_integration_three/client/src/store/api/productsApi";
-// import { createProduct, updateProduct } from "../services/productsApi";
 
 const style = {
   position: "absolute",
@@ -99,7 +98,6 @@ const ProductsModal = ({
     try {
       if (id === null) {
         const response = await createProduct(payload);
-
         console.log("Data Submitted Successfylly");
       } else {
         const response = await updateProduct(id, payload);
