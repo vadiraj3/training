@@ -22,6 +22,8 @@ training/
 │   └── client/       # React + Axios services + MUI pages
 ├── api_integration_three/  # Same APIs, now with RTK Query
 │   └── client/       # React + Redux Toolkit Query + MUI pages
+├── search_filter/    # Client-side search, filter, and sort
+│   └── client/       # React + MUI + local products.json
 └── README.md
 ```
 
